@@ -19,9 +19,7 @@ function MainMenu() {
     }
 
     var gameModes = [
-        [145, 165, 65, 50, "Zen", document.getElementById("buttonpurple")],
-        [100, 265, 155, 50, "Score Blitz", document.getElementById("buttonred")],
-        [65, 365, 230, 50, "Move Champion", document.getElementById("buttonyellow")]
+        [145, 165, 65, 50, "Adventure Mode", document.getElementById("buttonpurple")]
     ];
     
     this.doActions = function() {
