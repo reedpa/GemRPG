@@ -60,7 +60,7 @@ function Physics() {
         if (mover.topLeft < mover.targetLeft) { //going right
             if (mover.topLeft + mover.width <= blocker.topLeft) {
                 if (mover.topLeft + mover.width + mover.speed > blocker.topLeft) {
-                    if (mover.topTop >= blocker.topTop && mover.topTop <= blocker.topTop + blocker.height) {
+                    if (mover.topTop + mover.height >= blocker.topTop && mover.topTop <= blocker.topTop + blocker.height) {
                         return true;
                     }
                 }
@@ -68,7 +68,7 @@ function Physics() {
         } else if (mover.topLeft > mover.targetLeft) { //going left
             if (mover.topLeft >= blocker.topLeft + blocker.width) {
                 if (mover.topLeft - mover.speed < blocker.topLeft + blocker.width) {
-                    if (mover.topTop >= blocker.topTop && mover.topTop <= blocker.topTop + blocker.height) {
+                    if (mover.topTop + mover.height >= blocker.topTop && mover.topTop <= blocker.topTop + blocker.height) {
                         return true;
                     }
                 }
@@ -78,7 +78,7 @@ function Physics() {
         if (mover.topTop < mover.targetTop) { //going down
             if (mover.topTop + mover.height <= blocker.topTop) {
                 if (mover.topTop + mover.height + mover.speed > blocker.topTop) {
-                    if (mover.topLeft >= blocker.topLeft && mover.topLeft <= blocker.topLeft + blocker.width) {
+                    if (mover.topLeft + mover.width >= blocker.topLeft && mover.topLeft <= blocker.topLeft + blocker.width) {
                         return true;
                     }
                 }
@@ -86,7 +86,7 @@ function Physics() {
         } else if (mover.topTop > mover.targetTop) { //going up
             if (mover.topTop >= blocker.topTop + blocker.height) {
                 if (mover.topTop - mover.speed < blocker.topTop + blocker.height) {
-                    if (mover.topLeft >= blocker.topLeft && mover.topLeft <= blocker.topLeft + blocker.width) {
+                    if (mover.topLeft + mover.width >= blocker.topLeft && mover.topLeft <= blocker.topLeft + blocker.width) {
                         return true;
                     }
                 }
