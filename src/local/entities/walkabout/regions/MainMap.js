@@ -10,7 +10,12 @@ var mainMap = {
             topTop: 250,
             width: 300,
             height: 300,
-            color: "red"
+            color: "red",
+            encounters: [
+                {
+                    weight: 1
+                }
+            ]
         }, {
             name: "testBlockingRegion",
             image: null,

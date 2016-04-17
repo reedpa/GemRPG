@@ -1,11 +1,12 @@
 var player;
 
-function Walkabout() {
+function Walkabout(data) {
     this.image = document.getElementById("overlandmap");
     this.zindex = 0;
     this.order = 1;
     player = new MainCharacter();
-    this.data = mainMap;
+    this.data = data;
+    dataStore.lastWalkabout = data;
     this.image = document.getElementById(this.data.image);
     player.topLeft = this.data.startingLocation[0];
     player.topTop = this.data.startingLocation[1];

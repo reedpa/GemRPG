@@ -94,4 +94,13 @@ function Physics() {
         }
         return false;
     }
+    
+    this.isInside = function(thingOne, container) {
+        if (thingOne.topTop > container.topTop && thingOne.topTop + thingOne.height < container.topTop + container.height &&
+            thingOne.topLeft > container.topLeft && thingOne.topLeft + thingOne.width < container.topLeft + container.width) {
+                return true;
+            }
+            
+        return false;
+    }
 }

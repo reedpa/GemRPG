@@ -16,12 +16,35 @@ function Region(regionData) {
         graphics.fillRect(this.topLeft + 175 - player.topLeft, this.topTop + 315 - player.topTop, this.width, this.height)
         ctx.globalAlpha = 1;
 
-        graphics.setStrokeStyle("5px black");
+        graphics.setStrokeStyle("black");
+        if (physics.isInside(player, this)) {
+            graphics.setStrokeStyle("gold");
+        }
         graphics.strokeRect(this.topLeft + 175 - player.topLeft, this.topTop + 315 - player.topTop, this.width, this.height);
     }
     
     this.doActions = function() {
-        
+        if (physics.isInside(player, this)) {
+            if (Math.floor(Math.random() * 100) === 1 ) {
+                graphics.graphicsObjects = null;
+                ai.aiObjects = null;
+                physics.physObjects = null;
+                graphics = null;
+                ai = null;
+                physics = null;
+                gameBoard = null;
+                mainMenu = null;
+                graphics = new Graphics();
+                ai = new AI();
+                physics = new Physics();
+                interaction = new Interaction();
+                var gameBoard = new GameBoard("Score Blitz");
+                graphics.addObject(gameBoard);
+                ai.addObject(gameBoard);
+                dataStore.lastLeft = player.topLeft;
+                dataStore.lastTop = player.topTop;
+            }
+        }
     }
     
     ai.addObject(this);

@@ -32,15 +32,21 @@ function GameOver() {
             audio.playSound("buttonclick");
             graphics.graphicsObjects = null;
             ai.aiObjects = null;
+            physics.physObjects = null;
             graphics = null;
             ai = null;
+            physics = null;
             gameBoard = null;
             mainMenu = null;
             graphics = new Graphics();
             ai = new AI();
+            physics = new Physics();
             interaction = new Interaction();
-            mainMenu = new MainMenu();
-            canvas.removeEventListener("click", this.loadMainMenu);
+            var mainMap = new Walkabout(dataStore.lastWalkabout);
+            player.topLeft = dataStore.lastLeft;
+            player.targetLeft = dataStore.lastLeft;
+            player.topTop = dataStore.lastTop;
+            player.targetTop = dataStore.lastTop;
         }
     }
     

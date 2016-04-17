@@ -16,19 +16,10 @@ function MainCharacter() {
             this.targetLeft = mouseX - 175 + this.topLeft;
             this.targetTop = mouseY - 315 + this.topTop;
         }
-        /*if (mainCharacterTargetX < mainCharacterX) {
-            mainCharacterX -= this.speed;
-        } else if (mainCharacterTargetX > mainCharacterX) {
-            mainCharacterX += this.speed;
-        }
-        if (mainCharacterTargetY < mainCharacterY) {
-            mainCharacterY -= this.speed;
-        } else if (mainCharacterTargetY > mainCharacterY) {
-            mainCharacterY += this.speed;
-        }*/
     }
     
     this.draw = function() {
+        graphics.setLineWidth(1);
         graphics.strokeRect(175, 315, 10, 10);
         //graphics.drawImage(this.image, 360/2, 640/2);
     }

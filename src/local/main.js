@@ -8,6 +8,7 @@ var physics;
 var audio;
 var mainMenu;
 var gameOver;
+var dataStore = new DataStore(); //don't destroy it!
 
 function InitializeGame() {
     ai = new AI();
