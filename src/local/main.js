@@ -4,6 +4,7 @@ var ctx;
 var graphics;
 var ai;
 var interaction;
+var physics;
 var audio;
 var mainMenu;
 var gameOver;
@@ -12,6 +13,7 @@ function InitializeGame() {
     ai = new AI();
     graphics = new Graphics();
     interaction = new Interaction();
+    physics = new Physics();
     audio = new Audio();
     mainMenu = new MainMenu();
 }

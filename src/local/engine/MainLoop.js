@@ -6,6 +6,7 @@ var tps = 0;
 
 var loopStart;
 var loopEnd;
+var loopTime;
 
 function MainLoop() {
     loopStart = Date.now();
@@ -15,9 +16,11 @@ function MainLoop() {
         ticks++;
 
         ai.doActions();
+        physics.moveObjects();
         graphics.draw();
 
         calcTicksPerSecond();
+        writeDebugInfo();
 
     } catch (e) {
         console.log("Exception! " + e.toString());
@@ -25,6 +28,9 @@ function MainLoop() {
     }
 
     loopEnd = Date.now();
+    
+    loopTime = loopEnd - loopStart;
+    debugMessage = loopTime.toString();
 
     window.setTimeout(MainLoop, Math.max(30 - (loopEnd - loopStart), 0));
 }

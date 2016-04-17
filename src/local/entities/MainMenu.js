@@ -86,9 +86,10 @@ function MainMenu() {
     }
 
     this.initializeGame = function(index) {
-        var gameBoard = new GameBoard(gameModes[index][4]);
-        graphics.addObject(gameBoard);
-        ai.addObject(gameBoard);
+        //var gameBoard = new GameBoard(gameModes[index][4]);
+        //graphics.addObject(gameBoard);
+        //ai.addObject(gameBoard);
+        var mainMap = new Walkabout();
         
         this.active = false;
         graphics.removeObject(this);
