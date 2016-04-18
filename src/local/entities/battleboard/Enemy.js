@@ -14,12 +14,12 @@ function Enemy(enemyProps) {
             //action bar
             graphics.setFillStyle("blue");
             var fillLength = Math.ceil(this.actionTimer / this.actionMax * 30);
-            graphics.fillRect(225, 75 + ((30 + 20) * this.index + 35), fillLength, 10);
+            graphics.fillRect(225, 75 + ((30 + 20) * this.index + 32), fillLength, 5);
             
             //action bar border
             graphics.setLineWidth(1);
             graphics.setStrokeStyle("black");
-            graphics.strokeRect(225, 75 + ((30 + 20) * this.index + 35), 30, 10);
+            graphics.strokeRect(225, 75 + ((30 + 20) * this.index + 32), 30, 5);
         }
     }
     
