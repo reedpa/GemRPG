@@ -3,7 +3,7 @@ var topMove = 0;
 var topZen = 0;
 
 function MainMenu() {
-    this.zindex = 1;
+    this.zindex = mainMenuZIndex;
     this.active = true;
     this.id = "MainMenu";
     this.image = document.getElementById("mainmenu");

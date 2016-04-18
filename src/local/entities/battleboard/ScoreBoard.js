@@ -1,6 +1,6 @@
 
 function ScoreBoard() {
-    this.zindex = 4;
+    this.zindex = scoreBoardZIndex;
     
     this.currentScore = 0;
     this.currentTurnScore = 0;

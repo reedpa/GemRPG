@@ -6,7 +6,7 @@ function MainCharacter() {
     this.height = 10;
     this.targetLeft = 0;
     this.targetTop = 0;
-    this.zindex = 2;
+    this.zindex = mainCharacterZIndex;
     this.order = 2;
     this.speed = 2;
     this.image;

@@ -5,7 +5,7 @@ function TrickShotLabel() {
     this.top = 0;
     this.left = 0;
     this.ticksToLive = 33;
-    this.zindex = 10001;
+    this.zindex = trickShotLabelZIndex;
     this.id = "trickshot" + numTrickShots.toString();
     numTrickShots++;
 

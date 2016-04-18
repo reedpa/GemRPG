@@ -16,7 +16,7 @@ function GamePiece() {
     
     this.image;
 
-    this.zindex = 2;
+    this.zindex = pieceZIndex;
     this.draw = function() {
         var offset = 0;
         if (!this.image) {

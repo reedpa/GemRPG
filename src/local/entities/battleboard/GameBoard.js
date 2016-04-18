@@ -22,7 +22,8 @@ var gameStart = 0;
 
 var gameStyle = "";
 
-function GameBoard(style) {
+function GameBoard(encounterData) {
+    this.encounterData = encounterData;
     this.highlitX = -1;
     this.highlitY = -1;
     this.pieces = [];
@@ -32,7 +33,7 @@ function GameBoard(style) {
     this.state = "playing";
     this.id = "the game board";
     this.backDrop = null;
-    this.image = null;
+    this.image = document.getElementById(this.encounterData.board.boardImage);
 
     var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
 
@@ -43,23 +44,9 @@ function GameBoard(style) {
     dropTime = 0;
     gameTime = 0;
     gameStart = Date.now();
-    gameStyle = style;
+    gameStyle = "encounter";
 
-    switch(gameStyle) {
-        case "Zen":
-            this.image = document.getElementById("board_green");
-            break;
-        case "Score Blitz":
-            this.image = document.getElementById("board_red");
-            break;
-        case "Move Champion":
-            this.image = document.getElementById("board_yellow");
-            break;
-        default:
-            this.image = document.getElementById("board_green");
-    }
-
-    this.zindex = 1;
+    this.zindex = gameBoardZIndex;
     this.draw = function() {
         graphics.drawImage(this.image, boardLeft, boardTop);
     };
@@ -216,7 +203,7 @@ function GameBoard(style) {
         } else if (this.state === "playing") {
             this.grabbedPiece = this.getPiece(this.highlitY, this.highlitX);
             this.grabbedPiece.grabbed = true;
-            this.grabbedPiece.zindex = 1000;
+            this.grabbedPiece.zindex = grabbedPieceZIndex;
             this.unsetMatches();
             
             if (gameStyle !== "Zen") {
@@ -235,7 +222,7 @@ function GameBoard(style) {
     this.ungrabPiece = function() {
         if (this.grabbedPiece && this.grabbedPiece.grabbed) {
             this.grabbedPiece.grabbed = false;
-            this.grabbedPiece.zindex = 2;
+            this.grabbedPiece.zindex = pieceZIndex;
             dropTime = 0;
         }
     }
@@ -367,9 +354,13 @@ function GameBoard(style) {
     this.startBoard();
     this.state = "playing";
 
-    this.backDrop = new BackDrop();
+    this.backDrop = new BackDrop(this.encounterData.board.backDropImage);
     this.backDrop.height = boardTop;
     this.backDrop.width = boardWidth;
+    
+    for (var i = 0; i < this.encounterData.enemies.length; i++) {
+        var enemy = new Enemy(this.encounterData.enemies[i]);
+    }
 
     this.scoreBoard = new ScoreBoard();
     this.dropTimer = new DropTimer();

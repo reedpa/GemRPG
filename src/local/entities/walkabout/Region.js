@@ -7,7 +7,7 @@ function Region(regionData) {
     this.width = regionData.width;
     this.height = regionData.height;
     this.color = regionData.color;
-    this.zindex = 5;
+    this.zindex = regionZIndex;
     this.isBlocker = !!regionData.isBlocker;
     
     this.draw = function() {
@@ -38,7 +38,7 @@ function Region(regionData) {
                 ai = new AI();
                 physics = new Physics();
                 interaction = new Interaction();
-                var gameBoard = new GameBoard("Score Blitz");
+                var gameBoard = new GameBoard(regionData.encounters[0]);
                 graphics.addObject(gameBoard);
                 ai.addObject(gameBoard);
                 dataStore.lastLeft = player.topLeft;

@@ -1,24 +1,10 @@
-function BackDrop() {
-    this.zindex = 3;
+function BackDrop(backDropImage) {
+    this.zindex = backDropZIndex;
     this.top = 0;
     this.left = 0;
     this.width = 0;
     this.height = 0;
-    this.image = null;//document.getElementById("trees");
-    
-    switch(gameStyle) {
-        case "Zen":
-            this.image = document.getElementById("background_green");
-            break;
-        case "Score Blitz":
-            this.image = document.getElementById("background_red");
-            break;
-        case "Move Champion":
-            this.image = document.getElementById("background_yellow");
-            break;
-        default:
-            this.image = document.getElementById("background_green");
-    }
+    this.image = document.getElementById(backDropImage);
     
     this.draw = function() {
         graphics.setFillStyle("#FFFFFF");

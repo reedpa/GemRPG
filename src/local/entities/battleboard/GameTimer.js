@@ -1,6 +1,6 @@
 
 function GameTimer() {
-    this.zindex = 5;
+    this.zindex = gameTimerZIndex;
     
     this.draw = function() {
         graphics.setFont(30, "Consolas");

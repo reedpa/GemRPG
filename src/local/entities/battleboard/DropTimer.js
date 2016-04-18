@@ -1,7 +1,7 @@
 
 function DropTimer() {
     
-    this.zindex = 5;
+    this.zindex = dropTimerZIndex;
     
     this.draw = function() {
         if (dropTime > 0) {

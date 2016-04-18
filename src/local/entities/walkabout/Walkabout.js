@@ -2,7 +2,7 @@ var player;
 
 function Walkabout(data) {
     this.image = document.getElementById("overlandmap");
-    this.zindex = 0;
+    this.zindex = walkaboutZIndex;
     this.order = 1;
     player = new MainCharacter();
     this.data = data;

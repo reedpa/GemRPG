@@ -1,6 +1,6 @@
 
 function GameOver() {
-    this.zindex = 100;
+    this.zindex = gameOverZIndex;
     this.id = "GameOver";
     
     this.button = document.getElementById("buttonwhite");

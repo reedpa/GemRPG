@@ -13,7 +13,25 @@ var mainMap = {
             color: "red",
             encounters: [
                 {
-                    weight: 1
+                    weight: 1,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        {
+                            index: 0,
+                            image: "pink",
+                            actionMax: 90,
+                            health: 1000
+                        },
+                        {
+                            index: 1,
+                            image: "green",
+                            actionMax: 120,
+                            health: 1000
+                        }
+                    ]
                 }
             ]
         }, {
