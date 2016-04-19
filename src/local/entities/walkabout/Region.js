@@ -26,18 +26,7 @@ function Region(regionData) {
     this.doActions = function() {
         if (physics.isInside(player, this)) {
             if (Math.floor(Math.random() * 100) === 1 ) {
-                graphics.graphicsObjects = null;
-                ai.aiObjects = null;
-                physics.physObjects = null;
-                graphics = null;
-                ai = null;
-                physics = null;
-                gameBoard = null;
-                mainMenu = null;
-                graphics = new Graphics();
-                ai = new AI();
-                physics = new Physics();
-                interaction = new Interaction();
+                ResetAllObjects();
                 var gameBoard = new GameBoard(regionData.encounters[0]);
                 graphics.addObject(gameBoard);
                 ai.addObject(gameBoard);

@@ -30,18 +30,7 @@ function GameOver() {
     this.loadMainMenu = function() {
         if (mouseX > 110 && mouseX < 235 && mouseY > 220 && mouseY < 270) {
             audio.playSound("buttonclick");
-            graphics.graphicsObjects = null;
-            ai.aiObjects = null;
-            physics.physObjects = null;
-            graphics = null;
-            ai = null;
-            physics = null;
-            gameBoard = null;
-            mainMenu = null;
-            graphics = new Graphics();
-            ai = new AI();
-            physics = new Physics();
-            interaction = new Interaction();
+            ResetAllObjects();
             var mainMap = new Walkabout(dataStore.lastWalkabout);
             player.topLeft = dataStore.lastLeft;
             player.targetLeft = dataStore.lastLeft;
