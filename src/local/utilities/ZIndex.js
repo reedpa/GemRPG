@@ -1,9 +1,10 @@
 
 var gameBoardZIndex = 0;
 var mainMenuZIndex = 1;
-var backDropZIndex = 1;
+var backDropZIndex = 3;
 var pieceZIndex = 2;
 var enemyZIndex = 4;
+var characterZIndex = 4;
 var dropTimerZIndex = 5;
 var gameTimerZIndex = 6;
 var scoreBoardZIndex = 7;

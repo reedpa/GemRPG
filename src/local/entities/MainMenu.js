@@ -46,15 +46,6 @@ function MainMenu() {
             graphics.setFillStyle("black");
             graphics.fillText(gameModes[i][4], gameModes[i][0]+5+offset, gameModes[i][1]+32+offset);
         }
-        graphics.setFillStyle("black");
-        graphics.setGlobalAlpha(0.5);
-        graphics.fillRect(0, 490, 360, 200);
-        graphics.setFillStyle("white");
-        
-        graphics.setGlobalAlpha(1);
-        graphics.fillText("Longest Zen: " + topZen.toString(), 5, 525);
-        graphics.fillText("Top Score: " + topScore.toString(), 5, 575);
-        graphics.fillText("Top Move: " + topMove.toString(), 5, 625);
     };
 
     this.handleClick = function() {
@@ -86,6 +77,7 @@ function MainMenu() {
     }
 
     this.initializeGame = function(index) {
+        dataStore.characters = starterParty.characters;
         var mainWalkabout = new Walkabout(mainMap);
         
         this.active = false;

@@ -34,6 +34,8 @@ function GameBoard(encounterData) {
     this.id = "the game board";
     this.backDrop = null;
     this.image = document.getElementById(this.encounterData.board.boardImage);
+    this.enemies = [];
+    this.characters = [];
 
     var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
 
@@ -63,7 +65,8 @@ function GameBoard(encounterData) {
         }
 
         this.handleTimer();
-        this.handleGameTime();
+        this.handleEndState();
+
         if (this.stateCountdown > 1) {
             this.stateCountdown--;
         } else if (this.stateCountdown === 1) {
@@ -91,13 +94,14 @@ function GameBoard(encounterData) {
         }
     }
     
-    this.handleGameTime = function() {
-        if (gameTime > 0 && this.state === "playing") {
-            gameTime -= loopStart - loopEnd;
-            if (gameTime <= 0) {
-                this.endGame();
+    this.handleEndState = function() {
+        for (var i = 0; i < this.enemies.length; i++) {
+            if(this.enemies[i].health > 0) {
+                return;
             }
         }
+
+        this.endGame();
     }
 
     this.clearPieces = function() {
@@ -360,14 +364,14 @@ function GameBoard(encounterData) {
     
     for (var i = 0; i < this.encounterData.enemies.length; i++) {
         var enemy = new Enemy(this.encounterData.enemies[i]);
+        this.enemies.push(enemy);
+    }
+    
+    for (var i = 0; i < dataStore.characters.length; i++) {
+        var character = new Character(dataStore.characters[i]);
+        this.characters.push(character);
     }
 
-    this.scoreBoard = new ScoreBoard();
     this.dropTimer = new DropTimer();
-
-    if (gameStyle === "Score Blitz") {
-        gameTime = 60000;
-        this.gameTimer = new GameTimer();
-    }
 
 }
