@@ -8,6 +8,7 @@ function Character(characterData) {
     this.gemAffinity = characterData.gemAffinity;
     this.damageMultiplier = characterData.damageMultiplier;
     this.actionTimer = 0;
+    this.attacks = [];
     
     this.draw = function() {
         if (this.health > 0) {

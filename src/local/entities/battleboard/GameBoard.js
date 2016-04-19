@@ -13,7 +13,6 @@ var boardMouseY = 0;
 var stateLength = 33;
 var nextId = 0;
 var score = 0;
-var turnScore = 0;
 var bestMove = 0;
 
 var dropTime = 0;
@@ -21,6 +20,17 @@ var gameTime = 0;
 var gameStart = 0;
 
 var gameStyle = "";
+
+var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
+
+var turnScore = {
+    "blue": 0,
+    "green": 0,
+    "red": 0,
+    "purple": 0,
+    "pink": 0,
+    multiplier: 1
+}
 
 function GameBoard(encounterData) {
     this.encounterData = encounterData;
@@ -37,11 +47,8 @@ function GameBoard(encounterData) {
     this.enemies = [];
     this.characters = [];
 
-    var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
-
     score = 0;
-
-    turnScore = 0;
+    
     bestMove = 0;
     dropTime = 0;
     gameTime = 0;
@@ -174,8 +181,7 @@ function GameBoard(encounterData) {
                         trickShot.top = tempPiece.getPixelTop();
                         trickShot.left = tempPiece.getPixelLeft();
                         audio.playSound("trickshot_sound");
-                        turnScore += 250;
-                        turnScore = Math.floor(turnScore * 1.1);
+                        turnScore.multiplier += 0.1;
                     }
 
                     tempPiece.top = tempTop;
@@ -265,11 +271,11 @@ function GameBoard(encounterData) {
             this.state = "solving";
             this.stateCountdown = stateLength;
         } else {
-            score += turnScore;
-            if (bestMove < turnScore) {
-                bestMove = turnScore;
+            for (var i = 0; i < this.characters.length; i++) {
+                if (turnScore[this.characters[i].gemAffinity] > 0) {
+                    this.characters[i].attacks.push(turnScore[this.characters[i].gemAffinity] * turnScore.multiplier * this.characters[i].damageMultiplier);
+                }
             }
-            turnScore = 0;
             this.state = "playing";
         }
     }
@@ -289,17 +295,17 @@ function GameBoard(encounterData) {
                     for (var k = 0; k < downMatches.length; k++) {
                         matched = true;
                         this.pieces[downMatches[k]].matched = true;
-                        turnScore += 100;
+                        turnScore[this.pieces[downMatches[0]].color] += 100;
                     }
-                    turnScore = Math.floor(turnScore * (1 + 0.1 * downMatches.length));
+                    turnScore.multiplier += 0.1 * downMatches.length;
                 }
                 if (rightMatches) {
                     for (var m = 0; m < rightMatches.length; m++) {
                         matched = true;
                         this.pieces[rightMatches[m]].matched = true;
-                        turnScore += 100;
+                        turnScore[this.pieces[rightMatches[0]].color] += 100;
                     }
-                    turnScore = Math.floor(turnScore * (1 + 0.1 * rightMatches.length));
+                    turnScore.multiplier += 0.1 * rightMatches.length;
                 }
             }
         }
@@ -352,8 +358,17 @@ function GameBoard(encounterData) {
             this.repopulateBoard(true);
         }
 
-        turnScore = 0;
+        this.resetTurnScore();
     }
+    
+    this.resetTurnScore = function() {
+        for (var i = 0; i < colors.length; i++) {
+            turnScore[colors[i]] = 0;
+        }
+        turnScore.multiplier = 1;
+    }
+    
+    this.resetTurnScore();
 
     this.startBoard();
     this.state = "playing";
