@@ -90,6 +90,9 @@ function GameBoard(encounterData) {
                     this.repopulateBoard();
                     this.solveBoard();
                     break;
+                case "Game Over":
+                    this.endGame();
+                    break;
             }
         }
     }
@@ -104,14 +107,14 @@ function GameBoard(encounterData) {
     }
     
     this.handleEndState = function() {
-        for (var i = 0; i < this.enemies.length; i++) {
-            if(this.enemies[i].health > 0) {
-                return;
+        if (this.state !== "Game Over") {
+            for (var i = 0; i < this.enemies.length; i++) {
+                if(this.enemies[i].health > 0) {
+                    return;
+                }
             }
-        }
-
-        if (!gameOver) {
-            this.endGame();
+            this.state = "Game Over";        
+            this.stateCountdown = stateLength;
         }
     }
 
