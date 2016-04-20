@@ -1,3 +1,4 @@
+var gameBoard;
 
 function Region(regionData) {
     this.topLeft = regionData.topLeft;
@@ -27,7 +28,7 @@ function Region(regionData) {
         if (physics.isInside(player, this)) {
             if (Math.floor(Math.random() * 100) === 1 ) {
                 ResetAllObjects();
-                var gameBoard = new GameBoard(regionData.encounters[0]);
+                gameBoard = new GameBoard(regionData.encounters[0]);
                 graphics.addObject(gameBoard);
                 ai.addObject(gameBoard);
                 dataStore.lastLeft = player.topLeft;

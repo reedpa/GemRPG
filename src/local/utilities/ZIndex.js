@@ -1,18 +1,19 @@
 
 var gameBoardZIndex = 0;
-var mainMenuZIndex = 1;
-var backDropZIndex = 3;
-var pieceZIndex = 2;
-var enemyZIndex = 4;
-var characterZIndex = 4;
-var dropTimerZIndex = 5;
-var gameTimerZIndex = 6;
-var scoreBoardZIndex = 7;
-var gameOverZIndex = 100;
-var grabbedPieceZIndex = 1000;
-var trickShotLabelZIndex = 1001;
+var mainMenuZIndex = 100;
+var backDropZIndex = 300;
+var pieceZIndex = 200;
+var enemyZIndex = 400;
+var characterZIndex = 400;
+var attackZIndex = 500;
+var dropTimerZIndex = 600;
+var gameTimerZIndex = 700;
+var scoreBoardZIndex = 800;
+var gameOverZIndex = 10000;
+var grabbedPieceZIndex = 100000;
+var trickShotLabelZIndex = 100100;
 
 //walkabout
 var walkaboutZIndex = 0;
-var mainCharacterZIndex = 2;
-var regionZIndex = 5;
+var mainCharacterZIndex = 200;
+var regionZIndex = 500;

@@ -54,6 +54,7 @@ function GameBoard(encounterData) {
     gameTime = 0;
     gameStart = Date.now();
     gameStyle = "encounter";
+    gameOver = null;
 
     this.zindex = gameBoardZIndex;
     this.draw = function() {
@@ -72,6 +73,7 @@ function GameBoard(encounterData) {
         }
 
         this.handleTimer();
+
         this.handleEndState();
 
         if (this.stateCountdown > 1) {
@@ -108,7 +110,9 @@ function GameBoard(encounterData) {
             }
         }
 
-        this.endGame();
+        if (!gameOver) {
+            this.endGame();
+        }
     }
 
     this.clearPieces = function() {
@@ -273,9 +277,11 @@ function GameBoard(encounterData) {
         } else {
             for (var i = 0; i < this.characters.length; i++) {
                 if (turnScore[this.characters[i].gemAffinity] > 0) {
-                    this.characters[i].attacks.push(turnScore[this.characters[i].gemAffinity] * turnScore.multiplier * this.characters[i].damageMultiplier);
+                    var damage = Math.floor(turnScore[this.characters[i].gemAffinity] * turnScore.multiplier * this.characters[i].damageMultiplier);
+                    this.characters[i].attacks.push([damage]);
                 }
             }
+            this.resetTurnScore();
             this.state = "playing";
         }
     }
