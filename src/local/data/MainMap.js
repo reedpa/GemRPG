@@ -23,13 +23,13 @@ var mainMap = {
                             index: 0,
                             image: "pink",
                             actionMax: 90,
-                            health: 1000
+                            health: 10000
                         },
                         {
                             index: 1,
                             image: "green",
                             actionMax: 120,
-                            health: 1000
+                            health: 10000
                         }
                     ]
                 }

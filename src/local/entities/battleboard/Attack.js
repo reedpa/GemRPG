@@ -11,7 +11,7 @@ function Attack(attackProps) {
     this.verticalSpeed = 0;
     this.verticalAccel = -1;
     this.ticksAlive = 0;
-    this.id = "attackId" + (Math.random() * 100000).toString();
+    this.id = "attackId" + GetGuid();
     
     var ticksToLand = 32;
     var ticksToLive = 64;
@@ -20,25 +20,21 @@ function Attack(attackProps) {
         if (this.ticksAlive < ticksToLand) {
             graphics.setFillStyle("black");
             graphics.fillRect(this.topLeft, this.topTop, 5, 5);
-        } else {
-            var fontModifier = ((this.ticksAlive - 32) / 2);
-            var fontSize = 10 + fontModifier;
-            graphics.setFont(fontSize, "Arial");
-            graphics.setFillStyle("white");
-            graphics.fillText(this.damage.toString(), this.target.topLeft - fontModifier, this.target.topTop);
         }
     }
     
     this.doActions = function() {
-        this.topLeft += this.horizontalSpeed;
-        this.topTop += this.verticalSpeed;
-        this.verticalSpeed += this.verticalAccel;
-        this.ticksAlive += 1;
-        if (this.ticksAlive === ticksToLand) {
-            this.target.health -= this.damage; 
-        } else if (this.ticksAlive > ticksToLive) {
-            ai.removeObject(this);
-            graphics.removeObject(this);
+        if (gameBoard.state === "playing") {
+            this.topLeft += this.horizontalSpeed;
+            this.topTop += this.verticalSpeed;
+            this.verticalSpeed += this.verticalAccel;
+            this.ticksAlive += 1;
+            if (this.ticksAlive === ticksToLand) {
+                this.target.health -= this.damage; 
+            } else if (this.ticksAlive > ticksToLive) {
+                ai.removeObject(this);
+                graphics.removeObject(this);
+            }
         }
     }
     

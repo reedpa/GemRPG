@@ -6,6 +6,7 @@ var pieceZIndex = 200;
 var enemyZIndex = 400;
 var characterZIndex = 400;
 var attackZIndex = 500;
+var DamageBounceZIndex = 550;
 var dropTimerZIndex = 600;
 var gameTimerZIndex = 700;
 var scoreBoardZIndex = 800;

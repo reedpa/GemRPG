@@ -281,7 +281,7 @@ function GameBoard(encounterData) {
             for (var i = 0; i < this.characters.length; i++) {
                 if (turnScore[this.characters[i].gemAffinity] > 0) {
                     var damage = Math.floor(turnScore[this.characters[i].gemAffinity] * turnScore.multiplier * this.characters[i].damageMultiplier);
-                    this.characters[i].attacks.push([damage]);
+                    this.characters[i].attacks.push(damage);
                 }
             }
             this.resetTurnScore();

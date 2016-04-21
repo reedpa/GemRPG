@@ -2,11 +2,13 @@ function Enemy(enemyProps) {
     this.image = enemyProps.image;
     this.health = enemyProps.health;
     this.maxHealth = enemyProps.health;
+    this.lastHealth = enemyProps.health;
     this.tempDamage = 0;
     this.index = enemyProps.index;
     this.zindex = enemyZIndex;
     this.actionMax = enemyProps.actionMax;
     this.actionTimer = 0;
+    this.lastDamageBounce = -1;
     
     this.topLeft = 225;
     this.topTop = 75 + ((30 + 30) * this.index);
@@ -37,11 +39,33 @@ function Enemy(enemyProps) {
     }
     
     this.doActions = function() {
-        if (this.actionTimer <= this.actionMax) {
-            this.actionTimer += 1;
-        } else {
-            this.actionTimer = 0;
+        if (gameBoard.state === "playing") {
+            if (this.health !== this.lastHealth) {
+                var leftOffset = Math.random() * 50 - 25;
+                var topOffset = Math.random() * 50 - 25;
+                var damageBounceProps = {
+                    damage: this.lastHealth - this.health,
+                    topLeft: this.topLeft + leftOffset,
+                    topTop: this.topTop + topOffset
+                };
+                var damageBounce = new DamageBounce(damageBounceProps);
+                //var timeToWait = Math.max(0, (30 - this.lastDamageBounce) * 16);
+                //window.setTimeout(this.createDamageBounce, timeToWait, damageBounceProps);
+                //this.lastDamageBounce = 0;
+            }
+            this.lastHealth = this.health;
+            this.lastDamageBounce++;
+
+            if (this.actionTimer <= this.actionMax) {
+                this.actionTimer += 1;
+            } else {
+                this.actionTimer = 0;
+            }
         }
+    }
+    
+    this.createDamageBounce = function (damageBounceProps) {
+        var damageBounce = new DamageBounce(damageBounceProps);
     }
     
     ai.addObject(this);

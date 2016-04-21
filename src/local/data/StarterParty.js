@@ -6,7 +6,8 @@ var starterParty = {
             image: "blue",
             health: 100,
             index: 0,
-            actionMax: 120,
+            actionMax: 30,
+            actionDamage: 100,
             damageMultiplier: 1
         },
         {
@@ -14,7 +15,8 @@ var starterParty = {
             image: "green",
             health: 100,
             index: 1,
-            actionMax: 120,
+            actionMax: 60,
+            actionDamage: 200,
             damageMultiplier: 1
         },
         {
@@ -23,6 +25,7 @@ var starterParty = {
             health: 100,
             index: 2,
             actionMax: 120,
+            actionDamage: 500,
             damageMultiplier: 1
         },
         {
@@ -30,7 +33,8 @@ var starterParty = {
             image: "pink",
             health: 100,
             index: 3,
-            actionMax: 120,
+            actionMax: 150,
+            actionDamage: 750,
             damageMultiplier: 1
         },
         {
@@ -38,7 +42,8 @@ var starterParty = {
             image: "yellow",
             health: 100,
             index: 4,
-            actionMax: 120,
+            actionMax: 180,
+            actionDamage: 1000,
             damageMultiplier: 1
         },
         {
@@ -46,7 +51,8 @@ var starterParty = {
             image: "purple",
             health: 100,
             index: 5,
-            actionMax: 150,
+            actionMax: 210,
+            actionDamage: 2500,
             damageMultiplier: 1
         }
     ]
