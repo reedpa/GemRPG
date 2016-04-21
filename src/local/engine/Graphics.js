@@ -35,6 +35,25 @@ function Graphics() {
         ctx.drawImage(image, x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
     
+    this.drawClippedImage = function(image, sx, sy, sw, sh, x, y, width, height) {
+        if (!width) { width = sw; }
+        if (!height) { height = sw; }
+        
+        ctx.drawImage(image, sx, sy, sw, sh, x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
+    }
+    
+    this.drawSprite = function(spriteProps, frame, x, y) {
+        var image = document.getElementById(spriteProps.sheetName);
+        this.drawClippedImage(
+            image, 
+            (spriteProps.leftIndex * spriteProps.frames) * spriteProps.spriteSize + frame * spriteProps.spriteSize, 
+            spriteProps.topIndex * spriteProps.spriteSize, 
+            spriteProps.spriteSize,
+            spriteProps.spriteSize,
+            x, 
+            y);
+    }
+    
     this.drawImageRotated = function(image, rotation, x, y, width, height) {
         if (!width) { width = image.width; }
         if (!height) { height = image.height; }

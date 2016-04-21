@@ -3,7 +3,13 @@ var starterParty = {
     characters: [
         {
             gemAffinity: "blue",
-            image: "blue",
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 0,
+                topIndex: 0,
+                spriteSize: 32,
+                frames: 4
+            },
             health: 100,
             index: 0,
             actionMax: 30,
@@ -12,7 +18,13 @@ var starterParty = {
         },
         {
             gemAffinity: "green",
-            image: "green",
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 1,
+                topIndex: 0,
+                spriteSize: 32,
+                frames: 4
+            },
             health: 100,
             index: 1,
             actionMax: 60,
@@ -21,7 +33,13 @@ var starterParty = {
         },
         {
             gemAffinity: "red",
-            image: "red",
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 2,
+                topIndex: 0,
+                spriteSize: 32,
+                frames: 4
+            },
             health: 100,
             index: 2,
             actionMax: 120,
@@ -30,7 +48,13 @@ var starterParty = {
         },
         {
             gemAffinity: "pink",
-            image: "pink",
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 3,
+                topIndex: 0,
+                spriteSize: 32,
+                frames: 4
+            },
             health: 100,
             index: 3,
             actionMax: 150,
@@ -39,7 +63,13 @@ var starterParty = {
         },
         {
             gemAffinity: "yellow",
-            image: "yellow",
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 4,
+                topIndex: 0,
+                spriteSize: 32,
+                frames: 4
+            },
             health: 100,
             index: 4,
             actionMax: 180,
@@ -48,7 +78,13 @@ var starterParty = {
         },
         {
             gemAffinity: "purple",
-            image: "purple",
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 0,
+                topIndex: 5,
+                spriteSize: 32,
+                frames: 4
+            },
             health: 100,
             index: 5,
             actionMax: 210,
