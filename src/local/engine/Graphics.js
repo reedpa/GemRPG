@@ -42,10 +42,34 @@ function Graphics() {
         ctx.drawImage(image, sx, sy, sw, sh, x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
     
+    this.drawClippedImageRotated = function(image, rotation, sx, sy, sw, sh, x, y, width, height) {
+        if (!width) { width = sw; }
+        if (!height) { height = sw; }
+        
+        ctx.translate(x * scaleFactor, y * scaleFactor);
+        ctx.rotate(rotation);
+        this.drawClippedImage(image, sx, sy, sw, sh, 0, 0, width, height);
+        ctx.rotate(-1 * rotation);
+        ctx.translate(-1 * x * scaleFactor, -1 * y * scaleFactor);
+    }
+    
     this.drawSprite = function(spriteProps, frame, x, y) {
         var image = document.getElementById(spriteProps.sheetName);
         this.drawClippedImage(
             image, 
+            (spriteProps.leftIndex * spriteProps.frames) * spriteProps.spriteSize + frame * spriteProps.spriteSize, 
+            spriteProps.topIndex * spriteProps.spriteSize, 
+            spriteProps.spriteSize,
+            spriteProps.spriteSize,
+            x, 
+            y);
+    }
+    
+    this.drawSpriteRotated = function(spriteProps, frame, rotation, x, y) {
+        var image = document.getElementById(spriteProps.sheetName);
+        this.drawClippedImageRotated(
+            image, 
+            rotation,
             (spriteProps.leftIndex * spriteProps.frames) * spriteProps.spriteSize + frame * spriteProps.spriteSize, 
             spriteProps.topIndex * spriteProps.spriteSize, 
             spriteProps.spriteSize,

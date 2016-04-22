@@ -1,8 +1,86 @@
 //var colors = ["blue", "green", "red", "purple", "yellow", "pink"];
+
+
+var sword = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 14,
+        topIndex: 107,
+        spriteSize: 16,
+        frames: 1
+    },
+    type: "melee"
+}
+
+var axe = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 15,
+        topIndex: 92,
+        spriteSize: 16,
+        frames: 1
+    },
+    type: "melee"
+}
+
+var dagger = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 4,
+        topIndex: 97,
+        spriteSize: 16,
+        frames: 1
+    },
+    type: "thrown"
+}
+
+var staff = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 7,
+        topIndex: 104,
+        spriteSize: 16,
+        frames: 1
+    },
+    ammoProps: {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 4,
+            topIndex: 73,
+            spriteSize: 16,
+            frames: 1
+        }
+    },
+    type: "shooter"
+}
+
+var bow = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 12,
+        topIndex: 93,
+        spriteSize: 16,
+        frames: 1
+    },
+    ammoProps: {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 1,
+            topIndex: 90,
+            spriteSize: 16,
+            frames: 1
+        }
+    },
+    type: "shooter"
+}
+
+
+
 var starterParty = {
     characters: [
         {
             gemAffinity: "blue",
+            weapon: dagger,
             spriteProps: {
                 sheetName: "characters",
                 leftIndex: 0,
@@ -18,6 +96,7 @@ var starterParty = {
         },
         {
             gemAffinity: "green",
+            weapon: sword,
             spriteProps: {
                 sheetName: "characters",
                 leftIndex: 1,
@@ -33,6 +112,7 @@ var starterParty = {
         },
         {
             gemAffinity: "red",
+            weapon: bow,
             spriteProps: {
                 sheetName: "characters",
                 leftIndex: 2,
@@ -48,6 +128,7 @@ var starterParty = {
         },
         {
             gemAffinity: "pink",
+            weapon: sword,
             spriteProps: {
                 sheetName: "characters",
                 leftIndex: 3,
@@ -63,6 +144,7 @@ var starterParty = {
         },
         {
             gemAffinity: "yellow",
+            weapon: axe,
             spriteProps: {
                 sheetName: "characters",
                 leftIndex: 4,
@@ -78,6 +160,7 @@ var starterParty = {
         },
         {
             gemAffinity: "purple",
+            weapon: staff,
             spriteProps: {
                 sheetName: "characters",
                 leftIndex: 0,

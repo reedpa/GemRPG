@@ -6,20 +6,43 @@ function Attack(attackProps) {
     this.image = attackProps.image;
     this.target = attackProps.target;
     this.damage = attackProps.damage;
+    this.weaponProps = attackProps.weaponProps;
+    this.spriteProps = this.weaponProps.spriteProps;
 
     this.horizontalSpeed = 0;
     this.verticalSpeed = 0;
-    this.verticalAccel = -1;
+    this.verticalAccel = 0;
     this.ticksAlive = 0;
     this.id = "attackId" + GetGuid();
     
-    var ticksToLand = 32;
-    var ticksToLive = 64;
+    var ticksToLand = 16;
+    var ticksToLive = 32;
+    
+    if (this.weaponProps.type === "melee") {
+        ticksToLand = 32;
+        ticksToLive = 64;
+    } else if (this.weaponProps.type === "thrown") {
+        this.topTop += 10;
+    } else if (this.weaponProps.type === "shooter") {
+        this.topLeft -= 5;
+        this.topTop -= 5;
+        this.spriteProps = this.weaponProps.ammoProps.spriteProps;
+    }
     
     this.draw = function() {
         if (this.ticksAlive < ticksToLand) {
-            graphics.setFillStyle("black");
-            graphics.fillRect(this.topLeft, this.topTop, 5, 5);
+            var rotation;
+            if (this.weaponProps.type === "melee") {
+                rotation = ((this.ticksAlive / (ticksToLand)) + 0.33) * 360 * Math.PI / 180;
+            } else {
+                rotation = 0.13 * 360 * Math.PI / 180;
+            }
+            graphics.drawSpriteRotated(
+                this.spriteProps,
+                0,
+                rotation,
+                this.topLeft,
+                this.topTop);
         }
     }
     
@@ -39,12 +62,19 @@ function Attack(attackProps) {
     }
     
     this.calculateArc = function() {
-        var verticalDistance = this.topTop - this.target.topTop;
-        var horizontalDistance = -1 * (this.topLeft - this.target.topLeft);
+        var verticalDistance = this.topTop - (this.target.topTop + 10);
+        var horizontalDistance = -1 * (this.topLeft - (this.target.topLeft + 20));
         
         this.horizontalSpeed = horizontalDistance / ticksToLand;
-        this.verticalSpeed = -1 * Math.abs(this.horizontalSpeed);
-        this.verticalAccel = -1 * ((this.verticalSpeed + (verticalDistance / ticksToLand)) / (ticksToLand / 2));
+
+        if (this.weaponProps.type === "melee") {
+            this.verticalSpeed = -1 * Math.abs(this.horizontalSpeed);
+            this.verticalAccel = -1 * ((this.verticalSpeed + (verticalDistance / ticksToLand)) / (ticksToLand / 2));
+        } else if (this.weaponProps.type === "thrown") {
+            this.verticalSpeed = -1 * verticalDistance / ticksToLand;
+        } else if (this.weaponProps.type === "shooter") {
+            this.verticalSpeed = -1 * verticalDistance / ticksToLand;
+        }
     }
     
     this.calculateArc();
