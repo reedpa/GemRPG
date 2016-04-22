@@ -18,25 +18,17 @@ function GameOver() {
         graphics.setGlobalAlpha(1);
         graphics.setFont(40, "Arial");
         graphics.setFillStyle("white");
-        graphics.fillText("GAME", 110, 140);
-        graphics.fillText("OVER", 110, 190);
-
-        graphics.drawImage(this.button, 110, 220, 120, 40);
-        graphics.setFont(20, "Arial");
-        graphics.setFillStyle("black");
-        graphics.fillText("Main Menu", 120, 245);
+        graphics.fillText("SUCCESS", 80, 140);
     }
     
     this.loadMainMenu = function() {
-        if (mouseX > 110 && mouseX < 235 && mouseY > 220 && mouseY < 270) {
-            audio.playSound("buttonclick");
-            ResetAllObjects();
-            var mainMap = new Walkabout(dataStore.lastWalkabout);
-            player.topLeft = dataStore.lastLeft;
-            player.targetLeft = dataStore.lastLeft;
-            player.topTop = dataStore.lastTop;
-            player.targetTop = dataStore.lastTop;
-        }
+        audio.playSound("buttonclick");
+        ResetAllObjects();
+        var mainMap = new Walkabout(dataStore.lastWalkabout);
+        player.topLeft = dataStore.lastLeft;
+        player.targetLeft = dataStore.lastLeft;
+        player.topTop = dataStore.lastTop;
+        player.targetTop = dataStore.lastTop;
     }
     
     graphics.addObject(this);

@@ -27,6 +27,11 @@ function Attack(attackProps) {
         this.topLeft -= 5;
         this.topTop -= 5;
         this.spriteProps = this.weaponProps.ammoProps.spriteProps;
+    } else if (this.weaponProps.type === "magic ball") {
+        this.topTop -= 5;
+        ticksToLand = 32;
+        ticksToLive = 64;
+        this.spriteProps = this.weaponProps.ammoProps.spriteProps;
     }
     
     this.draw = function() {
@@ -35,7 +40,7 @@ function Attack(attackProps) {
             if (this.weaponProps.type === "melee") {
                 rotation = ((this.ticksAlive / (ticksToLand)) + 0.33) * 360 * Math.PI / 180;
             } else {
-                rotation = 0.13 * 360 * Math.PI / 180;
+                rotation = 45 * Math.PI / 180;
             }
             graphics.drawSpriteRotated(
                 this.spriteProps,
@@ -47,7 +52,7 @@ function Attack(attackProps) {
     }
     
     this.doActions = function() {
-        if (gameBoard.state === "playing") {
+        if (gameBoard.state !== "Game Over") {
             this.topLeft += this.horizontalSpeed;
             this.topTop += this.verticalSpeed;
             this.verticalSpeed += this.verticalAccel;
@@ -73,6 +78,8 @@ function Attack(attackProps) {
         } else if (this.weaponProps.type === "thrown") {
             this.verticalSpeed = -1 * verticalDistance / ticksToLand;
         } else if (this.weaponProps.type === "shooter") {
+            this.verticalSpeed = -1 * verticalDistance / ticksToLand;
+        } else if (this.weaponProps.type === "magic ball") {
             this.verticalSpeed = -1 * verticalDistance / ticksToLand;
         }
     }

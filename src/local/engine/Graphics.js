@@ -87,6 +87,13 @@ function Graphics() {
         ctx.rotate(-1 * rotation);
         ctx.translate(-1 * x * scaleFactor, -1 * y * scaleFactor);
     }
+    
+    this.drawCircle = function(color, x, y, radius) {
+        this.setFillStyle(color);
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2*Math.PI);
+        ctx.fill();
+    }
 
     this.setFont = function(fontSize, font) {
         ctx.font = (fontSize * scaleFactor).toString() + "px " + font;

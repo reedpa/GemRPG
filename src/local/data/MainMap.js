@@ -1,3 +1,40 @@
+var deathSprite = {
+    sheetName: "monsters",
+    leftIndex: 4,
+    topIndex: 9,
+    spriteSize: 32,
+    frames: 2
+}
+
+var mushroomShot = {
+    ammoProps: {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 1,
+            topIndex: 86,
+            spriteSize: 16,
+            frames: 1
+        }
+    },
+    type: "magic ball"
+}
+
+var badMushroom = {
+    gemAffinity: "green",
+    weapon: mushroomShot,
+    spriteProps: {
+        sheetName: "monsters",
+        leftIndex: 4,
+        topIndex: 4,
+        spriteSize: 32,
+        frames: 2
+    },
+    health: 10000,
+    index: 0,
+    actionMax: 90,
+    actionDamage: 100,
+    damageMultiplier: 1
+}
 
 var mainMap = {
     image: "mainmap",
@@ -19,18 +56,9 @@ var mainMap = {
                         boardImage: "board_green"
                     },
                     enemies: [
-                        {
-                            index: 0,
-                            image: "pink",
-                            actionMax: 90,
-                            health: 10000
-                        },
-                        {
-                            index: 1,
-                            image: "green",
-                            actionMax: 120,
-                            health: 10000
-                        }
+                        badMushroom,
+                        badMushroom,
+                        badMushroom
                     ]
                 }
             ]

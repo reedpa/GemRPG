@@ -10,7 +10,7 @@ var squareHeight = 360 / 6;
 var boardMouseX = 0;
 var boardMouseY = 0;
 
-var stateLength = 33;
+var stateLength = 16;
 var nextId = 0;
 var score = 0;
 var bestMove = 0;
@@ -46,6 +46,14 @@ function GameBoard(encounterData) {
     this.image = document.getElementById(this.encounterData.board.boardImage);
     this.enemies = [];
     this.characters = [];
+    this.infusion = {
+        "blue": 0,
+        "green": 0,
+        "red": 0,
+        "purple": 0,
+        "pink": 0,
+        "yellow": 0
+    }
 
     score = 0;
     
@@ -278,12 +286,16 @@ function GameBoard(encounterData) {
             this.state = "solving";
             this.stateCountdown = stateLength;
         } else {
-            for (var i = 0; i < this.characters.length; i++) {
+            /*for (var i = 0; i < this.characters.length; i++) {
                 if (turnScore[this.characters[i].gemAffinity] > 0) {
                     var damage = Math.floor(turnScore[this.characters[i].gemAffinity] * turnScore.multiplier * this.characters[i].damageMultiplier);
                     this.characters[i].attacks.push(damage);
                 }
+            }*/
+            for (var i = 0; i < colors.length; i++) {
+                this.infusion[colors[i]] += turnScore[colors[i]];
             }
+
             this.resetTurnScore();
             this.state = "playing";
         }
@@ -386,13 +398,20 @@ function GameBoard(encounterData) {
     this.backDrop.height = boardTop;
     this.backDrop.width = boardWidth;
     
-    for (var i = 0; i < this.encounterData.enemies.length; i++) {
-        var enemy = new Enemy(this.encounterData.enemies[i]);
+    for (var i = this.encounterData.enemies.length - 1; i >= 0; i--) {
+        var enemyProps = this.encounterData.enemies[i];
+        enemyProps.fieldStart = 300;
+        enemyProps.index = i;
+        enemyProps.type = "enemy";
+        var enemy = new Character(enemyProps);
         this.enemies.push(enemy);
     }
     
     for (var i = 0; i < dataStore.characters.length; i++) {
-        var character = new Character(dataStore.characters[i]);
+        var characterProps = dataStore.characters[i];
+        characterProps.fieldStart = 100;
+        characterProps.type = "character";
+        var character = new Character(characterProps);
         this.characters.push(character);
     }
 

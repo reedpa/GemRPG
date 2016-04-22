@@ -88,7 +88,7 @@ var starterParty = {
                 spriteSize: 32,
                 frames: 4
             },
-            health: 100,
+            health: 1000,
             index: 0,
             actionMax: 30,
             actionDamage: 100,
@@ -104,7 +104,7 @@ var starterParty = {
                 spriteSize: 32,
                 frames: 4
             },
-            health: 100,
+            health: 1000,
             index: 1,
             actionMax: 60,
             actionDamage: 200,
@@ -120,7 +120,7 @@ var starterParty = {
                 spriteSize: 32,
                 frames: 4
             },
-            health: 100,
+            health: 1000,
             index: 2,
             actionMax: 120,
             actionDamage: 500,
@@ -136,7 +136,7 @@ var starterParty = {
                 spriteSize: 32,
                 frames: 4
             },
-            health: 100,
+            health: 1000,
             index: 3,
             actionMax: 150,
             actionDamage: 750,
@@ -152,7 +152,7 @@ var starterParty = {
                 spriteSize: 32,
                 frames: 4
             },
-            health: 100,
+            health: 1000,
             index: 4,
             actionMax: 180,
             actionDamage: 1000,
@@ -168,7 +168,7 @@ var starterParty = {
                 spriteSize: 32,
                 frames: 4
             },
-            health: 100,
+            health: 1000,
             index: 5,
             actionMax: 210,
             actionDamage: 2500,

@@ -39,7 +39,7 @@ function Enemy(enemyProps) {
     }
     
     this.doActions = function() {
-        if (gameBoard.state === "playing") {
+        if (gameBoard.state !== "Game Over") {
             if (this.health !== this.lastHealth) {
                 var leftOffset = Math.random() * 50 - 25;
                 var topOffset = Math.random() * 50 - 25;
