@@ -9,13 +9,13 @@ function Character(characterData) {
     this.maxHealth = characterData.health;
     this.lastHealth = characterData.health;
     this.tempDamage = 0;
-    this.actionMax = characterData.actionMax;
-    this.actionDamage = characterData.actionDamage;
+    this.actionMax = basicSpeed * this.weaponProps.speedModifier;
     this.gemAffinity = characterData.gemAffinity;
     this.damageMultiplier = characterData.damageMultiplier;
     this.actionTimer = 0 + Math.floor(Math.random() * this.actionMax / 2);
     this.attacks = [];
     this.ticksAlive = Math.floor(Math.random() * this.spriteProps.frames) * 10;
+    this.targetted = false;
     
     this.lastAttackCountDown = 0;
     
@@ -29,8 +29,8 @@ function Character(characterData) {
             spriteProps = this.spriteProps;
             if (gameBoard.infusion[this.gemAffinity] > 0) {
                 var infusion = gameBoard.infusion[this.gemAffinity];
-                graphics.setGlobalAlpha(Math.min(infusion / 1000, 1));
-                graphics.drawCircle(this.gemAffinity, this.topLeft + 16, this.topTop + 16, 40);
+                graphics.setGlobalAlpha(Math.min(infusion / 120, 0.8));
+                graphics.drawCircle(this.gemAffinity, this.topLeft + 16, this.topTop + 16, spriteProps.spriteSize);
                 graphics.setGlobalAlpha(1);
             }
 
@@ -61,6 +61,11 @@ function Character(characterData) {
             graphics.setLineWidth(1);
             graphics.setStrokeStyle("black");
             graphics.strokeRect(this.topLeft, this.topTop + 40, 30, 5);
+            
+            if (this.targetted) {
+                graphics.setStrokeStyle("black");
+                graphics.strokeRect(this.topLeft, this.topTop, 32, 32);
+            }
         }
         
         var topLeftModifier;
@@ -90,7 +95,7 @@ function Character(characterData) {
             if (this.actionTimer <= this.actionMax) {
                 this.actionTimer += 1;
             } else {
-                this.attacks.push(this.actionDamage);
+                this.attacks.push(basicDamage);
                 this.actionTimer = 0;
             }
             
@@ -109,11 +114,35 @@ function Character(characterData) {
     
     this.pickTarget = function(damage) {
         var target;
-        var targetList;
+        var targetList = [];
         if (this.type === "character") {
-            targetList = gameBoard.enemies;
+            if (this.weaponProps.subType !== null && this.weaponProps.subType === "healing") {
+                targetList = gameBoard.characters;
+                targetList.sort((left, right) => {
+                    return left.health - right.health;
+                });
+            } else {
+                targetList = gameBoard.enemies;
+                if (gameBoard.targettedEnemy !== null) {
+                    targetList.splice(0, 0, gameBoard.targettedEnemy);
+                }
+            }
         } else {
-            targetList = gameBoard.characters;
+            if (this.weaponProps.subType !== null && this.weaponProps.subType === "healing") {
+                targetList = gameBoard.enemies;
+                targetList.sort((left, right) => {
+                    return left.health - right.health;
+                });
+            } else {
+                for (var i = 0; i < gameBoard.characters.length; i++) {
+                    if (gameBoard.characters[i].maxHealth - gameBoard.characters[i].tempDamage > 0) {
+                        targetList.push(gameBoard.characters[i]);
+                    }
+                }
+                targetList.sort((a, b) => {
+                    return Math.random() - Math.random();
+                });
+            }
         }
         for (var j = targetList.length - 1; j >= 0 ; j--) {
             if (targetList[j].maxHealth - targetList[j].tempDamage > 0) {
@@ -122,6 +151,7 @@ function Character(characterData) {
         }
         if (target) {
             damage = damage + gameBoard.infusion[this.gemAffinity];
+            damage = Math.floor(damage * this.weaponProps.damageModifier);
             target.tempDamage += damage;
             var topLeftModifier;
             this.type === "character" ? topLeftModifier = 30 : topLeftModifier = 0;

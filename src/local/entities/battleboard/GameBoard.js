@@ -46,6 +46,7 @@ function GameBoard(encounterData) {
     this.image = document.getElementById(this.encounterData.board.boardImage);
     this.enemies = [];
     this.characters = [];
+    this.targettedEnemy = null;
     this.infusion = {
         "blue": 0,
         "green": 0,
@@ -73,6 +74,7 @@ function GameBoard(encounterData) {
         this.highLightSquare();
 
         if (mouseCameDown) {
+            this.targetEnemy();
             this.grabPiece();
         }
 
@@ -116,13 +118,30 @@ function GameBoard(encounterData) {
     
     this.handleEndState = function() {
         if (this.state !== "Game Over") {
+            var badGuyGameOver = true;
+            var goodGuyGameOver = true;
             for (var i = 0; i < this.enemies.length; i++) {
                 if(this.enemies[i].health > 0) {
-                    return;
+                    badGuyGameOver = false;
                 }
             }
-            this.state = "Game Over";        
-            this.stateCountdown = stateLength;
+            for (var i = 0; i < this.characters.length; i++) {
+                if (this.characters[i].health > 0) {
+                    goodGuyGameOver = false;
+                }
+            }
+            if (goodGuyGameOver) {
+                this.result = "FAILURE";
+                this.state = "Game Over";
+                this.stateCountdown = stateLength;
+                this.endGame();
+            } else if (badGuyGameOver) {
+                this.result = "SUCCESS!";
+                this.state = "Game Over";
+                this.stateCountDown = stateLength;
+                this.endGame();
+            }
+            
         }
     }
 
@@ -220,19 +239,32 @@ function GameBoard(encounterData) {
             }
         }
     }
+    
+    this.targetEnemy = function() {
+        for (var i = 0; i < this.enemies.length; i++) {
+            if (mouseX > this.enemies[i].topLeft && mouseX < this.enemies[i].topLeft + 32) {
+                if (mouseY > this.enemies[i].topTop && mouseY < this.enemies[i].topTop + 32) {
+                    this.targettedEnemy = this.enemies[i];
+                    this.targettedEnemy.targetted = true;
+                }
+            }
+        }
+    }
 
     this.grabPiece = function() {
         if (mouseX > 330 && mouseY < 30) {
             audio.playSound("buttonclick");
             this.endGame();
         } else if (this.state === "playing") {
-            this.grabbedPiece = this.getPiece(this.highlitY, this.highlitX);
-            this.grabbedPiece.grabbed = true;
-            this.grabbedPiece.zindex = grabbedPieceZIndex;
-            this.unsetMatches();
-            
-            if (gameStyle !== "Zen") {
-                dropTime = 5000;
+            if (mouseY >= boardTop) {
+                this.grabbedPiece = this.getPiece(this.highlitY, this.highlitX);
+                this.grabbedPiece.grabbed = true;
+                this.grabbedPiece.zindex = grabbedPieceZIndex;
+                this.unsetMatches();
+                
+                if (gameStyle !== "Zen") {
+                    dropTime = 5000;
+                }
             }
         }
     };
@@ -256,6 +288,7 @@ function GameBoard(encounterData) {
         this.state = "Game Over";
         this.ungrabPiece();
 
+        audio.stopSound("battle_music");
         var now = Date.now();
         if ( (now - gameStart) > topZen && gameStyle === "Zen") {
             topZen = now - gameStart;
@@ -286,12 +319,6 @@ function GameBoard(encounterData) {
             this.state = "solving";
             this.stateCountdown = stateLength;
         } else {
-            /*for (var i = 0; i < this.characters.length; i++) {
-                if (turnScore[this.characters[i].gemAffinity] > 0) {
-                    var damage = Math.floor(turnScore[this.characters[i].gemAffinity] * turnScore.multiplier * this.characters[i].damageMultiplier);
-                    this.characters[i].attacks.push(damage);
-                }
-            }*/
             for (var i = 0; i < colors.length; i++) {
                 this.infusion[colors[i]] += turnScore[colors[i]];
             }
@@ -414,6 +441,8 @@ function GameBoard(encounterData) {
         var character = new Character(characterProps);
         this.characters.push(character);
     }
+    
+    audio.playMusic("battle_music");
 
     this.dropTimer = new DropTimer();
 

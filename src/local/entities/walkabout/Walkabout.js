@@ -4,6 +4,7 @@ function Walkabout(data) {
     this.image = document.getElementById("overlandmap");
     this.zindex = walkaboutZIndex;
     this.order = 1;
+    this.ticksAlive = 0;
     player = new MainCharacter();
     this.data = data;
     dataStore.lastWalkabout = data;
@@ -20,12 +21,17 @@ function Walkabout(data) {
     }
     
     this.doActions = function() {
-        
+        this.ticksAlive++;
     }
     
     this.draw = function() {
         //ctx.translate(0 - mainCharacterX, 0 - mainCharacterY);
         graphics.drawImage(this.image, 0 + 175 - player.topLeft, 0 + 315 - player.topTop);
+        
+        graphics.setFillStyle("black");
+        graphics.setFont(30, "Arial");
+        graphics.fillText("Gold: " + dataStore.gold, 10, 600);
+        graphics.fillText("XP: " + dataStore.xp, 10, 630);
     }
     
     ai.addObject(this);

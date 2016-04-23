@@ -9,6 +9,13 @@ function Audio() {
         window.setTimeout(this.playSoundAsync, 0, soundName);
     }
     
+    this.playMusic = function(musicName) {
+        var music = document.getElementById(musicName);
+        music.currentTime = 0;
+        music.volume = 0.25;
+        music.play();
+    }
+    
     this.playSoundAsync = function(soundName) {
         try {
             var sound;

@@ -10,6 +10,7 @@ function Region(regionData) {
     this.color = regionData.color;
     this.zindex = regionZIndex;
     this.isBlocker = !!regionData.isBlocker;
+    this.ticksAlive = 0;
     
     this.draw = function() {
         graphics.setFillStyle(this.color);
@@ -26,15 +27,19 @@ function Region(regionData) {
     
     this.doActions = function() {
         if (physics.isInside(player, this)) {
-            if (Math.floor(Math.random() * 100) === 1 ) {
-                ResetAllObjects();
-                gameBoard = new GameBoard(regionData.encounters[0]);
-                graphics.addObject(gameBoard);
-                ai.addObject(gameBoard);
-                dataStore.lastLeft = player.topLeft;
-                dataStore.lastTop = player.topTop;
+            if (this.ticksAlive > 60) {
+                if (Math.floor(Math.random() * 100) === 1 && regionData.encounters.length >= 1 ) {
+                    var encounter = regionData.encounters[Math.floor(Math.random() * regionData.encounters.length)];
+                    ResetAllObjects();
+                    gameBoard = new GameBoard(encounter);
+                    graphics.addObject(gameBoard);
+                    ai.addObject(gameBoard);
+                    dataStore.lastLeft = player.topLeft;
+                    dataStore.lastTop = player.topTop;
+                }
             }
         }
+        this.ticksAlive++;
     }
     
     ai.addObject(this);

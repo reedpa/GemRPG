@@ -48,6 +48,8 @@ function Attack(attackProps) {
                 rotation,
                 this.topLeft,
                 this.topTop);
+        } else if (this.ticksAlive === ticksToLand && gameBoard.state !== "Game Over") {
+            audio.playSoundAsync(this.weaponProps.sound);
         }
     }
     

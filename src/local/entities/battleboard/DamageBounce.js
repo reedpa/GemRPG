@@ -5,11 +5,17 @@ function DamageBounce(damageBounceProps) {
     this.topLeft = damageBounceProps.topLeft;
     this.topTop = damageBounceProps.topTop;
     this.id = "DamageBounce" + GetGuid();
+    this.fillStyle = "white";
     this.lifeToLive = 32;
+    
+    if (this.damage < 0) {
+        this.damage *= -1;
+        this.fillStyle = "blue";
+    }
     
     this.draw = function() {
         graphics.setFont(22, "Arial");
-        graphics.setFillStyle("white");
+        graphics.setFillStyle(this.fillStyle);
         graphics.fillText(this.damage.toString(), this.topLeft, this.topTop - (32 - this.lifeToLive) / 2);
     }
     
