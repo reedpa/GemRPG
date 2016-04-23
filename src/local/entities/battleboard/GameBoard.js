@@ -75,6 +75,7 @@ function GameBoard(encounterData) {
 
         if (mouseCameDown) {
             this.targetEnemy();
+            this.launchInfusions();
             this.grabPiece();
         }
 
@@ -250,6 +251,27 @@ function GameBoard(encounterData) {
             }
         }
     }
+    
+    this.launchInfusions = function() {
+        for (var i = 0; i < this.characters.length; i++) {
+            if (mouseX > this.characters[i].topLeft && mouseX < this.characters[i].topLeft + 32) {
+                if (mouseY > this.characters[i].topTop && mouseY < this.characters[i].topTop + 32) {
+                    if (this.infusion[this.characters[i].gemAffinity] > 0) {
+                        var attackProps = {
+                            topTop: 15,
+                            topLeft: 150,
+                            damage: this.infusion[this.characters[i].gemAffinity],
+                            targetList: this.enemies,
+                            image: this.characters[i].gemAffinity + "_blast"
+                        }
+                        
+                        var attack = new BlastAttack(attackProps);
+                        this.infusion[this.characters[i].gemAffinity] = 0;
+                    }
+                }
+            }
+        }
+    }
 
     this.grabPiece = function() {
         if (mouseX > 330 && mouseY < 30) {
@@ -343,7 +365,7 @@ function GameBoard(encounterData) {
                     for (var k = 0; k < downMatches.length; k++) {
                         matched = true;
                         this.pieces[downMatches[k]].matched = true;
-                        turnScore[this.pieces[downMatches[0]].color] += 100;
+                        turnScore[this.pieces[downMatches[0]].color] += 10;
                     }
                     turnScore.multiplier += 0.1 * downMatches.length;
                 }
@@ -351,7 +373,7 @@ function GameBoard(encounterData) {
                     for (var m = 0; m < rightMatches.length; m++) {
                         matched = true;
                         this.pieces[rightMatches[m]].matched = true;
-                        turnScore[this.pieces[rightMatches[0]].color] += 100;
+                        turnScore[this.pieces[rightMatches[0]].color] += 10;
                     }
                     turnScore.multiplier += 0.1 * rightMatches.length;
                 }
