@@ -103,4 +103,14 @@ function Physics() {
             
         return false;
     }
+    
+    this.mouseIsInside = function(container) {
+        if (mouseX > container.topLeft && mouseX < container.topLeft + container.width) {
+            if (mouseY > container.topTop && mouseY < container.topTop + container.height) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

@@ -6,6 +6,14 @@ var deathSprite = {
     frames: 2
 }
 
+var targetSprite = {
+    sheetName: "monsters",
+    leftIndex: 4,
+    topIndex: 10,
+    spriteSize: 32,
+    frames: 2
+}
+
 var mushroomShot = {
     ammoProps: {
         spriteProps: {

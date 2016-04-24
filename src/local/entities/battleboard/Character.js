@@ -15,12 +15,14 @@ function Character(characterData) {
     this.actionTimer = 0 + Math.floor(Math.random() * this.actionMax / 2);
     this.attacks = [];
     this.ticksAlive = Math.floor(Math.random() * this.spriteProps.frames) * 10;
-    this.targetted = false;
+    this.targeted = false;
     
     this.lastAttackCountDown = 0;
     
     this.topLeft = characterData.fieldStart - 75 * Math.floor(this.index / 3);
     this.topTop = 50 + ((30 + 45) * (this.index % 3));
+    this.width = this.spriteProps.spriteSize;
+    this.height = this.spriteProps.spriteSize;
     
     this.draw = function() {
         var spriteProps = deathSprite;
@@ -62,9 +64,13 @@ function Character(characterData) {
             graphics.setStrokeStyle("black");
             graphics.strokeRect(this.topLeft, this.topTop + 40, 30, 5);
             
-            if (this.targetted) {
-                graphics.setStrokeStyle("black");
-                graphics.strokeRect(this.topLeft, this.topTop, 32, 32);
+            if (this.targeted) {
+                graphics.drawSprite(
+                    targetSprite,
+                    Math.floor(this.ticksAlive / 16) % 2,
+                    this.topLeft,
+                    this.topTop
+                )
             }
         }
         
@@ -78,6 +84,13 @@ function Character(characterData) {
     }
     
     this.doActions = function() {
+        if (mouseCameDown) {
+            if (this.type === "character") {
+                this.tryInfusionAttack();
+            } else {
+                this.tryGettingtargeted();
+            }
+        }
         if (gameBoard.state !== "Game Over" && this.health > 0) {
             if (this.health !== this.lastHealth) {
                 var leftOffset = Math.random() * 50 - 25;
@@ -112,6 +125,34 @@ function Character(characterData) {
         }
     }
     
+    this.tryInfusionAttack = function() {
+        if (physics.mouseIsInside(this)) {
+            if (this.health > 0) {
+                if (gameBoard.infusion[this.gemAffinity] > 0) {
+                    var attackProps = {
+                        topTop: 15,
+                        topLeft: 150,
+                        damage: gameBoard.infusion[this.gemAffinity] * this.damageMultiplier,
+                        targetList: gameBoard.enemies,
+                        image: this.gemAffinity + "_blast"
+                    }
+                    var attack = new BlastAttack(attackProps);
+                    gameBoard.infusion[this.gemAffinity] = 0;
+                }
+            }
+        }
+    }
+    
+    this.tryGettingtargeted = function() {
+        if (physics.mouseIsInside(this)) {
+            if (gameBoard.targetedEnemy !== null) {
+                gameBoard.targetedEnemy.targeted = false;
+            }
+            this.targeted = true;
+            gameBoard.targetedEnemy = this;
+        }
+    }
+    
     this.pickTarget = function(damage) {
         var target;
         var targetList = [];
@@ -123,8 +164,8 @@ function Character(characterData) {
                 });
             } else {
                 targetList = gameBoard.enemies;
-                if (gameBoard.targettedEnemy !== null) {
-                    targetList.splice(0, 0, gameBoard.targettedEnemy);
+                if (gameBoard.targetedEnemy !== null) {
+                    targetList.splice(0, 0, gameBoard.targetedEnemy);
                 }
             }
         } else {

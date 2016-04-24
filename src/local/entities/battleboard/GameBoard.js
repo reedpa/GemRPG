@@ -46,7 +46,7 @@ function GameBoard(encounterData) {
     this.image = document.getElementById(this.encounterData.board.boardImage);
     this.enemies = [];
     this.characters = [];
-    this.targettedEnemy = null;
+    this.targetedEnemy = null;
     this.infusion = {
         "blue": 0,
         "green": 0,
@@ -74,8 +74,6 @@ function GameBoard(encounterData) {
         this.highLightSquare();
 
         if (mouseCameDown) {
-            this.targetEnemy();
-            this.launchInfusions();
             this.grabPiece();
         }
 
@@ -237,38 +235,6 @@ function GameBoard(encounterData) {
         for (var i = 0; i < this.pieces.length; i++) {
             if (this.pieces[i] && this.pieces[i].top === top && this.pieces[i].left === left) {
                 return this.pieces[i];
-            }
-        }
-    }
-    
-    this.targetEnemy = function() {
-        for (var i = 0; i < this.enemies.length; i++) {
-            if (mouseX > this.enemies[i].topLeft && mouseX < this.enemies[i].topLeft + 32) {
-                if (mouseY > this.enemies[i].topTop && mouseY < this.enemies[i].topTop + 32) {
-                    this.targettedEnemy = this.enemies[i];
-                    this.targettedEnemy.targetted = true;
-                }
-            }
-        }
-    }
-    
-    this.launchInfusions = function() {
-        for (var i = 0; i < this.characters.length; i++) {
-            if (mouseX > this.characters[i].topLeft && mouseX < this.characters[i].topLeft + 32) {
-                if (mouseY > this.characters[i].topTop && mouseY < this.characters[i].topTop + 32) {
-                    if (this.infusion[this.characters[i].gemAffinity] > 0) {
-                        var attackProps = {
-                            topTop: 15,
-                            topLeft: 150,
-                            damage: this.infusion[this.characters[i].gemAffinity],
-                            targetList: this.enemies,
-                            image: this.characters[i].gemAffinity + "_blast"
-                        }
-                        
-                        var attack = new BlastAttack(attackProps);
-                        this.infusion[this.characters[i].gemAffinity] = 0;
-                    }
-                }
             }
         }
     }

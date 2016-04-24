@@ -31,6 +31,10 @@ function BlastAttack(attackProps) {
         this.ticksAlive++;
     }
     
+    for (var i = 0; i < this.targetList.length; i++) {
+        this.targetList[i].tempDamage += this.damage;
+    }
+    
     ai.addObject(this);
     graphics.addObject(this);
 }
