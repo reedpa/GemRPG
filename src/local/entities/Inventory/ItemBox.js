@@ -54,13 +54,21 @@ function ItemBox(itemProps) {
             if (physics.mouseIsInside(this)) {
                 if (this.isEquipped === true && inventoryScreen.grabbedThing !== null) {
                     if (inventoryScreen.grabbedThing.itemProps !== null) {
+                        var newWielder;
+                        var formerWielder;
                         for (var i = 0; i < dataStore.characters.length; i++) {
                             if (dataStore.characters[i].weapon.id === this.itemProps.id) {
-                                //TODO figure out how not to cause people to get "stuck" with the same weapon
-                                dataStore.characters[i].weapon = inventoryScreen.grabbedThing.itemProps;
-                                inventoryScreen.deInitializeObjects();
-                                inventoryScreen.initializeObjects();
+                                newWielder = dataStore.characters[i];
+                            } else if (dataStore.characters[i].weapon.id === inventoryScreen.grabbedThing.itemProps.id) {
+                                formerWielder = dataStore.characters[i];
                             }
+                        }
+                        if (newWielder) {
+                            newWielder.weapon = inventoryScreen.grabbedThing.itemProps;
+                            if (formerWielder) {
+                                formerWielder.weapon = this.itemProps;
+                            }
+                            inventoryScreen.dropAndReInitialize();
                         }
                     }
                 }

@@ -52,6 +52,34 @@ function CharacterBox(characterProps) {
                 this.grabbed = true;
             }
         }
+        if (mouseCameUp) {
+            if (physics.mouseIsInside(this)) {
+                if (inventoryScreen.grabbedThing && inventoryScreen.grabbedThing.characterProps !== null) {
+                    if (this.isEquipped === true) {
+                        var newSpot = -1;
+                        var oldSpot = -1;
+                        for (var i = 0; i < dataStore.characters.length; i++) {
+                            if (dataStore.characters[i].id === this.characterProps.id) {
+                                newSpot = i;
+                            }
+                            if (dataStore.characters[i].id === inventoryScreen.grabbedThing.characterProps.id) {
+                                oldSpot = i;
+                            }
+                        }
+                        
+                        if (newSpot !== -1) {
+                            dataStore.characters[newSpot] = inventoryScreen.grabbedThing.characterProps;
+                            dataStore.characters[newSpot].index = newSpot;
+                            if (oldSpot !== -1) {
+                                dataStore.characters[oldSpot] = this.characterProps;
+                                dataStore.characters[oldSpot].index = oldSpot;
+                            }
+                            inventoryScreen.dropAndReInitialize();
+                        }
+                    }
+                }
+            }
+        }
     }
     
     this.isInView = function() {

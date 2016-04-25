@@ -15,8 +15,8 @@ function InventoryScreen() {
     
     this.itemPage = 0;
     
-    var inventoryPageRight = {};
-    var inventoryPageLeft = {};
+    var inventoryPageLeft = {topLeft: 320, topTop: 80, width: 20, height: 20};
+    var inventoryPageRight = {topLeft: 320, topTop: 100, width: 20, height: 20};
     
     this.characterPage = 0;
     
@@ -73,6 +73,13 @@ function InventoryScreen() {
         this.itemBoxes = [];
     }
     
+    this.dropAndReInitialize = function() {
+        this.grabbedThing.grabbed = false;
+        this.grabbedThing = null;
+        this.deInitializeObjects();
+        this.initializeObjects();
+    }
+    
     this.draw = function() {
         graphics.setFillStyle("black");
         graphics.fillRect(0, 0, 360, 640);
@@ -89,6 +96,17 @@ function InventoryScreen() {
                 mouseY - 10
             );
         }
+        
+        
+        if (this.itemPage > 0) {
+            graphics.setFillStyle("blue");
+            graphics.fillRect(inventoryPageLeft.topLeft, inventoryPageLeft.topTop, inventoryPageLeft.width, inventoryPageLeft.height);
+        }
+        if (this.itemBoxes.length - this.itemPage > inventoryItemPageSize) {
+            graphics.setFillStyle("green");
+            graphics.fillRect(inventoryPageRight.topLeft, inventoryPageRight.topTop, inventoryPageRight.width, inventoryPageRight.height);
+        }
+        
     }
     
     this.doActions = function() {
@@ -102,6 +120,14 @@ function InventoryScreen() {
                 player.targetLeft = dataStore.lastLeft;
                 player.topTop = dataStore.lastTop;
                 player.targetTop = dataStore.lastTop;
+            }
+            
+            if (physics.mouseIsInside(inventoryPageRight)) {
+                this.itemPage += inventoryItemPageSize;
+            }
+            
+            if (physics.mouseIsInside(inventoryPageLeft)) {
+                this.itemPage -= inventoryItemPageSize;
             }
         }
         if (mouseCameUp) {
