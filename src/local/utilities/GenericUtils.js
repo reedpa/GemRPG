@@ -15,3 +15,11 @@ function ConvertMillisecondsToSecondString(inTime) {
     
     return seconds + "." + afterSeconds;
 }
+
+function copyJSONThing(thing) {
+    var thing2 = JSON.parse(JSON.stringify(thing));
+    if (thing2.id) {
+        thing2.id = GetGuid();
+    }
+    return thing2;
+}

@@ -1,4 +1,5 @@
 var player;
+var inventoryScreen;
 
 function Walkabout(data) {
     this.image = document.getElementById("overlandmap");
@@ -13,6 +14,7 @@ function Walkabout(data) {
     player.topTop = this.data.startingLocation[1];
     player.targetLeft = player.topLeft;
     player.targetTop = player.topTop;
+    var inventoryButton = {topLeft: 10, topTop: 540, height: 30, width: 30};
 
     this.regions = [];
     
@@ -22,12 +24,23 @@ function Walkabout(data) {
     
     this.doActions = function() {
         this.ticksAlive++;
+        
+        if (mouseCameDown) {
+            if (physics.mouseIsInside(inventoryButton)) {
+                ResetAllObjects();
+                inventoryScreen = new InventoryScreen();
+
+                dataStore.lastLeft = player.topLeft;
+                dataStore.lastTop = player.topTop;
+            }
+        }
     }
     
     this.draw = function() {
-        //ctx.translate(0 - mainCharacterX, 0 - mainCharacterY);
         graphics.drawImage(this.image, 0 + 175 - player.topLeft, 0 + 315 - player.topTop);
         
+        graphics.setFillStyle("red");
+        graphics.fillRect(inventoryButton.topLeft, inventoryButton.topTop, inventoryButton.width, inventoryButton.height);
         graphics.setFillStyle("black");
         graphics.setFont(30, "Arial");
         graphics.fillText("Gold: " + dataStore.gold, 10, 600);

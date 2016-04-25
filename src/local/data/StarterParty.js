@@ -105,6 +105,29 @@ var healing = {
     subType: "healing"
 }
 
+var starterInventory = [
+    sword,
+    axe,
+    bow,
+    healing,
+    dagger,
+    staff,
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword)),
+    JSON.parse(JSON.stringify(sword))
+]
+
 var starterParty = {
     characters: [
         {

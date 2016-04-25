@@ -20,7 +20,7 @@ function MainLoop() {
         graphics.draw();
 
         calcTicksPerSecond();
-        writeDebugInfo();
+        //writeDebugInfo();
 
     } catch (e) {
         console.log("Exception! " + e.toString());

@@ -18,3 +18,7 @@ var trickShotLabelZIndex = 100100;
 var walkaboutZIndex = 0;
 var mainCharacterZIndex = 200;
 var regionZIndex = 500;
+
+//inventory
+var inventoryZIndex = 0;
+var inventoryBoxZIndex = 100;

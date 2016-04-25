@@ -78,7 +78,7 @@ function Character(characterData) {
         this.type === "character" ? topLeftModifier = this.lastAttackCountDown : topLeftModifier = (-1 * this.lastAttackCountDown);
         graphics.drawSprite(
             spriteProps, 
-            Math.floor(this.lastAttackCountDown / this.spriteProps.frames) % this.spriteProps.frames, 
+            Math.abs(Math.floor(this.lastAttackCountDown / this.spriteProps.frames) % this.spriteProps.frames), 
             this.topLeft + topLeftModifier, 
             this.topTop);
     }
@@ -101,6 +101,7 @@ function Character(characterData) {
                     topTop: this.topTop + topOffset
                 };
                 var damageBounce = new DamageBounce(damageBounceProps);
+                //this.lastAttackCountDown -= 8;
             }
             this.lastHealth = this.health;
             
