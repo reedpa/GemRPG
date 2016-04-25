@@ -77,7 +77,9 @@ function ItemBox(itemProps) {
     }
     
     this.isInView = function() {
-        return this.index - inventoryScreen.itemPage < inventoryItemPageSize;
+        var pageIndex = this.index - inventoryScreen.itemPage;
+        return this.isEquipped || 
+            (pageIndex < inventoryItemPageSize && pageIndex >= 0);
     }
     
     ai.addObject(this);

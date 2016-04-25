@@ -14,11 +14,13 @@ function InventoryScreen() {
     this.characters = dataStore.inventory.characters;
     
     this.itemPage = 0;
+    this.characterPage = 0;
     
     var inventoryPageLeft = {topLeft: 320, topTop: 80, width: 20, height: 20};
     var inventoryPageRight = {topLeft: 320, topTop: 100, width: 20, height: 20};
     
-    this.characterPage = 0;
+    var characterPageLeft = {topLeft: 320, topTop: 250, width: 20, height: 20 };
+    var characterPageRight = {topLeft: 320, topTop: 270, width: 20, height: 20 };
     
     this.grabbedThing = null;
     
@@ -28,16 +30,16 @@ function InventoryScreen() {
     this.initializeObjects = function() {
         for (var i = 0; i < this.items.length; i++) {
             var newItemBox = new ItemBox(this.items[i]);
-            newItemBox.topLeft = ((i - this.itemPage) % 6 ) * inventoryBoxWidth + 5;
-            newItemBox.topTop = top = Math.floor( (i - this.itemPage) / 6) * inventoryBoxHeight + 5;
+            newItemBox.topLeft = (i % 6 ) * inventoryBoxWidth + 5;
+            newItemBox.topTop = top = (Math.floor( i / 6 ) % 3) * inventoryBoxHeight + 5;
             newItemBox.index = i;
             this.itemBoxes.push(newItemBox);
         }
         
         for (var i = 0; i < this.characters.length; i++) {
             var newCharacterBox = new CharacterBox(this.characters[i]);
-            newCharacterBox.topLeft = ((i - this.characterPage) % 6 ) * inventoryBoxWidth + 5;
-            newCharacterBox.topTop = Math.floor( (i - this.characterPage) / 6) * inventoryBoxHeight + 175;
+            newCharacterBox.topLeft = (i % 6 ) * inventoryBoxWidth + 5;
+            newCharacterBox.topTop = ( Math.floor( i/ 6) % 3 ) * inventoryBoxHeight + 175;
             newCharacterBox.index = i; 
             this.characterBoxes.push(newCharacterBox); 
         }
@@ -107,7 +109,17 @@ function InventoryScreen() {
             graphics.fillRect(inventoryPageRight.topLeft, inventoryPageRight.topTop, inventoryPageRight.width, inventoryPageRight.height);
         }
         
+        if (this.characterPage > 0) {
+            graphics.setFillStyle("blue");
+            graphics.fillRect(characterPageLeft.topLeft, characterPageLeft.topTop, characterPageLeft.width, characterPageLeft.height);
+        }
+        if (this.characterBoxes.length - this.characterPage > inventoryCharacterPageSize) {
+            graphics.setFillStyle("green");
+            graphics.fillRect(characterPageRight.topLeft, characterPageRight.topTop, characterPageRight.width, characterPageRight.height);
+        }
+        
     }
+    
     
     this.doActions = function() {
         if (mouseCameDown) {
@@ -120,14 +132,22 @@ function InventoryScreen() {
                 player.targetLeft = dataStore.lastLeft;
                 player.topTop = dataStore.lastTop;
                 player.targetTop = dataStore.lastTop;
-            }
-            
-            if (physics.mouseIsInside(inventoryPageRight)) {
-                this.itemPage += inventoryItemPageSize;
-            }
-            
-            if (physics.mouseIsInside(inventoryPageLeft)) {
-                this.itemPage -= inventoryItemPageSize;
+            } else if (physics.mouseIsInside(inventoryPageRight)) {
+                if (this.itemBoxes.length - this.itemPage > inventoryItemPageSize) {
+                    this.itemPage += inventoryItemPageSize;
+                }
+            } else if (physics.mouseIsInside(inventoryPageLeft)) {
+                if (this.itemPage > 0) {
+                    this.itemPage -= inventoryItemPageSize;
+                }
+            } else if (physics.mouseIsInside(characterPageRight)) {
+                if (this.characterBoxes.length - this.characterPage > inventoryCharacterPageSize) {
+                    this.characterPage += inventoryCharacterPageSize;
+                }
+            } else if (physics.mouseIsInside(characterPageLeft)) {
+                if (this.characterPage > 0) {
+                    this.characterPage -= inventoryCharacterPageSize;
+                }
             }
         }
         if (mouseCameUp) {

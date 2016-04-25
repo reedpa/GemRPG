@@ -83,7 +83,9 @@ function CharacterBox(characterProps) {
     }
     
     this.isInView = function() {
-        return this.index - inventoryScreen.characterPage < inventoryCharacterPageSize;
+        var pageIndex = this.index - inventoryScreen.characterPage;
+        return this.isEquipped || 
+            (pageIndex < inventoryCharacterPageSize && pageIndex >= 0);
     }
     
     ai.addObject(this);
