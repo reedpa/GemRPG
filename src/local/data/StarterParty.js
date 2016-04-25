@@ -13,6 +13,7 @@ var sword = {
     sound: "sword_hit",
     damageModifier: 1,
     speedModifier: 1,
+    id: 1,
     type: "melee"
 }
 
@@ -27,6 +28,7 @@ var axe = {
     sound: "axe_hit",
     damageModifier: 1.5,
     speedModifier: 1.5,
+    id: 2,
     type: "melee"
 }
 
@@ -41,6 +43,7 @@ var dagger = {
     sound: "dagger_hit",
     damageModifier: 0.8,
     speedModifier: 0.5,
+    id: 3,
     type: "thrown"
 }
 
@@ -63,7 +66,8 @@ var staff = {
     },
     sound: "magic_hit",
     damageModifier: 1.4,
-    speedModifier: 1.4, 
+    speedModifier: 1.4,
+    id: 4,
     type: "shooter"
 }
 
@@ -87,6 +91,7 @@ var bow = {
     sound: "bow_hit",
     damageModifier: 1.2,
     speedModifier: 1.2,
+    id: 5,
     type: "shooter"
 }
 
@@ -102,6 +107,7 @@ var healing = {
     damageModifier: -1,
     speedModifier: 0.8,
     type: "thrown",
+    id: 6,
     subType: "healing"
 }
 
@@ -112,20 +118,29 @@ var starterInventory = [
     healing,
     dagger,
     staff,
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword)),
-    JSON.parse(JSON.stringify(sword))
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword),
+    copyJSONThing(sword)
 ]
 
 var starterParty = {
@@ -142,7 +157,8 @@ var starterParty = {
             },
             health: 1000,
             index: 0,
-            damageMultiplier: 1
+            damageMultiplier: 1,
+            id: 1
         },
         {
             gemAffinity: "green",
@@ -156,7 +172,8 @@ var starterParty = {
             },
             health: 1000,
             index: 1,
-            damageMultiplier: 1
+            damageMultiplier: 1,
+            id: 2
         },
         {
             gemAffinity: "pink",
@@ -170,7 +187,8 @@ var starterParty = {
             },
             health: 1000,
             index: 3,
-            damageMultiplier: 1
+            damageMultiplier: 1,
+            id: 3
         },
         {
             gemAffinity: "red",
@@ -184,7 +202,8 @@ var starterParty = {
             },
             health: 1000,
             index: 2,
-            damageMultiplier: 1
+            damageMultiplier: 1,
+            id: 4
         },
         {
             gemAffinity: "yellow",
@@ -198,7 +217,8 @@ var starterParty = {
             },
             health: 1000,
             index: 4,
-            damageMultiplier: 1
+            damageMultiplier: 1,
+            id: 5
         },
         {
             gemAffinity: "purple",
@@ -212,7 +232,8 @@ var starterParty = {
             },
             health: 1000,
             index: 5,
-            damageMultiplier: 1
+            damageMultiplier: 1,
+            id: 6
         }
     ]
 }

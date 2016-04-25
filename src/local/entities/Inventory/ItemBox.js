@@ -3,12 +3,14 @@ function ItemBox(itemProps) {
     this.spriteProps = itemProps.spriteProps;
     this.id = "ItemBox_" + GetGuid();
     this.index = 0;
+    this.order = 0;
     this.zindex = inventoryBoxZIndex;
     
     this.width = 50;
     this.height = 50;
     
     this.grabbed = false;
+    this.isEquipped = false;
     
     this.draw = function() {
         if (this.isInView()) {
@@ -35,6 +37,9 @@ function ItemBox(itemProps) {
                 graphics.fillText("Dam " + this.itemProps.damageModifier * basicDamage, this.topLeft + 2, this.topTop + 30);
             }
             graphics.fillText("Swg " + this.itemProps.speedModifier.toString(), this.topLeft + 2, this.topTop + 40);
+            
+            graphics.setFont(8, "Arial");
+            graphics.fillText(this.itemProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);
         }
     }
     
@@ -43,6 +48,22 @@ function ItemBox(itemProps) {
             if (physics.mouseIsInside(this)) {
                 inventoryScreen.grabbedThing = this;
                 this.grabbed = true;
+            }
+        }
+        if (mouseCameUp) {
+            if (physics.mouseIsInside(this)) {
+                if (this.isEquipped === true && inventoryScreen.grabbedThing !== null) {
+                    if (inventoryScreen.grabbedThing.itemProps !== null) {
+                        for (var i = 0; i < dataStore.characters.length; i++) {
+                            if (dataStore.characters[i].weapon.id === this.itemProps.id) {
+                                //TODO figure out how not to cause people to get "stuck" with the same weapon
+                                dataStore.characters[i].weapon = inventoryScreen.grabbedThing.itemProps;
+                                inventoryScreen.deInitializeObjects();
+                                inventoryScreen.initializeObjects();
+                            }
+                        }
+                    }
+                }
             }
         }
     }

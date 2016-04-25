@@ -4,6 +4,7 @@ function CharacterBox(characterProps) {
     this.spriteProps = characterProps.spriteProps;
     this.id = "CharacterBox_" + GetGuid();
     this.index = 0;
+    this.order = 0;
     this.zindex = inventoryBoxZIndex;
     
     this.width = 50;
@@ -11,6 +12,8 @@ function CharacterBox(characterProps) {
     
     this.mouseTicks = 0;
     this.grabbed = false;
+    
+    this.isEquipped = false;
     
     this.draw = function() {
         if (this.isInView()) {
@@ -31,6 +34,9 @@ function CharacterBox(characterProps) {
                     this.topLeft + 5, 
                     this.topTop + 5);
             }
+            
+            graphics.setFont(8, "Arial");
+            graphics.fillText(this.characterProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);
         }
     }
     
