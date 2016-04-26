@@ -122,6 +122,12 @@ function InventoryScreen() {
             graphics.fillRect(characterPageRight.topLeft, characterPageRight.topTop, characterPageRight.width, characterPageRight.height);
         }
         
+        graphics.setFont(25, "Arial");
+        graphics.setFillStyle("white");
+        
+        graphics.fillText("Gold: " + dataStore.gold.toString(), detailsBox.topLeft, detailsBox.topTop - 30);
+        graphics.fillText("XP: " + dataStore.xp.toString(), detailsBox.topLeft, detailsBox.topTop - 5);
+        
     }
     
     
