@@ -12,9 +12,22 @@ function ItemBox(itemProps) {
     this.grabbed = false;
     this.isEquipped = false;
     
+    this.isWielded = false;
+    
+    for (var i = 0; i < dataStore.characters.length; i++) {
+        if (dataStore.characters[i].weapon.id === this.itemProps.id) {
+            this.isWielded = true;
+        }
+    }
+    
     this.draw = function() {
         if (this.isInView()) {
             graphics.setStrokeStyle("grey");
+            if (this.isEquipped) {
+                graphics.setStrokeStyle("green");
+            } else if (this.isWielded) {
+                graphics.setStrokeStyle("yellow");
+            }
             
             graphics.strokeRect(this.topLeft,
                 this.topTop,

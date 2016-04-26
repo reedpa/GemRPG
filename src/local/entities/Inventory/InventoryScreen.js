@@ -33,6 +33,7 @@ function InventoryScreen() {
             newItemBox.topLeft = (i % 6 ) * inventoryBoxWidth + 5;
             newItemBox.topTop = top = (Math.floor( i / 6 ) % 3) * inventoryBoxHeight + 5;
             newItemBox.index = i;
+            newItemBox.zindex += i;
             this.itemBoxes.push(newItemBox);
         }
         
@@ -41,6 +42,7 @@ function InventoryScreen() {
             newCharacterBox.topLeft = (i % 6 ) * inventoryBoxWidth + 5;
             newCharacterBox.topTop = ( Math.floor( i/ 6) % 3 ) * inventoryBoxHeight + 175;
             newCharacterBox.index = i; 
+            newCharacterBox.zindex += i;
             this.characterBoxes.push(newCharacterBox); 
         }
         
