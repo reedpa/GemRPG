@@ -1,5 +1,5 @@
 
 function DataStore() {
-    this.xp = 0;
-    this.gold = 0;
+    this.xp = 2000;
+    this.gold = 2000;
 }

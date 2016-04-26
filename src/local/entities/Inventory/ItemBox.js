@@ -51,8 +51,8 @@ function ItemBox(itemProps) {
             }
             graphics.fillText("Swg " + this.itemProps.speedModifier.toString(), this.topLeft + 2, this.topTop + 40);
             
-            graphics.setFont(8, "Arial");
-            graphics.fillText(this.itemProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);
+            //graphics.setFont(8, "Arial");
+            //graphics.fillText(this.itemProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);
         }
     }
     
@@ -61,6 +61,8 @@ function ItemBox(itemProps) {
             if (physics.mouseIsInside(this)) {
                 inventoryScreen.grabbedThing = this;
                 this.grabbed = true;
+                
+                detailsBox.setItem(this.itemProps);
             }
         }
         if (mouseCameUp) {

@@ -1,7 +1,9 @@
 var inventoryBoxWidth = 50;
 var inventoryBoxHeight = 50;
 var inventoryItemPageSize = 18;
-var inventoryCharacterPageSize = 18;
+var inventoryCharacterPageSize = 12;
+
+var detailsBox = null;
 
 function InventoryScreen() {
     this.topLeft = 0;
@@ -19,8 +21,8 @@ function InventoryScreen() {
     var inventoryPageLeft = {topLeft: 320, topTop: 80, width: 20, height: 20};
     var inventoryPageRight = {topLeft: 320, topTop: 100, width: 20, height: 20};
     
-    var characterPageLeft = {topLeft: 320, topTop: 250, width: 20, height: 20 };
-    var characterPageRight = {topLeft: 320, topTop: 270, width: 20, height: 20 };
+    var characterPageLeft = {topLeft: 320, topTop: 210, width: 20, height: 20 };
+    var characterPageRight = {topLeft: 320, topTop: 230, width: 20, height: 20 };
     
     this.grabbedThing = null;
     
@@ -40,7 +42,7 @@ function InventoryScreen() {
         for (var i = 0; i < this.characters.length; i++) {
             var newCharacterBox = new CharacterBox(this.characters[i]);
             newCharacterBox.topLeft = (i % 6 ) * inventoryBoxWidth + 5;
-            newCharacterBox.topTop = ( Math.floor( i/ 6) % 3 ) * inventoryBoxHeight + 175;
+            newCharacterBox.topTop = ( Math.floor( i/ 6) % 2 ) * inventoryBoxHeight + 175;
             newCharacterBox.index = i; 
             newCharacterBox.zindex += i;
             this.characterBoxes.push(newCharacterBox); 
@@ -48,15 +50,15 @@ function InventoryScreen() {
         
         for (var i = 0; i < dataStore.characters.length; i++) {
             var newCharacterBox = new CharacterBox(dataStore.characters[i]);
-            newCharacterBox.topLeft = 150 - Math.floor(i / 3) * 125;
-            newCharacterBox.topTop = 375 + (i % 3) * 65;
+            newCharacterBox.topLeft = 80 - Math.floor(i / 3) * 65;
+            newCharacterBox.topTop = 285 + (i % 3) * 120;
             newCharacterBox.index = 0;
             newCharacterBox.isEquipped = true;
             this.characterBoxes.push(newCharacterBox);
             
             var newItemBox = new ItemBox(dataStore.characters[i].weapon);
-            newItemBox.topLeft = newCharacterBox.topLeft + 60;
-            newItemBox.topTop = newCharacterBox.topTop + 10;
+            newItemBox.topLeft = newCharacterBox.topLeft + 10;
+            newItemBox.topTop = newCharacterBox.topTop + 55;
             newItemBox.index = 0;
             newItemBox.isEquipped = true;
             this.itemBoxes.push(newItemBox);
@@ -160,6 +162,7 @@ function InventoryScreen() {
         }
     }
     this.initializeObjects();
+    detailsBox = new DetailsBox();
     graphics.addObject(this);
     ai.addObject(this);
 }

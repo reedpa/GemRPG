@@ -47,13 +47,13 @@ function CharacterBox(characterProps) {
                     this.topTop + 5);
             }
             
-            graphics.setFont(8, "Arial");
-            graphics.fillText(this.characterProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);
+            //graphics.setFont(8, "Arial");
+            //graphics.fillText(this.characterProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);
         }
     }
     
     this.doActions = function() {
-        if (physics.mouseIsInside(this)) {
+        if (physics.mouseIsInside(this) && this.isInView()) {
             this.mouseTicks++;
         } else {
             this.mouseTicks = 0;
@@ -62,6 +62,8 @@ function CharacterBox(characterProps) {
             if (physics.mouseIsInside(this)) {
                 inventoryScreen.grabbedThing = this;
                 this.grabbed = true;
+                
+                detailsBox.setCharacter(this.characterProps);
             }
         }
         if (mouseCameUp) {

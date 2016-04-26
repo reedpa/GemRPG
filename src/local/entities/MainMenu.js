@@ -80,20 +80,6 @@ function MainMenu() {
         dataStore.characters = starterParty.characters;
         dataStore.inventory = {};
         dataStore.inventory.characters = JSON.parse(JSON.stringify(starterParty.characters));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[5]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[4]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[3]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[2]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[1]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[0]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[0]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[1]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[2]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[3]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[4]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[5]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[0]));
-        dataStore.inventory.characters.push(copyJSONThing(dataStore.characters[1]));
         dataStore.inventory.items = starterInventory;
         var mainWalkabout = new Walkabout(mainMap);
         

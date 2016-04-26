@@ -14,6 +14,8 @@ var sword = {
     damageModifier: 1,
     speedModifier: 1,
     id: 1,
+    level: 1,
+    gold: 0,
     type: "melee"
 }
 
@@ -29,6 +31,8 @@ var axe = {
     damageModifier: 1.5,
     speedModifier: 1.5,
     id: 2,
+    level: 1,
+    gold: 0,
     type: "melee"
 }
 
@@ -44,6 +48,8 @@ var dagger = {
     damageModifier: 0.8,
     speedModifier: 0.5,
     id: 3,
+    level: 1,
+    gold: 0,
     type: "thrown"
 }
 
@@ -68,6 +74,8 @@ var staff = {
     damageModifier: 1.4,
     speedModifier: 1.4,
     id: 4,
+    level: 1,
+    gold: 0,
     type: "shooter"
 }
 
@@ -92,6 +100,8 @@ var bow = {
     damageModifier: 1.2,
     speedModifier: 1.2,
     id: 5,
+    level: 1,
+    gold: 0,
     type: "shooter"
 }
 
@@ -108,6 +118,8 @@ var healing = {
     speedModifier: 0.8,
     type: "thrown",
     id: 6,
+    level: 1,
+    gold: 0,
     subType: "healing"
 }
 
@@ -118,27 +130,6 @@ var starterInventory = [
     healing,
     dagger,
     staff,
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
-    copyJSONThing(sword),
     copyJSONThing(sword),
     copyJSONThing(sword)
 ]
@@ -158,6 +149,8 @@ var starterParty = {
             health: 1000,
             index: 0,
             damageMultiplier: 1,
+            level: 1,
+            xp: 0,
             id: 1
         },
         {
@@ -173,6 +166,8 @@ var starterParty = {
             health: 1000,
             index: 1,
             damageMultiplier: 1,
+            level: 1,
+            xp: 0,
             id: 2
         },
         {
@@ -188,6 +183,8 @@ var starterParty = {
             health: 1000,
             index: 3,
             damageMultiplier: 1,
+            level: 1,
+            xp: 0,
             id: 3
         },
         {
@@ -203,6 +200,8 @@ var starterParty = {
             health: 1000,
             index: 2,
             damageMultiplier: 1,
+            level: 1,
+            xp: 0,
             id: 4
         },
         {
@@ -218,6 +217,8 @@ var starterParty = {
             health: 1000,
             index: 4,
             damageMultiplier: 1,
+            level: 1,
+            xp: 0,
             id: 5
         },
         {
@@ -233,6 +234,8 @@ var starterParty = {
             health: 1000,
             index: 5,
             damageMultiplier: 1,
+            level: 1,
+            xp: 0,
             id: 6
         }
     ]

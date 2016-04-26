@@ -22,3 +22,4 @@ var regionZIndex = 500;
 //inventory
 var inventoryZIndex = 0;
 var inventoryBoxZIndex = 100;
+var detailsBoxZIndex = 200;
