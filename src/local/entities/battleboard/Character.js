@@ -16,6 +16,7 @@ function Character(characterData) {
     this.attacks = [];
     this.ticksAlive = Math.floor(Math.random() * this.spriteProps.frames) * 10;
     this.targeted = false;
+    this.infusionType = characterData.infusionType;
     
     this.lastAttackCountDown = 0;
     
@@ -130,11 +131,21 @@ function Character(characterData) {
         if (physics.mouseIsInside(this)) {
             if (this.health > 0) {
                 if (gameBoard.infusion[this.gemAffinity] > 0) {
+                    var infusionDamage = gameBoard.infusion[this.gemAffinity] * this.damageMultiplier;
+                    var targetList = gameBoard.enemies; 
+                    var topTop = 15;
+                    var topLeft = 150;
+                    if (this.infusionType === "heal") {
+                        infusionDamage *= -1;
+                        targetList = gameBoard.characters;
+                        topLeft = 5;
+                    }
                     var attackProps = {
-                        topTop: 15,
-                        topLeft: 150,
-                        damage: gameBoard.infusion[this.gemAffinity] * this.damageMultiplier,
-                        targetList: gameBoard.enemies,
+                        infusionType: this.infusionType,
+                        topTop: topTop,
+                        topLeft: topLeft,
+                        damage: infusionDamage,
+                        targetList: targetList,
                         image: this.gemAffinity + "_blast"
                     }
                     var attack = new BlastAttack(attackProps);
