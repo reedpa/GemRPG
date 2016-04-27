@@ -68,21 +68,28 @@ function Attack(attackProps) {
         }
     }
     
+    // d = vt + (att) / 2
+    // a = (d - vt) 2 /  tt
     this.calculateArc = function() {
-        var verticalDistance = this.topTop - (this.target.topTop + 10);
-        var horizontalDistance = -1 * (this.topLeft - (this.target.topLeft + 20));
+        var verticalDistance = (this.target.topTop + 10) - this.topTop;
+        var horizontalDistance = (this.target.topLeft + 20) - this.topLeft;
         
         this.horizontalSpeed = horizontalDistance / ticksToLand;
 
         if (this.weaponProps.type === "melee") {
-            this.verticalSpeed = -1 * Math.abs(this.horizontalSpeed);
-            this.verticalAccel = -1 * ((this.verticalSpeed + (verticalDistance / ticksToLand)) / (ticksToLand / 2));
+            var verticalTarget = this.topTop - 30;
+            if (this.target.topTop < this.topTop) {
+                verticalTarget = this.target.topTop - 30;
+            }
+            var tempVerticalDistance = verticalTarget - this.topTop;
+            this.verticalSpeed = tempVerticalDistance / (ticksToLand / 3);
+            this.verticalAccel = (verticalDistance - (this.verticalSpeed * ticksToLand)) * 2 / (ticksToLand * ticksToLand);
         } else if (this.weaponProps.type === "thrown") {
-            this.verticalSpeed = -1 * verticalDistance / ticksToLand;
+            this.verticalSpeed = verticalDistance / ticksToLand;
         } else if (this.weaponProps.type === "shooter") {
-            this.verticalSpeed = -1 * verticalDistance / ticksToLand;
+            this.verticalSpeed = verticalDistance / ticksToLand;
         } else if (this.weaponProps.type === "magic ball") {
-            this.verticalSpeed = -1 * verticalDistance / ticksToLand;
+            this.verticalSpeed = verticalDistance / ticksToLand;
         }
     }
     
