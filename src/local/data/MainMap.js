@@ -32,10 +32,10 @@ var mushroomWand = {
         }
     },
     sound: "magic_hit",
-    damageModifier: 1.2,
+    damageModifier: 1.6,
     speedModifier: 0.8,
     id: 7,
-    level: 1,
+    level: 2,
     gold: 0,
     type: "shooter"
 }
@@ -44,16 +44,16 @@ var rebelMushroom = {
     gemAffinity: "green",
     weapon: copyJSONThing(mushroomWand),
     spriteProps: {
-        sheetName: "monsters",
-        leftIndex: 4,
+        sheetName: "rebel_monsters",
+        leftIndex: 5,
         topIndex: 5,
         spriteSize: 32,
         frames: 2
     },
-    health: 1200,
+    health: 1400,
     index: 5,
-    damageMultiplier: 1.1,
-    level: 1,
+    damageMultiplier: 1.4,
+    level: 2,
     xp: 0,
     infusionType: "heal",
     id: 7

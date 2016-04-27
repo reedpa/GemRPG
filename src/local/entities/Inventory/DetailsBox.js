@@ -13,9 +13,13 @@ function DetailsBox() {
     
     this.id = "DetailsBox";
     
+    this.isWielded = false;
+    
     this.ticksAlive = 0;
     
     var plusButton = { topLeft: this.topLeft + 5, topTop: this.topTop + 153, width: 32, height: 32 };
+    
+    var sellButton = { topLeft: this.topLeft + 125, topTop: this.topTop + 270, width: 50, height: 20};
     
     this.draw = function() {
         
@@ -51,6 +55,16 @@ function DetailsBox() {
             
             graphics.fillText("Level: " + this.itemProps.level, this.topLeft + 5, this.topTop + 160);
             graphics.fillText("Gold: " + this.itemProps.gold, this.topLeft + 25, this.topTop + 180);
+            
+            if (!this.isWielded) {
+                graphics.setFillStyle("white");
+                var selectedMod = 0;
+                if (physics.mouseIsInside(sellButton)) {
+                    graphics.setFillStyle("gold");
+                    selectedMod = 1;
+                }
+                graphics.fillText("Sell", sellButton.topLeft + selectedMod, sellButton.topTop + 20 + selectedMod);
+            }
         } else if (this.characterProps) {
             graphics.drawSprite(this.characterProps.spriteProps, 
                 Math.floor(this.ticksAlive / 4) % this.characterProps.spriteProps.frames, 
@@ -78,11 +92,36 @@ function DetailsBox() {
             
             graphics.fillText("Level: " + this.characterProps.level, this.topLeft + 5, this.topTop + 160);
             graphics.fillText("XP: " + this.characterProps.xp, this.topLeft + 30, this.topTop + 180);
+            
+            if (!this.isWielded && !this.characterProps.keyCharacter) {
+                graphics.setFillStyle("white");
+                var selectedMod = 0;
+                if (physics.mouseIsInside(sellButton)) {
+                    graphics.setFillStyle("gold");
+                    selectedMod = 1;
+                }
+                graphics.fillText("Retire", sellButton.topLeft + selectedMod, sellButton.topTop + 20 + selectedMod);
+            }
         }
     }
     
     this.doActions = function() {
         this.ticksAlive++;
+        
+        if (this.characterProps) {
+            for (var i = 0; i < dataStore.characters.length; i++) {
+                if (dataStore.characters[i].id === this.characterProps.id) {
+                    this.isWielded = true;
+                }
+            }
+        }
+        if (this.itemProps) {
+            for (var i = 0; i < dataStore.characters.length; i++) {
+                if (dataStore.characters[i].weapon.id === this.itemProps.id) {
+                    this.isWielded = true;
+                }
+            }
+        }
         
         if (mouseIsDown) {
             if (physics.mouseIsInside(plusButton)) {
@@ -102,17 +141,68 @@ function DetailsBox() {
                     }
                 }
             }
+            
+            if (physics.mouseIsInside(sellButton)) {
+                if (this.characterProps && !this.isWielded && !this.characterProps.keyCharacter) {
+                    var xp = 0;
+                    for (var i = this.characterProps.level; i > 0; i--) {
+                        xp += i * i * 10;
+                    }
+                    
+                    for (var i = 0; i < dataStore.inventory.characters.length; i++) {
+                        if (dataStore.inventory.characters[i].id === this.characterProps.id) {
+                            dataStore.inventory.characters.splice(i, 1);
+                        }
+                    }
+                    
+                    dataStore.xp += xp;
+                    this.reset();
+                    inventoryScreen.dropAndReInitialize();
+                    audio.playSound("buttonclick");
+                }
+                if (this.itemProps && !this.isWielded) {
+                    var gold = 0;
+                    for (var i = this.itemProps.level; i > 0; i--) {
+                        gold += i * i * 10;
+                    }
+                    
+                    for (var i = 0; i < dataStore.inventory.items.length; i++) {
+                        if (dataStore.inventory.items[i].id === this.itemProps.id) {
+                            dataStore.inventory.items.splice(i, 1);
+                        }
+                    }
+                    
+                    dataStore.gold += gold;
+                    this.reset();
+                    inventoryScreen.dropAndReInitialize();
+                    audio.playSound("buttonclick");
+                }
+            }
         }
     }
     
     this.setItem = function(itemProps) {
         this.reset();
         this.itemProps = itemProps;
+        this.isWielded = false;
+        
+        for (var i = 0; i < dataStore.characters.length; i++) {
+            if (dataStore.characters[i].weapon.id === this.itemProps.id) {
+                this.isWielded = true;
+            }
+        }
     }
     
     this.setCharacter = function(characterProps) {
         this.reset();
         this.characterProps = characterProps;
+        this.isWielded = false;
+        
+        for (var i = 0; i < dataStore.characters.length; i++) {
+            if (dataStore.characters[i].id === this.characterProps.id) {
+                this.isWielded = true;
+            }
+        }
     }
     
     this.tryLevellingCharacter = function() {

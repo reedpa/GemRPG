@@ -30,6 +30,8 @@ function InventoryScreen() {
     this.characterBoxes = [];
     
     this.initializeObjects = function() {
+        this.items = dataStore.inventory.items;
+        this.characters = dataStore.inventory.characters;
         for (var i = 0; i < this.items.length; i++) {
             var newItemBox = new ItemBox(this.items[i]);
             newItemBox.topLeft = (i % 6 ) * inventoryBoxWidth + 5;
@@ -80,8 +82,10 @@ function InventoryScreen() {
     }
     
     this.dropAndReInitialize = function() {
-        this.grabbedThing.grabbed = false;
-        this.grabbedThing = null;
+        if (this.grabbedThing) {
+            this.grabbedThing.grabbed = false;
+            this.grabbedThing = null;
+        }
         this.deInitializeObjects();
         this.initializeObjects();
     }
@@ -144,18 +148,22 @@ function InventoryScreen() {
                 player.targetTop = dataStore.lastTop;
             } else if (physics.mouseIsInside(inventoryPageRight)) {
                 if (this.itemBoxes.length - this.itemPage > inventoryItemPageSize) {
+                    audio.playSound("buttonclick");
                     this.itemPage += inventoryItemPageSize;
                 }
             } else if (physics.mouseIsInside(inventoryPageLeft)) {
                 if (this.itemPage > 0) {
+                    audio.playSound("buttonclick");
                     this.itemPage -= inventoryItemPageSize;
                 }
             } else if (physics.mouseIsInside(characterPageRight)) {
                 if (this.characterBoxes.length - this.characterPage > inventoryCharacterPageSize) {
+                    audio.playSound("buttonclick");
                     this.characterPage += inventoryCharacterPageSize;
                 }
             } else if (physics.mouseIsInside(characterPageLeft)) {
                 if (this.characterPage > 0) {
+                    audio.playSound("buttonclick");
                     this.characterPage -= inventoryCharacterPageSize;
                 }
             }

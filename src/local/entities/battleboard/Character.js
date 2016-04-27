@@ -57,9 +57,11 @@ function Character(characterData) {
             graphics.strokeRect(this.topLeft, this.topTop + 32, 30, 5);
             
             //action bar
-            graphics.setFillStyle("blue");
-            fillLength = Math.ceil(this.actionTimer / this.actionMax * 30);
-            graphics.fillRect(this.topLeft, this.topTop + 40, fillLength, 5);
+            if (this.actionTimer >= 0) {
+                graphics.setFillStyle("blue");
+                fillLength = Math.ceil(this.actionTimer / this.actionMax * 30);
+                graphics.fillRect(this.topLeft, this.topTop + 40, fillLength, 5);
+            }
             //action bar border
             graphics.setLineWidth(1);
             graphics.setStrokeStyle("black");
@@ -102,7 +104,6 @@ function Character(characterData) {
                     topTop: this.topTop + topOffset
                 };
                 var damageBounce = new DamageBounce(damageBounceProps);
-                //this.lastAttackCountDown -= 8;
             }
             this.lastHealth = this.health;
             
@@ -132,23 +133,40 @@ function Character(characterData) {
             if (this.health > 0) {
                 if (gameBoard.infusion[this.gemAffinity] > 0) {
                     var infusionDamage = gameBoard.infusion[this.gemAffinity] * this.damageMultiplier;
-                    var targetList = gameBoard.enemies; 
-                    var topTop = 15;
-                    var topLeft = 150;
-                    if (this.infusionType === "heal") {
-                        infusionDamage *= -1;
-                        targetList = gameBoard.characters;
-                        topLeft = 5;
+                    if (this.infusionType === "frenzy") {
+                        var frenzyProps = {
+                            target: this,
+                            ticksToLive: infusionDamage,
+                        };
+                        var frenzy = new FrenzyAttack(frenzyProps);
+                        
+                    } else if (this.infusionType === "haste") {
+                        var hasteProps = {
+                            targetList: gameBoard.characters,
+                            ticksToLive: infusionDamage
+                        }
+                        var haste = new Haste(hasteProps);
+                    }else {
+                        var targetList = gameBoard.enemies; 
+                        var topTop = 15;
+                        var topLeft = 150;
+                        if (this.infusionType === "heal") {
+                            infusionDamage *= -1;
+                            targetList = gameBoard.characters;
+                            topLeft = 5;
+                        }
+                        var attackProps = {
+                            infusionType: this.infusionType,
+                            topTop: topTop,
+                            topLeft: topLeft,
+                            damage: infusionDamage,
+                            targetList: targetList,
+                            image: this.gemAffinity + "_blast",
+                            gemAffinity: this.gemAffinity
+                        }
+                        var attack = new BlastAttack(attackProps);
                     }
-                    var attackProps = {
-                        infusionType: this.infusionType,
-                        topTop: topTop,
-                        topLeft: topLeft,
-                        damage: infusionDamage,
-                        targetList: targetList,
-                        image: this.gemAffinity + "_blast"
-                    }
-                    var attack = new BlastAttack(attackProps);
+
                     gameBoard.infusion[this.gemAffinity] = 0;
                 }
             }
@@ -165,18 +183,25 @@ function Character(characterData) {
         }
     }
     
-    this.pickTarget = function(damage) {
+    this.pickTarget = function(damage, trulyRandom) {
         var target;
         var targetList = [];
         if (this.type === "character") {
+            //character healer
             if (this.weaponProps.subType !== null && this.weaponProps.subType === "healing") {
                 targetList = gameBoard.characters;
                 targetList.sort((left, right) => {
                     return left.health - right.health;
                 });
+            //character damage dealer
             } else {
-                targetList = gameBoard.enemies;
-                if (gameBoard.targetedEnemy !== null) {
+                for (var i = 0; i < gameBoard.enemies.length; i++) {
+                    if (gameBoard.enemies[i].maxHealth - gameBoard.enemies[i].tempDamage > 0) {
+                        targetList.push(gameBoard.enemies[i]);
+                    }
+                } 
+                if (gameBoard.targetedEnemy !== null &&
+                    gameBoard.targetedEnemy.maxHealth - gameBoard.targetedEnemy.tempDamage > 0) {
                     targetList.splice(0, 0, gameBoard.targetedEnemy);
                 }
             }
@@ -197,10 +222,16 @@ function Character(characterData) {
                 });
             }
         }
-        for (var j = targetList.length - 1; j >= 0 ; j--) {
-            if (targetList[j].maxHealth - targetList[j].tempDamage > 0) {
-                target = targetList[j];
+        if (!trulyRandom) {
+            for (var j = targetList.length - 1; j >= 0 ; j--) {
+                if (targetList[j].maxHealth - targetList[j].tempDamage > 0) {
+                    target = targetList[j];
+                }
             }
+        } else {
+            var targetNum = Math.floor(Math.random() * targetList.length);
+            if (targetNum === targetList.length) { targetNum--; }
+            target = targetList[targetNum];
         }
         if (target) {
             damage = damage + gameBoard.infusion[this.gemAffinity];

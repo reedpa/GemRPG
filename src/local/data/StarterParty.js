@@ -152,6 +152,7 @@ var starterParty = {
             level: 1,
             xp: 0,
             infusionType: "frenzy",
+            keyCharacter: true,
             id: 1
         },
         {
@@ -170,6 +171,7 @@ var starterParty = {
             level: 1,
             xp: 0,
             infusionType: "beam",
+            keyCharacter: true,
             id: 2
         },
         {
@@ -188,6 +190,7 @@ var starterParty = {
             level: 1,
             xp: 0,
             infusionType: "heal",
+            keyCharacter: true,
             id: 3
         },
         {
@@ -206,6 +209,7 @@ var starterParty = {
             level: 1,
             xp: 0,
             infusionType: "haste",
+            keyCharacter: true,
             id: 4
         },
         {
@@ -224,6 +228,7 @@ var starterParty = {
             level: 1,
             xp: 0,
             infusionType: "blast",
+            keyCharacter: true,
             id: 5
         },
         {
@@ -242,6 +247,7 @@ var starterParty = {
             level: 1,
             xp: 0,
             infusionType: "stun",
+            keyCharacter: true,
             id: 6
         }
     ]
