@@ -14,6 +14,51 @@ var targetSprite = {
     frames: 2
 }
 
+var mushroomWand = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 12,
+        topIndex: 111,
+        spriteSize: 16,
+        frames: 1
+    },
+    ammoProps: {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 1,
+            topIndex: 86,
+            spriteSize: 16,
+            frames: 1
+        }
+    },
+    sound: "magic_hit",
+    damageModifier: 1.2,
+    speedModifier: 0.8,
+    id: 7,
+    level: 1,
+    gold: 0,
+    type: "shooter"
+}
+
+var rebelMushroom = {
+    gemAffinity: "green",
+    weapon: copyJSONThing(mushroomWand),
+    spriteProps: {
+        sheetName: "monsters",
+        leftIndex: 4,
+        topIndex: 5,
+        spriteSize: 32,
+        frames: 2
+    },
+    health: 1200,
+    index: 5,
+    damageMultiplier: 1.1,
+    level: 1,
+    xp: 0,
+    infusionType: "heal",
+    id: 7
+}
+
 var mushroomShot = {
     ammoProps: {
         spriteProps: {
@@ -61,7 +106,17 @@ var badMushroom = {
     index: 0,
     damageMultiplier: 1,
     goldDrop: 5,
-    xpDrop: 2
+    xpDrop: 2,
+    loot: [
+        {
+            chanceInOneThousand: 10,
+            characterProps: rebelMushroom
+        },
+        {
+            chanceInOneThousand: 20,
+            itemProps: mushroomWand
+        }
+    ]
 }
 
 var goodMushroom = {
@@ -79,7 +134,8 @@ var goodMushroom = {
     index: 0,
     damageMultiplier: 1,
     goldDrop: 6,
-    xpDrop: 8
+    xpDrop: 8,
+    loot: []
 }
 
 var mainMap = {

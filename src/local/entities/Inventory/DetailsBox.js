@@ -68,6 +68,7 @@ function DetailsBox() {
                 
             graphics.setFont(20, "Arial");
             graphics.setFillStyle("white");
+            graphics.fillText("Infusion: " + this.characterProps.infusionType, this.topLeft + 40, this.topTop + 30);
             graphics.fillText("Gem: ", this.topLeft + 5, this.topTop + 60);
             graphics.setFillStyle(this.characterProps.gemAffinity);
             graphics.fillText(this.characterProps.gemAffinity, this.topLeft + 58, this.topTop + 60);

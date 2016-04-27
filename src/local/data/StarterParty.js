@@ -151,6 +151,7 @@ var starterParty = {
             damageMultiplier: 1,
             level: 1,
             xp: 0,
+            infusionType: "frenzy",
             id: 1
         },
         {
@@ -168,6 +169,7 @@ var starterParty = {
             damageMultiplier: 1,
             level: 1,
             xp: 0,
+            infusionType: "beam",
             id: 2
         },
         {
@@ -185,6 +187,7 @@ var starterParty = {
             damageMultiplier: 1,
             level: 1,
             xp: 0,
+            infusionType: "heal",
             id: 3
         },
         {
@@ -202,6 +205,7 @@ var starterParty = {
             damageMultiplier: 1,
             level: 1,
             xp: 0,
+            infusionType: "haste",
             id: 4
         },
         {
@@ -219,6 +223,7 @@ var starterParty = {
             damageMultiplier: 1,
             level: 1,
             xp: 0,
+            infusionType: "blast",
             id: 5
         },
         {
@@ -236,6 +241,7 @@ var starterParty = {
             damageMultiplier: 1,
             level: 1,
             xp: 0,
+            infusionType: "stun",
             id: 6
         }
     ]
