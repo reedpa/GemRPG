@@ -20,7 +20,7 @@ function Character(characterData) {
     
     this.lastAttackCountDown = 0;
     
-    this.topLeft = characterData.fieldStart - 75 * Math.floor(this.index / 3);
+    this.topLeft = characterData.fieldStart - 55 * Math.floor(this.index / 3);
     this.topTop = 50 + ((30 + 45) * (this.index % 3));
     this.width = this.spriteProps.spriteSize;
     this.height = this.spriteProps.spriteSize;
@@ -206,14 +206,16 @@ function Character(characterData) {
                 }
             }
         } else {
+            //enemy healer
             if (this.weaponProps.subType !== null && this.weaponProps.subType === "healing") {
                 targetList = gameBoard.enemies;
                 targetList.sort((left, right) => {
                     return left.health - right.health;
                 });
+            //enemy damage dealer
             } else {
                 for (var i = 0; i < gameBoard.characters.length; i++) {
-                    if (gameBoard.characters[i].maxHealth - gameBoard.characters[i].tempDamage > 0) {
+                    if (gameBoard.characters[i].maxHealth - gameBoard.characters[i].tempDamage > 0 && targetList.length < 3) {
                         targetList.push(gameBoard.characters[i]);
                     }
                 }

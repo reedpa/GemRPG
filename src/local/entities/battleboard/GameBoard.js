@@ -415,7 +415,7 @@ function GameBoard(encounterData) {
     
     for (var i = this.encounterData.enemies.length - 1; i >= 0; i--) {
         var enemyProps = this.encounterData.enemies[i];
-        enemyProps.fieldStart = 300;
+        enemyProps.fieldStart = 310;
         enemyProps.index = i;
         enemyProps.type = "enemy";
         var enemy = new Character(enemyProps);
@@ -424,7 +424,8 @@ function GameBoard(encounterData) {
     
     for (var i = 0; i < dataStore.characters.length; i++) {
         var characterProps = dataStore.characters[i];
-        characterProps.fieldStart = 100;
+        characterProps.index = i;
+        characterProps.fieldStart = 70;
         characterProps.type = "character";
         var character = new Character(characterProps);
         this.characters.push(character);
