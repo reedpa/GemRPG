@@ -175,25 +175,6 @@ var starterParty = {
             id: 2
         },
         {
-            gemAffinity: "pink",
-            weapon: healing,
-            spriteProps: {
-                sheetName: "characters",
-                leftIndex: 2,
-                topIndex: 7,
-                spriteSize: 32,
-                frames: 4
-            },
-            health: 1000,
-            index: 3,
-            damageMultiplier: 1,
-            level: 1,
-            xp: 0,
-            infusionType: "heal",
-            keyCharacter: true,
-            id: 3
-        },
-        {
             gemAffinity: "red",
             weapon: axe,
             spriteProps: {
@@ -211,6 +192,25 @@ var starterParty = {
             infusionType: "haste",
             keyCharacter: true,
             id: 4
+        },
+        {
+            gemAffinity: "pink",
+            weapon: healing,
+            spriteProps: {
+                sheetName: "characters",
+                leftIndex: 2,
+                topIndex: 7,
+                spriteSize: 32,
+                frames: 4
+            },
+            health: 1000,
+            index: 3,
+            damageMultiplier: 1,
+            level: 1,
+            xp: 0,
+            infusionType: "heal",
+            keyCharacter: true,
+            id: 3
         },
         {
             gemAffinity: "yellow",

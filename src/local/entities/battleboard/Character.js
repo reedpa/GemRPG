@@ -146,7 +146,19 @@ function Character(characterData) {
                             ticksToLive: infusionDamage
                         }
                         var haste = new Haste(hasteProps);
-                    }else {
+                    } else if (this.infusionType === "beam") { 
+                        var target = this.constructCharacterDamageDealerTargetList()[0];
+                        if (target) {
+                            var attackProps = {
+                                damage: infusionDamage * 6,
+                                topLeft: this.topLeft + 32,
+                                topTop: this.topTop,
+                                target: target
+                            };
+
+                            var beamAttack = new BeamAttack(attackProps);
+                        }
+                    } else {
                         var targetList = gameBoard.enemies; 
                         var topTop = 15;
                         var topLeft = 150;
@@ -195,15 +207,7 @@ function Character(characterData) {
                 });
             //character damage dealer
             } else {
-                for (var i = 0; i < gameBoard.enemies.length; i++) {
-                    if (gameBoard.enemies[i].maxHealth - gameBoard.enemies[i].tempDamage > 0) {
-                        targetList.push(gameBoard.enemies[i]);
-                    }
-                } 
-                if (gameBoard.targetedEnemy !== null &&
-                    gameBoard.targetedEnemy.maxHealth - gameBoard.targetedEnemy.tempDamage > 0) {
-                    targetList.splice(0, 0, gameBoard.targetedEnemy);
-                }
+                targetList = this.constructCharacterDamageDealerTargetList();
             }
         } else {
             //enemy healer
@@ -251,6 +255,21 @@ function Character(characterData) {
             }
             var attack = new Attack(attackProps);
         }
+    }
+    
+    this.constructCharacterDamageDealerTargetList = function() {
+        var targetList = [];
+        for (var i = 0; i < gameBoard.enemies.length; i++) {
+            if (gameBoard.enemies[i].maxHealth - gameBoard.enemies[i].tempDamage > 0) {
+                targetList.push(gameBoard.enemies[i]);
+            }
+        } 
+        if (gameBoard.targetedEnemy !== null &&
+            gameBoard.targetedEnemy.maxHealth - gameBoard.targetedEnemy.tempDamage > 0) {
+            targetList.splice(0, 0, gameBoard.targetedEnemy);
+        }
+        
+        return targetList
     }
     
     ai.addObject(this);

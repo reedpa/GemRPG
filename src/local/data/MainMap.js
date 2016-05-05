@@ -106,7 +106,7 @@ var badMushroom = {
     index: 0,
     damageMultiplier: 1,
     goldDrop: 5,
-    xpDrop: 2,
+    xpDrop: 5,
     loot: [
         {
             chanceInOneThousand: 10,
@@ -130,12 +130,21 @@ var goodMushroom = {
         frames: 2
     },
     sound: "heal",
-    health: 1000,
+    health: 1200,
     index: 0,
     damageMultiplier: 1,
     goldDrop: 6,
     xpDrop: 8,
-    loot: []
+    loot: [
+        {
+            chanceInOneThousand: 50,
+            characterProps: rebelMushroom
+        },
+        {
+            chanceInOneThousand: 100,
+            itemProps: mushroomWand
+        }
+    ]
 }
 
 var mainMap = {

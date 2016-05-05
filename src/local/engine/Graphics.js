@@ -35,6 +35,17 @@ function Graphics() {
         ctx.drawImage(image, x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
     
+    this.drawImageRotated = function(image, rotation, x, y, width, height) {
+        if (!width) { width = image.width; }
+        if (!height) { height = image.height; }
+        
+        ctx.translate(x * scaleFactor, y * scaleFactor);
+        ctx.rotate(rotation);
+        this.drawImage(image, x, y, width, height);
+        ctx.rotate(-1 * rotation);
+        ctx.translate(-1 * x * scaleFactor, -1 * y * scaleFactor);
+    }
+    
     this.drawClippedImage = function(image, sx, sy, sw, sh, x, y, width, height) {
         if (!width) { width = sw; }
         if (!height) { height = sw; }
