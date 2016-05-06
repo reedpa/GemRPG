@@ -47,11 +47,15 @@ function DetailsBox() {
                 graphics.fillText(this.itemProps.type, this.topLeft + 5, this.topTop + 50);
             }
             
-            graphics.fillText("Damage: " + (Math.abs(this.itemProps.damageModifier) * basicDamage).toString(), this.topLeft + 5, this.topTop + 70);
-            graphics.fillText("Swing Speed: " + this.itemProps.speedModifier.toString(), this.topLeft + 5, this.topTop + 90);
+            graphics.fillText(
+                "Damage: " + toNumberStringWithConstrainedDecimals((Math.abs(this.itemProps.damageModifier) * basicDamage), 2), 
+                this.topLeft + 5, this.topTop + 70);
+            graphics.fillText(
+                "Swing Speed: " + toNumberStringWithConstrainedDecimals(this.itemProps.speedModifier, 2), 
+                this.topLeft + 5, this.topTop + 90);
             
             var dps = (Math.abs(this.itemProps.damageModifier) * basicDamage ) / this.itemProps.speedModifier;
-            graphics.fillText("DPS: " + dps.toString(), this.topLeft + 5, this.topTop + 110);
+            graphics.fillText("DPS: " + toNumberStringWithConstrainedDecimals(dps, 2), this.topLeft + 5, this.topTop + 110);
             
             graphics.fillText("Level: " + this.itemProps.level, this.topLeft + 5, this.topTop + 160);
             graphics.fillText("Gold: " + this.itemProps.gold, this.topLeft + 25, this.topTop + 180);
@@ -87,8 +91,12 @@ function DetailsBox() {
             graphics.setFillStyle(this.characterProps.gemAffinity);
             graphics.fillText(this.characterProps.gemAffinity, this.topLeft + 58, this.topTop + 60);
             graphics.setFillStyle("white");
-            graphics.fillText("Health: " + this.characterProps.health.toString(), this.topLeft + 5, this.topTop + 80);
-            graphics.fillText("Damage x: " + this.characterProps.damageMultiplier.toString(), this.topLeft + 5, this.topTop + 100);
+            graphics.fillText(
+                "Health: " + toNumberStringWithConstrainedDecimals(this.characterProps.health, 0), 
+                this.topLeft + 5, this.topTop + 80);
+            graphics.fillText(
+                "Damage x: " + toNumberStringWithConstrainedDecimals(this.characterProps.damageMultiplier, 2), 
+                this.topLeft + 5, this.topTop + 100);
             
             graphics.fillText("Level: " + this.characterProps.level, this.topLeft + 5, this.topTop + 160);
             graphics.fillText("XP: " + this.characterProps.xp, this.topLeft + 30, this.topTop + 180);

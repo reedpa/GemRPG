@@ -45,11 +45,17 @@ function ItemBox(itemProps) {
             }
             graphics.setFont(10, "Arial");
             if (this.itemProps.subType && this.itemProps.subType === "healing") {
-                graphics.fillText("Hel " + this.itemProps.damageModifier * basicDamage * -1, this.topLeft + 2, this.topTop + 30);
+                graphics.fillText(
+                    "Hel " + toNumberStringWithConstrainedDecimals(this.itemProps.damageModifier * basicDamage * -1, 2),
+                this.topLeft + 2, this.topTop + 30);
             } else {
-                graphics.fillText("Dam " + this.itemProps.damageModifier * basicDamage, this.topLeft + 2, this.topTop + 30);
+                graphics.fillText(
+                    "Dam " + toNumberStringWithConstrainedDecimals(this.itemProps.damageModifier * basicDamage, 2), 
+                    this.topLeft + 2, this.topTop + 30);
             }
-            graphics.fillText("Swg " + this.itemProps.speedModifier.toString(), this.topLeft + 2, this.topTop + 40);
+            graphics.fillText(
+                "Swg " + toNumberStringWithConstrainedDecimals(this.itemProps.speedModifier, 2), 
+                this.topLeft + 2, this.topTop + 40);
             
             //graphics.setFont(8, "Arial");
             //graphics.fillText(this.itemProps.id.toString().substring(0, 2), this.topLeft + 40, this.topTop + 45);

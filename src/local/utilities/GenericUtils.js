@@ -23,3 +23,18 @@ function copyJSONThing(thing) {
     }
     return thing2;
 }
+
+function toNumberStringWithConstrainedDecimals(number, maxDecimals) {
+    var leftHandPrecision = 0;
+    var numberToOperateOn = number;
+    while (numberToOperateOn >= 1) {
+        leftHandPrecision++;
+        numberToOperateOn = numberToOperateOn / 10;
+    }
+    
+    if (number % 1 !== 0) {
+        return number.toPrecision(maxDecimals + leftHandPrecision).toString();
+    } else {
+        return number.toPrecision(leftHandPrecision).toString();
+    }
+}

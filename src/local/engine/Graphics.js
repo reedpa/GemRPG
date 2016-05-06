@@ -126,8 +126,12 @@ function Graphics() {
         ctx.globalAlpha = globalAlpha;
     }
 
-    this.fillText = function(text, x, y) {
-        ctx.fillText(text, x * scaleFactor, y * scaleFactor);
+    this.fillText = function(text, x, y, maxWidth) {
+        if (maxWidth) {
+            ctx.fillText(text, x * scaleFactor, y * scaleFactor, maxWidth * scaleFactor);
+        } else {
+            ctx.fillText(text, x * scaleFactor, y * scaleFactor);
+        }
     }
 
     this.strokeRect = function(x, y, width, height) {

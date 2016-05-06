@@ -79,7 +79,7 @@ function MainMenu() {
     this.initializeGame = function(index) {
         dataStore.characters = starterParty.characters;
         dataStore.inventory = {};
-        dataStore.inventory.characters = JSON.parse(JSON.stringify(starterParty.characters));
+        dataStore.inventory.characters = starterParty.characters;
         dataStore.inventory.items = starterInventory;
         var mainWalkabout = new Walkabout(mainMap);
         
