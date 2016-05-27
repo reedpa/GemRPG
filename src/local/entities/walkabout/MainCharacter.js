@@ -10,8 +10,10 @@ function MainCharacter() {
     this.order = 2;
     this.speed = 2;
     this.image;
+    this.ticksAlive = 0;
     
     this.doActions = function() {
+        this.ticksAlive++;
         if (mouseCameDown) {
             this.targetLeft = mouseX - 175 + this.topLeft;
             this.targetTop = mouseY - 315 + this.topTop;
@@ -19,9 +21,26 @@ function MainCharacter() {
     }
     
     this.draw = function() {
-        graphics.setLineWidth(1);
-        graphics.strokeRect(175, 315, 10, 10);
-        //graphics.drawImage(this.image, 360/2, 640/2);
+        graphics.drawSprite(dataStore.characters[0].spriteProps, this.getCharacterFrame(), 175, 315);
+        if (this.moving()) {
+            graphics.drawSprite(targetSprite, this.getTargetFrame(), this.targetLeft + 175 - this.topLeft, this.targetTop + 315 - this.topTop);
+        }
+    }
+    
+    this.moving = function() {
+        return this.targetLeft !== this.topLeft || this.targetTop !== this.topTop;
+    }
+    
+    this.getTargetFrame = function() {
+        return Math.floor( (this.ticksAlive / 16) % 2);
+    }
+    
+    this.getCharacterFrame = function() {
+        var frame = 0;
+        if (this.moving()) {
+            frame = (this.ticksAlive / 5) % dataStore.characters[0].spriteProps.frames;
+        }
+        return Math.floor(frame);
     }
     
     physics.addObject(this);

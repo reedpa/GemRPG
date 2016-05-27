@@ -14,7 +14,15 @@ function Walkabout(data) {
     player.topTop = this.data.startingLocation[1];
     player.targetLeft = player.topLeft;
     player.targetTop = player.topTop;
-    var inventoryButton = {topLeft: 10, topTop: 540, height: 30, width: 30};
+    var inventoryButton = {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 0,
+            topIndex: 58,
+            spriteSize: 16,
+            frames: 1
+        },
+        topLeft: 10, topTop: 540, height: 30, width: 30};
 
     this.regions = [];
     
@@ -38,9 +46,8 @@ function Walkabout(data) {
     
     this.draw = function() {
         graphics.drawImage(this.image, 0 + 175 - player.topLeft, 0 + 315 - player.topTop);
-        
-        graphics.setFillStyle("red");
-        graphics.fillRect(inventoryButton.topLeft, inventoryButton.topTop, inventoryButton.width, inventoryButton.height);
+
+        graphics.drawSpriteZoomed(inventoryButton.spriteProps, 0, inventoryButton.topLeft, inventoryButton.topTop, 2);
         graphics.setFillStyle("black");
         graphics.setFont(30, "Arial");
         graphics.fillText("Gold: " + dataStore.gold, 10, 600);

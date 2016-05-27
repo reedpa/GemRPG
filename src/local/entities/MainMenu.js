@@ -77,7 +77,10 @@ function MainMenu() {
     }
 
     this.initializeGame = function(index) {
-        dataStore.characters = starterParty.characters;
+        dataStore.characters = [];
+        for (var i = 0; i < starterParty.characters.length; i++) {
+            dataStore.characters.push(starterParty.characters[i]);
+        }
         dataStore.inventory = {};
         dataStore.inventory.characters = starterParty.characters;
         dataStore.inventory.items = starterInventory;

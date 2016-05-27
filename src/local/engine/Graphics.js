@@ -76,6 +76,20 @@ function Graphics() {
             y);
     }
     
+    this.drawSpriteZoomed = function(spriteProps, frame, x, y, zoom) {
+        var image = document.getElementById(spriteProps.sheetName);
+        this.drawClippedImage(
+            image, 
+            (spriteProps.leftIndex * spriteProps.frames) * spriteProps.spriteSize + frame * spriteProps.spriteSize, 
+            spriteProps.topIndex * spriteProps.spriteSize, 
+            spriteProps.spriteSize,
+            spriteProps.spriteSize,
+            x, 
+            y,
+            zoom * spriteProps.spriteSize,
+            zoom * spriteProps.spriteSize);
+    }
+    
     this.drawSpriteRotated = function(spriteProps, frame, rotation, x, y) {
         var image = document.getElementById(spriteProps.sheetName);
         this.drawClippedImageRotated(
