@@ -21,10 +21,10 @@ function MainCharacter() {
     }
     
     this.draw = function() {
-        graphics.drawSprite(dataStore.characters[0].spriteProps, this.getCharacterFrame(), 175, 315);
         if (this.moving()) {
-            graphics.drawSprite(targetSprite, this.getTargetFrame(), this.targetLeft + 175 - this.topLeft, this.targetTop + 315 - this.topTop);
+            graphics.drawSprite(targetSprite, this.getTargetFrame(), adjustXForWalkabout(this.targetLeft), adjustYForWalkabout(this.targetTop));
         }
+        graphics.drawSprite(dataStore.characters[0].spriteProps, this.getCharacterFrame(), 175, 315);
     }
     
     this.moving = function() {

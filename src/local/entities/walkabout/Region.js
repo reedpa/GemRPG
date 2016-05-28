@@ -15,14 +15,14 @@ function Region(regionData) {
     this.draw = function() {
         graphics.setFillStyle(this.color);
         ctx.globalAlpha = 0.5;
-        graphics.fillRect(this.topLeft + 175 - player.topLeft, this.topTop + 315 - player.topTop, this.width, this.height)
+        graphics.fillRect(adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height)
         ctx.globalAlpha = 1;
 
         graphics.setStrokeStyle("black");
         if (physics.isInside(player, this)) {
             graphics.setStrokeStyle("gold");
         }
-        graphics.strokeRect(this.topLeft + 175 - player.topLeft, this.topTop + 315 - player.topTop, this.width, this.height);
+        graphics.strokeRect(adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height);
     }
     
     this.doActions = function() {
