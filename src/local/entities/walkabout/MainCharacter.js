@@ -2,8 +2,10 @@
 function MainCharacter() {
     this.topLeft = 0;
     this.topTop = 0;
-    this.width = 10;
-    this.height = 10;
+    this.targetLeft = 0;
+    this.targetTop = 0;
+    this.width = 32;
+    this.height = 32;
     this.targetLeft = 0;
     this.targetTop = 0;
     this.zindex = mainCharacterZIndex;

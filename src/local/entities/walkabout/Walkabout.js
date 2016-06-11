@@ -30,6 +30,19 @@ function Walkabout(data) {
         this.regions.push(new Region(this.data.regions[i]));
     }
     
+    this.followers = [];
+    
+    for (var i = 1; i < dataStore.characters.length; i++) {
+        var target;
+        if (i === 1) {
+            target = player;
+        } else {
+            target = this.followers[i - 2];
+        }
+        var follower = new Follower(target, dataStore.characters[i].spriteProps);
+        this.followers.push(follower);
+    }
+    
     this.doActions = function() {
         this.ticksAlive++;
         
