@@ -27,6 +27,13 @@ function Follower(target, spriteProps) {
         if (mouseCameDown) {
             this.calcNewLocation();
         }
+
+        var verticalDistanceToPlayer = this.topLeft - player.topLeft;
+        var horizontalDistanceToPlayer = this.topTop - player.topTop;
+        if (Math.abs(verticalDistanceToPlayer) + Math.abs(horizontalDistanceToPlayer) > 400) {
+            this.topLeft = player.topLeft;
+            this.topTop = player.topTop;
+        }
     }
     
     this.moving = function() {
