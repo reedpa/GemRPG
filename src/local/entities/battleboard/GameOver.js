@@ -111,7 +111,7 @@ function GameOver() {
         audio.stopSound(this.music);
         audio.playSound("buttonclick");
         ResetAllObjects();
-        var mainMap = new Walkabout(dataStore.lastWalkabout);
+        walkabout = new Walkabout(dataStore.lastWalkabout);
         player.topLeft = dataStore.lastLeft;
         player.targetLeft = dataStore.lastLeft;
         player.topTop = dataStore.lastTop;

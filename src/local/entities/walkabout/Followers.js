@@ -9,6 +9,9 @@ function Follower(target, spriteProps) {
     this.speed = target.speed;
     this.zindex = mainCharacterZIndex;
     this.order = 2;
+    this.id = GetGuid();
+    this.height = 32;
+    this.width = 32;
 
     this.draw = function() {
         graphics.drawSprite(
@@ -21,24 +24,13 @@ function Follower(target, spriteProps) {
     this.doActions = function() {
         this.ticksAlive++;
 
-        if (player.topLeft !== player.targetLeft || player.topTop !== player.targetTop) {
-            var horizontalDistance = player.topLeft - player.targetLeft;
-            var verticalDistance = player.topTop - player.targetTop;
-            if (Math.abs(verticalDistance) > Math.abs(horizontalDistance)) {
-                this.targetTop = this.target.topTop + (35 * (verticalDistance / Math.abs(verticalDistance)));
-                this.targetLeft = this.target.topLeft;
-            } else {
-                this.targetLeft = this.target.topLeft + (35 * (horizontalDistance / Math.abs(horizontalDistance)));
-                this.targetTop = this.target.topTop;
-            }
-        } else {
-            this.targetLeft = this.topLeft;
-            this.targetTop = this.topTop;
+        if (mouseCameDown) {
+            this.calcNewLocation();
         }
     }
     
     this.moving = function() {
-        return player.moving();
+        return this.topLeft !== this.targetLeft || this.topTop !== this.targetTop;
     }
     
     this.getCharacterFrame = function() {
@@ -48,8 +40,46 @@ function Follower(target, spriteProps) {
         }
         return Math.floor(frame);
     }
+
+    this.calcNewLocation = function() {
+        var horizontalOffset = Math.floor(Math.random() * 200) - 100;
+        var verticalOffset = Math.floor(Math.random() * 200) - 100;
+
+        this.targetTop = player.targetTop + verticalOffset;
+        this.targetLeft = player.targetLeft + horizontalOffset;
+
+        var isBlocked = false;
+        var peopleToTest = [player];
+        for (var i = 0; i < walkabout.followers.length; i++) {
+            peopleToTest.push(walkabout.followers[i]);
+        }
+        for(var i = 0; i < peopleToTest.length; i++) {
+            if (this.id !== peopleToTest[i].id) {
+                var thingOne = {
+                    topLeft: this.targetLeft,
+                    topTop: this.targetTop,
+                    width: 32,
+                    height: 32
+                };
+                var thingTwo = {
+                    topLeft: peopleToTest[i].targetLeft,
+                    topTop: peopleToTest[i].targetTop,
+                    width: 32,
+                    height: 32
+                };
+                if (physics.isPartiallyInside(thingOne, thingTwo)) {
+                    isBlocked = true;
+                    break;
+                }
+            }
+        }
+
+        if (isBlocked) {
+            this.calcNewLocation();
+        }
+    }
     
     physics.addObject(this);
     ai.addObject(this);
     graphics.addObject(this);
-}
+} 

@@ -13,6 +13,7 @@ function MainCharacter() {
     this.speed = 2;
     this.image;
     this.ticksAlive = 0;
+    this.id = GetGuid();
     
     this.doActions = function() {
         this.ticksAlive++;

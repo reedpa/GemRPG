@@ -2,6 +2,8 @@ var topScore = 0;
 var topMove = 0;
 var topZen = 0;
 
+var walkabout;
+
 function MainMenu() {
     this.zindex = mainMenuZIndex;
     this.active = true;
@@ -84,7 +86,7 @@ function MainMenu() {
         dataStore.inventory = {};
         dataStore.inventory.characters = starterParty.characters;
         dataStore.inventory.items = starterInventory;
-        var mainWalkabout = new Walkabout(mainMap);
+        walkabout = new Walkabout(mainMap);
         
         this.active = false;
         graphics.removeObject(this);

@@ -100,7 +100,25 @@ function Physics() {
             thingOne.topLeft > container.topLeft && thingOne.topLeft + thingOne.width < container.topLeft + container.width) {
                 return true;
             }
-            
+
+        return false;
+    }
+
+    this.isPartiallyInside = function(thingOne, thingTwo) {
+        if (thingOne.topTop >= thingTwo.topTop && 
+        thingOne.topLeft >= thingOne.topLeft && 
+        thingOne.topTop <= thingTwo.topTop + thingTwo.height &&
+        thingOne.topLeft <= thingTwo.topLeft + thingTwo.width) {
+            return true;
+        }
+
+        if (thingOne.topTop + thingOne.height >= thingTwo.topTop &&
+        thingOne.topLeft + thingOne.width >= thingTwo.topLeft &&
+        thingOne.topTop + thingOne.height <= thingTwo.topTop + thingTwo.height &&
+        thingOne.topLeft + thingOne.width <= thingTwo.topLeft + thingTwo.width) {
+            return true;
+        }
+
         return false;
     }
     
