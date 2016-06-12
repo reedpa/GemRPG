@@ -12,6 +12,7 @@ function Follower(target, spriteProps) {
     this.id = GetGuid();
     this.height = 32;
     this.width = 32;
+    this.ticksNotMoving = 0;
 
     this.draw = function() {
         graphics.drawSprite(
@@ -33,6 +34,18 @@ function Follower(target, spriteProps) {
         if (Math.abs(verticalDistanceToPlayer) + Math.abs(horizontalDistanceToPlayer) > 400) {
             this.topLeft = player.topLeft;
             this.topTop = player.topTop;
+        }
+
+        if (!this.moving()) {
+            this.ticksNotMoving++;
+            if (this.ticksNotMoving > 200) {
+                var chanceToMove = Math.floor(Math.random() * 1000);
+                if (chanceToMove > 990) {
+                    this.calcNewLocation();
+                }
+            }
+        } else {
+            this.ticksNotMoving = 0;
         }
     }
     
