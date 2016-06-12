@@ -10,8 +10,8 @@ function Walkabout(data) {
     this.data = data;
     dataStore.lastWalkabout = data;
     this.image = document.getElementById(this.data.image);
-    player.topLeft = this.data.startingLocation[0];
-    player.topTop = this.data.startingLocation[1];
+    dataStore.lastLeft ? player.topLeft = dataStore.lastLeft : player.topLeft = this.data.startingLocation[0];
+    dataStore.lastTop ? player.topTop = dataStore.lastTop : player.topTop = this.data.startingLocation[1]; 
     player.targetLeft = player.topLeft;
     player.targetTop = player.topTop;
     var inventoryButton = {
