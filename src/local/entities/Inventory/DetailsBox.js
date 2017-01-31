@@ -47,8 +47,12 @@ function DetailsBox() {
                 graphics.fillText(this.itemProps.type, this.topLeft + 5, this.topTop + 50);
             }
             
+            var damLabel = "Damage: ";
+            if (this.itemProps.subType === "healing") {
+                damLabel = "Healing: ";
+            }
             graphics.fillText(
-                "Damage: " + toNumberStringWithConstrainedDecimals((Math.abs(this.itemProps.damageModifier) * basicDamage), 2), 
+                damLabel + toNumberStringWithConstrainedDecimals((Math.abs(this.itemProps.damageModifier) * basicDamage), 2), 
                 this.topLeft + 5, this.topTop + 70);
             graphics.fillText(
                 "Swing Speed: " + toNumberStringWithConstrainedDecimals(this.itemProps.speedModifier, 2), 
@@ -229,8 +233,12 @@ function DetailsBox() {
         if (this.itemProps.gold > levelTimesTwo * 10) {
             this.itemProps.level++;
             this.itemProps.gold = 0;
+            var delta = levelTimesTwo * 0.1;
+            if (this.itemProps.subType && this.itemProps.subType === "healing") {
+                delta *= -1;
+            }
             
-            this.itemProps.damageModifier += levelTimesTwo * 0.1;
+            this.itemProps.damageModifier += delta;
         }
     }
     
