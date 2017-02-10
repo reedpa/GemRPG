@@ -149,7 +149,7 @@ var goodMushroom = {
 
 var mainMap = {
     image: "mainmap",
-    startingLocation: [820, 950],
+    //startingLocation: [820, 950],
     regions: [ 
         {
             name: "treeOverlay",
@@ -770,6 +770,161 @@ var mainMap = {
             isBlocker: false,
             footstepsColor: "yellow",
             footstepsDuration: 150
+        }, {
+            name: "footstepsPond",
+            image: null,
+            topLeft: 2200,
+            topTop: 510,
+            width: 80,
+            height: 100,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "blue",
+            footstepsDuration: 100
+        }, {
+            name: "footstepsPondRight",
+            image: null,
+            topLeft: 2280,
+            topTop: 550,
+            width: 50,
+            height: 60,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "blue",
+            footstepsDuration: 100
+        }, {
+            name: "footstepsPondLeft",
+            image: null,
+            topLeft: 2140,
+            topTop: 450,
+            width: 50,
+            height: 65,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "blue",
+            footstepsDuration: 100
+        }, {
+            name: "footstepsPondLeftBottom",
+            image: null,
+            topLeft: 2140,
+            topTop: 515,
+            width: 50,
+            height: 65,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "blue",
+            footstepsDuration: 100
+        }, {
+            name: "footstepsPondLeftRight",
+            image: null,
+            topLeft: 2200,
+            topTop: 465,
+            width: 50,
+            height: 65,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "blue",
+            footstepsDuration: 100
+        }, {
+            name: "orangeOne",
+            image: null,
+            topLeft: 1910,
+            topTop: 1345,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeTwo",
+            image: null,
+            topLeft: 1925,
+            topTop: 1400,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeThree",
+            image: null,
+            topLeft: 1790,
+            topTop: 1400,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeFour",
+            image: null,
+            topLeft: 1890,
+            topTop: 1460,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeFive",
+            image: null,
+            topLeft: 1895,
+            topTop: 1500,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeSix",
+            image: null,
+            topLeft: 1855,
+            topTop: 1485,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeSeven",
+            image: null,
+            topLeft: 1815,
+            topTop: 1485,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeEight",
+            image: null,
+            topLeft: 1840,
+            topTop: 1535,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
+        }, {
+            name: "orangeNine",
+            image: null,
+            topLeft: 1760,
+            topTop: 1550,
+            width: 50,
+            height: 50,
+            color: "green",
+            isBlocker: false,
+            footstepsColor: "orange",
+            footstepsDuration: 100
         }
-    ]
+    ],
+    startingLocation: [2100, 1500]
 }
