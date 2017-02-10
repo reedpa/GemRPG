@@ -14,7 +14,11 @@ function Follower(target, spriteProps) {
     this.width = 32;
     this.ticksNotMoving = 0;
 
+    this.footstepList = [];
+
     this.draw = function() {
+        drawFootsteps(this);
+
         graphics.drawSprite(
             this.spriteProps, 
             this.getCharacterFrame(), 
@@ -47,6 +51,8 @@ function Follower(target, spriteProps) {
         } else {
             this.ticksNotMoving = 0;
         }
+
+        doFootstepActions(this);
     }
     
     this.moving = function() {

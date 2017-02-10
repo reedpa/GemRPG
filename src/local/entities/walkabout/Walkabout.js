@@ -26,10 +26,6 @@ function Walkabout(data) {
 
     this.regions = [];
     
-    for (var i = 0; i < this.data.regions.length; i++) {
-        this.regions.push(new Region(this.data.regions[i]));
-    }
-    
     this.followers = [];
     
     for (var i = 1; i < dataStore.characters.length; i++) {
@@ -41,6 +37,10 @@ function Walkabout(data) {
         }
         var follower = new Follower(target, dataStore.characters[i].spriteProps);
         this.followers.push(follower);
+    }
+
+    for (var i = 0; i < this.data.regions.length; i++) {
+        this.regions.push(new Region(this.data.regions[i], this.followers));
     }
     
     this.doActions = function() {

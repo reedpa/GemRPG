@@ -14,6 +14,8 @@ function MainCharacter() {
     this.image;
     this.ticksAlive = 0;
     this.id = GetGuid();
+
+    this.footstepList = [];
     
     this.doActions = function() {
         this.ticksAlive++;
@@ -21,9 +23,13 @@ function MainCharacter() {
             this.targetLeft = mouseX - 175 + this.topLeft;
             this.targetTop = mouseY - 315 + this.topTop;
         }
+
+        doFootstepActions(this);
     }
     
     this.draw = function() {
+        drawFootsteps(this);
+        
         if (this.moving()) {
             graphics.drawSprite(targetSprite, this.getTargetFrame(), adjustXForWalkabout(this.targetLeft), adjustYForWalkabout(this.targetTop));
         }
