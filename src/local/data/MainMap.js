@@ -236,6 +236,111 @@ var goodMushroom = {
     ]
 }
 
+//encounters
+
+var mushroomEncounters = [
+    {
+        weight: 1,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badMushroom,
+            badMushroom,
+            goodMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom
+        ]
+    },
+    {
+        weight: 1,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badMushroom,
+            badMushroom,
+            badMushroom
+        ]
+    },
+    {
+        weight: 1,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom,
+            badMushroom
+        ]
+    }
+    ];
+
+var spiderAndMouseEncounters = [
+    {
+        weight: 2,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badMouse,
+            badSpider
+        ]
+    },
+    {
+        weight: 2,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badMouse,
+            badMouse,
+            badMouse,
+            badSpider
+        ]
+    },
+    {
+        weight: 1,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badSpider,
+            badSpider,
+            badSpider,
+            badSpider
+        ]
+    },
+    {
+        weight: 1,
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            badSpider,
+            badSpider,
+            badSpider,
+            badMouse,
+            badMouse,
+            badMouse
+        ]
+    }
+];
+
 var mainMap = {
     image: "mainmap",
     startingLocation: [820, 950],
@@ -252,58 +357,21 @@ var mainMap = {
         }, {
             name: "mushroomRegion",
             image: null,
-            topLeft: 2604,
+            topLeft: 2600,
             topTop: 0,
             width: 700,
             height: 2000,
             color: "red",
-            encounters: [
-                {
-                    weight: 1,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badMushroom,
-                        badMushroom,
-                        goodMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom
-                    ]
-                },
-                {
-                    weight: 1,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badMushroom,
-                        badMushroom,
-                        badMushroom
-                    ]
-                },
-                {
-                    weight: 1,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom,
-                        badMushroom
-                    ]
-                }
-            ]
+            encounters: mushroomEncounters
+        }, {
+            name: "mushroomRegion",
+            image: null,
+            topLeft: 3300,
+            topTop: 1100,
+            width: 500,
+            height: 600,
+            color: "red",
+            encounters: mushroomEncounters
         }, {
             name: "easyRegion",
             image: null,
@@ -341,63 +409,19 @@ var mainMap = {
             image: null,
             topLeft: 300,
             topTop: 1100,
-            width: 2400,
+            width: 2300,
             height: 1000,
             color: "red",
-            encounters: [
-                {
-                    weight: 2,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badMouse,
-                        badSpider
-                    ]
-                },
-                {
-                    weight: 2,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badMouse,
-                        badMouse,
-                        badMouse,
-                        badSpider
-                    ]
-                },
-                {
-                    weight: 1,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badSpider,
-                        badSpider,
-                        badSpider,
-                        badSpider
-                    ]
-                },
-                {
-                    weight: 1,
-                    board: {
-                        backDropImage: "background_green",
-                        boardImage: "board_green"
-                    },
-                    enemies: [
-                        badSpider,
-                        badSpider,
-                        badSpider,
-                        badMouse,
-                        badMouse,
-                        badMouse
-                    ]
-                }
-            ]
+            encounters: spiderAndMouseEncounters
+        }, { 
+            name: "middleRegion",
+            image: null,
+            topLeft: 1420,
+            topTop: 810,
+            width: 1200,
+            height: 300,
+            color: "red",
+            encounters: spiderAndMouseEncounters
         }, {
             name: "treesTopBorder",
             image: null,
