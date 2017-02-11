@@ -11,7 +11,7 @@ function Region(regionData, followers) {
     this.color = regionData.color;
     this.zindex = regionData.zindex || regionZIndex;
     this.followers = followers;
-    this.isBlocker = !!regionData.isBlocker; //DEBUG: comment this out to explore a map without bumping into walls
+    //this.isBlocker = !!regionData.isBlocker; //DEBUG: comment this out to explore a map without bumping into walls
     if (regionData.image) {
         this.image = document.getElementById(regionData.image);
     }
@@ -21,7 +21,7 @@ function Region(regionData, followers) {
         if (this.image) {
             graphics.drawImage(this.image, adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height);
         } else {
-            return; //DEBUG: comment out this return in order to "see" regions that have no image
+            //return; //DEBUG: comment out this return in order to "see" regions that have no image
             graphics.setFillStyle(this.color);
             ctx.globalAlpha = 0.5;
             graphics.fillRect(adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height)
@@ -43,7 +43,7 @@ function Region(regionData, followers) {
                     if (this.ticksAlive > 60) {
                         if (regionData.encounters.length >= 1) {
                             //return; //DEBUG: put this return here to not have encounters
-                            if (Math.floor(Math.random() * 100) === 1 && regionData.encounters.length >= 1 ) {
+                            if (Math.floor(Math.random() * 200) === 1 && regionData.encounters.length >= 1 ) {
                                 var encounter = regionData.encounters[Math.floor(Math.random() * regionData.encounters.length)];
                                 ResetAllObjects();
                                 gameBoard = new GameBoard(encounter);

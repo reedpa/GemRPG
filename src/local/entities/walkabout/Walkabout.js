@@ -14,15 +14,7 @@ function Walkabout(data) {
     dataStore.lastTop ? player.topTop = dataStore.lastTop : player.topTop = this.data.startingLocation[1]; 
     player.targetLeft = player.topLeft;
     player.targetTop = player.topTop;
-    var inventoryButton = {
-        spriteProps: {
-            sheetName: "items",
-            leftIndex: 0,
-            topIndex: 58,
-            spriteSize: 16,
-            frames: 1
-        },
-        topLeft: 10, topTop: 540, height: 30, width: 30};
+    this.inventory = new Inventory();
 
     this.regions = [];
     
@@ -35,7 +27,7 @@ function Walkabout(data) {
         } else {
             target = this.followers[i - 2];
         }
-        var follower = new Follower(target, dataStore.characters[i].spriteProps);
+        var follower = new Follower(target, dataStore.characters[i].spriteProps, i);
         this.followers.push(follower);
     }
 
@@ -46,25 +38,11 @@ function Walkabout(data) {
     this.doActions = function() {
         this.ticksAlive++;
         
-        if (mouseCameDown) {
-            if (physics.mouseIsInside(inventoryButton)) {
-                ResetAllObjects();
-                inventoryScreen = new InventoryScreen();
-
-                dataStore.lastLeft = player.topLeft;
-                dataStore.lastTop = player.topTop;
-            }
-        }
+        
     }
     
     this.draw = function() {
         graphics.drawImage(this.image, 0 + 175 - player.topLeft, 0 + 315 - player.topTop);
-
-        graphics.drawSpriteZoomed(inventoryButton.spriteProps, 0, inventoryButton.topLeft, inventoryButton.topTop, 2);
-        graphics.setFillStyle("black");
-        graphics.setFont(30, "Arial");
-        graphics.fillText("Gold: " + dataStore.gold, 10, 600);
-        graphics.fillText("XP: " + dataStore.xp, 10, 630);
     }
     
     ai.addObject(this);

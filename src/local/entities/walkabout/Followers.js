@@ -1,4 +1,4 @@
-function Follower(target, spriteProps) {
+function Follower(target, spriteProps, index) {
     this.target = target;
     this.topLeft = target.topLeft - 35;
     this.topTop = target.topTop;
@@ -7,7 +7,7 @@ function Follower(target, spriteProps) {
     this.spriteProps = spriteProps;
     this.ticksAlive = 0;
     this.speed = target.speed;
-    this.zindex = mainCharacterZIndex;
+    this.zindex = mainCharacterZIndex - index;
     this.order = 2;
     this.id = GetGuid();
     this.height = 32;
