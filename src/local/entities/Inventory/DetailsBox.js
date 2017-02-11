@@ -31,6 +31,7 @@ function DetailsBox() {
             
             graphics.setFillStyle("white");
             graphics.setFont(30, "Arial");
+
             if (physics.mouseIsInside(plusButton)) {
                 graphics.setFillStyle("gold");
                 graphics.fillText("+", plusButton.topLeft + 1, plusButton.topTop + 30 + 1);
@@ -40,6 +41,8 @@ function DetailsBox() {
             
             graphics.setFont(20, "Arial");
             graphics.setFillStyle("white");
+
+            graphics.fillText(this.itemProps.name, this.topLeft + 5 + 16 + 5, this.topTop + 30);
             
             if (this.itemProps.subType && this.itemProps.subType === "healing") {
                 graphics.fillText(this.itemProps.subType, this.topLeft + 5, this.topTop + 50);

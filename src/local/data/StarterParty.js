@@ -16,7 +16,8 @@ var sword = {
     id: 1,
     level: 1,
     gold: 0,
-    type: "melee"
+    type: "melee",
+    name: "Sword"
 }
 
 var axe = {
@@ -33,7 +34,8 @@ var axe = {
     id: 2,
     level: 1,
     gold: 0,
-    type: "melee"
+    type: "melee",
+    name: "Axe"
 }
 
 var dagger = {
@@ -50,7 +52,8 @@ var dagger = {
     id: 3,
     level: 1,
     gold: 0,
-    type: "thrown"
+    type: "thrown",
+    name: "Dagger"
 }
 
 var staff = {
@@ -76,7 +79,8 @@ var staff = {
     id: 4,
     level: 1,
     gold: 0,
-    type: "shooter"
+    type: "shooter",
+    name: "Staff"
 }
 
 var bow = {
@@ -102,7 +106,8 @@ var bow = {
     id: 5,
     level: 1,
     gold: 0,
-    type: "shooter"
+    type: "shooter",
+    name: "Bow"
 }
 
 var healing = {
@@ -120,7 +125,8 @@ var healing = {
     id: 6,
     level: 1,
     gold: 0,
-    subType: "healing"
+    subType: "healing",
+    name: "Healing Focus"
 }
 
 var starterInventory = [

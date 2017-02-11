@@ -37,7 +37,26 @@ var mushroomWand = {
     id: 7,
     level: 2,
     gold: 0,
-    type: "shooter"
+    type: "shooter",
+    name: "Mushroom Wand"
+}
+
+var spiderWebThrown = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 7,
+        topIndex: 74,
+        spriteSize: 16,
+        frames: 1
+    },
+    sound: "magic_hit",
+    damageModifier: 1.5,
+    speedModifier: 0.7,
+    id: 8,
+    level: 2,
+    gold: 0,
+    type: "thrown",
+    name: "Spider Web"
 }
 
 var rebelMushroom = {
@@ -90,6 +109,76 @@ var mushroomHeal = {
     speedModifier: 1.2,
     type: "magic ball",
     subType: "healing"
+}
+
+var mouseBite = {
+    type: "melee",
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 14,
+        topIndex: 12,
+        spriteSize: 16,
+        frames: 1
+    },
+    damageModifier: 0.8,
+    speedModifier: 1.4,
+    invisibleWhenHeld: true
+}
+
+var badMouse = {
+    gemAffinity: "blue",
+    weapon: mouseBite,
+    spriteProps: {
+        sheetName: "monsters",
+        leftIndex: 1,
+        topIndex: 0,
+        spriteSize: 32,
+        frames: 2
+    },
+    health: 500,
+    index: 0,
+    damageMultiplier: 1,
+    goldDrop: 3,
+    xpDrop: 3,
+    loot: []
+}
+
+var spiderWeb = {
+    type: "magic ball",
+    ammoProps: {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 7,
+            topIndex: 74,
+            spriteSize: 16,
+            frames: 1
+        }
+    },
+    damageModifier: 1,
+    speedModifier: 1
+}
+
+var badSpider = {
+    gemAffinity: "purple",
+    weapon: spiderWeb,
+    spriteProps: {
+        sheetName: "monsters",
+        leftIndex: 0,
+        topIndex: 0,
+        spriteSize: 32,
+        frames: 2
+    },
+    health: 1000,
+    index: 0,
+    damageMultiplier: 1,
+    goldDrop: 6,
+    xpDrop: 6,
+    loot: [
+            {
+                chanceInOneThousand: 50,
+                itemProps: spiderWebThrown
+            }
+        ]
 }
 
 var badMushroom = {
@@ -149,7 +238,7 @@ var goodMushroom = {
 
 var mainMap = {
     image: "mainmap",
-    //startingLocation: [820, 950],
+    startingLocation: [820, 950],
     regions: [ 
         {
             name: "treeOverlay",
@@ -160,13 +249,13 @@ var mainMap = {
             width: 4000,
             height: 2000,
             zindex: 450
-}, /*{
-            name: "testRegion",
+        }, {
+            name: "mushroomRegion",
             image: null,
-            topLeft: 1200,
-            topTop: 250,
-            width: 300,
-            height: 300,
+            topLeft: 2604,
+            topTop: 0,
+            width: 700,
+            height: 2000,
             color: "red",
             encounters: [
                 {
@@ -215,7 +304,101 @@ var mainMap = {
                     ]
                 }
             ]
-        },*/ {
+        }, {
+            name: "easyRegion",
+            image: null,
+            topLeft: 1300,
+            topTop: 250,
+            width: 1200,
+            height: 500,
+            color: "red",
+            encounters: [
+                {
+                    weight: 2,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        badMouse
+                    ]
+                },
+                {
+                    weight: 1,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        badMouse,
+                        badMouse,
+                        badMouse
+                    ]
+                }
+            ]
+        }, { 
+            name: "leftRegion",
+            image: null,
+            topLeft: 300,
+            topTop: 1100,
+            width: 2400,
+            height: 1000,
+            color: "red",
+            encounters: [
+                {
+                    weight: 2,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        badMouse,
+                        badSpider
+                    ]
+                },
+                {
+                    weight: 2,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        badMouse,
+                        badMouse,
+                        badMouse,
+                        badSpider
+                    ]
+                },
+                {
+                    weight: 1,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        badSpider,
+                        badSpider,
+                        badSpider,
+                        badSpider
+                    ]
+                },
+                {
+                    weight: 1,
+                    board: {
+                        backDropImage: "background_green",
+                        boardImage: "board_green"
+                    },
+                    enemies: [
+                        badSpider,
+                        badSpider,
+                        badSpider,
+                        badMouse,
+                        badMouse,
+                        badMouse
+                    ]
+                }
+            ]
+        }, {
             name: "treesTopBorder",
             image: null,
             topLeft: 0,
@@ -925,6 +1108,5 @@ var mainMap = {
             footstepsColor: "orange",
             footstepsDuration: 100
         }
-    ],
-    startingLocation: [2100, 1500]
+    ]
 }

@@ -37,8 +37,10 @@ function Character(characterData) {
                 graphics.setGlobalAlpha(1);
             }
 
+            //render weapon
             if ( (this.lastAttackCountDown === 0 || this.weaponProps.type === "shooter") 
-                && (this.weaponProps.type !== "magic ball")) {
+                    && (this.weaponProps.type !== "magic ball") && 
+                    (!this.weaponProps.invisibleWhenHeld)) {
                 graphics.drawSprite(
                     this.weaponProps.spriteProps,
                     0,
@@ -244,7 +246,7 @@ function Character(characterData) {
             damage = Math.floor(damage * this.weaponProps.damageModifier);
             target.tempDamage += damage;
             var topLeftModifier;
-            this.type === "character" ? topLeftModifier = 30 : topLeftModifier = 0;
+            this.type === "character" ? topLeftModifier = 30 : topLeftModifier = -16;
             var attackProps = {
                 topLeft: this.topLeft + topLeftModifier,
                 topTop: this.topTop,
