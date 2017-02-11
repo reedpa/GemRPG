@@ -62,7 +62,7 @@ function Follower(target, spriteProps) {
     this.getCharacterFrame = function() {
         var frame = 0;
         if (this.moving()) {
-            frame = (this.ticksAlive / 5) % dataStore.characters[0].spriteProps.frames;
+            frame = (this.ticksAlive / 5) % this.spriteProps.frames;
         }
         return Math.floor(frame);
     }
