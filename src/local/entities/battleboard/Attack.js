@@ -77,9 +77,9 @@ function Attack(attackProps) {
         this.horizontalSpeed = horizontalDistance / ticksToLand;
 
         if (this.weaponProps.type === "melee") {
-            var verticalTarget = this.topTop - 30;
+            var verticalTarget = this.topTop - 80;
             if (this.target.topTop < this.topTop) {
-                verticalTarget = this.target.topTop - 30;
+                verticalTarget = this.target.topTop - 80;
             }
             var tempVerticalDistance = verticalTarget - this.topTop;
             this.verticalSpeed = tempVerticalDistance / (ticksToLand / 3);
