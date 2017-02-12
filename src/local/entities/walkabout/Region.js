@@ -18,10 +18,13 @@ function Region(regionData, followers) {
     this.ticksAlive = 0;
     
     this.draw = function() {
+        if (this.inactive) {
+            return;
+        }
         if (this.image) {
             graphics.drawImage(this.image, adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height);
         } else {
-            //return; //DEBUG: comment out this return in order to "see" regions that have no image
+            return; //DEBUG: comment out this return in order to "see" regions that have no image
             graphics.setFillStyle(this.color);
             ctx.globalAlpha = 0.5;
             graphics.fillRect(adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height)
@@ -37,6 +40,9 @@ function Region(regionData, followers) {
     }
     
     this.doActions = function() {
+        if (this.inactive) {
+            return;
+        }
         if (!regionData.decorative) {
             if (regionData.encounters) {
                 if (physics.isInside(player, this)) {
@@ -71,6 +77,41 @@ function Region(regionData, followers) {
                     }
                 }
             }
+            if (regionData.loot) {
+                if (physics.isInside(player, {topTop: this.topTop - 30, topLeft: this.topLeft - 30, width: this.width + 60, height: this.height + 60})) {
+                    var lootPopProps = {
+                        loot: regionData.loot,
+                        topTop: this.topTop,
+                        topLeft: this.topLeft
+                    }
+                    var lootPop = new LootPop(lootPopProps);
+
+                    this.inactive = true;
+                }
+            }
+
+            if (regionData.gold) {
+                if (physics.isInside(player, {topTop: this.topTop - 30, topLeft: this.topLeft - 30, width: this.width + 60, height: this.height + 60})) {
+                    var lootPopProps = {
+                        gold: regionData.gold,
+                        topTop: this.topTop,
+                        topLeft: this.topLeft,
+                        loot: {
+                            spriteProps: {
+                                sheetName: "items",
+                                leftIndex: 12,
+                                topIndex: 32,
+                                spriteSize: 16,
+                                frames: 1
+                            }
+                        }
+                    };
+
+                    var lootPop = new LootPop(lootPopProps);
+                    this.inactive = true;
+                }
+            }
+
         }
         this.ticksAlive++;
     }

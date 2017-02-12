@@ -59,6 +59,24 @@ var spiderWebThrown = {
     name: "Spider Web"
 }
 
+var katar = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 12,
+        topIndex: 99,
+        spriteSize: 16,
+        frames: 1
+    },
+    sound: "sword_hit",
+    damageModifier: 1.4,
+    speedModifier: 0.6,
+    id: 8,
+    level: 2,
+    gold: 15,
+    type: "melee",
+    name: "Katar"
+}
+
 var rebelMushroom = {
     gemAffinity: "green",
     weapon: copyJSONThing(mushroomWand),
@@ -354,6 +372,15 @@ var mainMap = {
             width: 4000,
             height: 2000,
             zindex: 450
+        }, {
+            name: "beachChest",
+            image: "wooden_chest",
+            topLeft: 420,
+            topTop: 950,
+            width: 32,
+            height: 32,
+            //loot: katar
+            gold: 58
         }, {
             name: "mushroomRegion",
             image: null,
