@@ -30,11 +30,17 @@ function LootPop(lootProps) {
             graphics.setFillStyle("gold");
             graphics.setFont(30, "Arial");
             graphics.fillText(lootProps.gold.toString(), adjustXForWalkabout(this.topLeft + 16), adjustYForWalkabout(this.topTop));
+        } else if (lootProps.xp) {
+            graphics.setFillStyle("purple");
+            graphics.setFont(30, "Arial");
+            graphics.fillText(lootProps.xp.toString(), adjustXForWalkabout(this.topLeft + 16), adjustYForWalkabout(this.topTop));
         }
     };
 
     if (lootProps.gold) {
         dataStore.gold += lootProps.gold;
+    } else if (lootProps.xp) {
+        dataStore.xp += lootProps.xp;
     } else {
         dataStore.inventory.items.push(this.loot);
     }

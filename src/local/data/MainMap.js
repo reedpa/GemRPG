@@ -382,6 +382,38 @@ var mainMap = {
             //loot: katar
             gold: 58
         }, {
+            name: "hiddenChest",
+            image: "wooden_chest",
+            topLeft: 2835,
+            topTop: 420,
+            width: 32,
+            height: 32,
+            loot: katar
+        }, {
+            name: "teaserChest",
+            image: "wooden_chest",
+            topLeft: 1625,
+            topTop: 825,
+            width: 32,
+            height: 32,
+            gold: 102
+        }, {
+            name: "teaserChestTwo",
+            image: "wooden_chest",
+            topLeft: 2740,
+            topTop: 1530,
+            width: 32,
+            height: 32,
+            gold: 47
+        }, {
+            name: "hiddenGem",
+            image: "blue",
+            topLeft: 3475,
+            topTop: 1395,
+            width: 32,
+            height: 32,
+            xp: 105
+        }, {
             name: "mushroomRegion",
             image: null,
             topLeft: 2600,

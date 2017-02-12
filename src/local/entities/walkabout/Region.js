@@ -11,11 +11,12 @@ function Region(regionData, followers) {
     this.color = regionData.color;
     this.zindex = regionData.zindex || regionZIndex;
     this.followers = followers;
-    //this.isBlocker = !!regionData.isBlocker; //DEBUG: comment this out to explore a map without bumping into walls
+    this.isBlocker = !!regionData.isBlocker; //DEBUG: comment this out to explore a map without bumping into walls
     if (regionData.image) {
         this.image = document.getElementById(regionData.image);
     }
     this.ticksAlive = 0;
+    this.inactive = regionData.inactive;
     
     this.draw = function() {
         if (this.inactive) {
@@ -49,7 +50,7 @@ function Region(regionData, followers) {
                     if (this.ticksAlive > 60) {
                         if (regionData.encounters.length >= 1) {
                             //return; //DEBUG: put this return here to not have encounters
-                            if (Math.floor(Math.random() * 200) === 1 && regionData.encounters.length >= 1 ) {
+                            if (Math.floor(Math.random() * 300) === 10 && regionData.encounters.length >= 1 ) {
                                 var encounter = regionData.encounters[Math.floor(Math.random() * regionData.encounters.length)];
                                 ResetAllObjects();
                                 gameBoard = new GameBoard(encounter);
@@ -87,6 +88,7 @@ function Region(regionData, followers) {
                     var lootPop = new LootPop(lootPopProps);
 
                     this.inactive = true;
+                    regionData.inactive = true;
                 }
             }
 
@@ -109,6 +111,30 @@ function Region(regionData, followers) {
 
                     var lootPop = new LootPop(lootPopProps);
                     this.inactive = true;
+                    regionData.inactive = true;
+                }
+            }
+
+            if (regionData.xp) {
+                if (physics.isInside(player, {topTop: this.topTop - 30, topLeft: this.topLeft - 30, width: this.width + 60, height: this.height + 60})) {
+                    var lootPopProps = {
+                        xp: regionData.xp,
+                        topTop: this.topTop,
+                        topLeft: this.topLeft,
+                        loot: {
+                            spriteProps: {
+                                sheetName: "items",
+                                leftIndex: 11,
+                                topIndex: 111,
+                                spriteSize: 16,
+                                frames: 1
+                            }
+                        }
+                    };
+
+                    var lootPop = new LootPop(lootPopProps);
+                    this.inactive = true;
+                    regionData.inactive = true;
                 }
             }
 
