@@ -138,6 +138,14 @@ function Region(regionData, followers) {
                 }
             }
 
+            if (regionData.conversation) {
+                if (physics.isInside(player, this)) {
+                    var conversation = new Conversation({conversation: regionData.conversation}, followers);
+                    this.inactive = true;
+                    regionData.inactive = true;
+                }
+            }
+
         }
         this.ticksAlive++;
     }

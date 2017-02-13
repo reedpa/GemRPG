@@ -6,7 +6,7 @@ function Walkabout(data) {
     this.zindex = walkaboutZIndex;
     this.order = 1;
     this.ticksAlive = 0;
-    player = new MainCharacter();
+    player = new MainCharacter(dataStore.characters[0]);
     this.data = data;
     dataStore.lastWalkabout = data;
     this.image = document.getElementById(this.data.image);
@@ -27,7 +27,7 @@ function Walkabout(data) {
         } else {
             target = this.followers[i - 2];
         }
-        var follower = new Follower(target, dataStore.characters[i].spriteProps, i);
+        var follower = new Follower(dataStore.characters[i], target, dataStore.characters[i].spriteProps, i);
         this.followers.push(follower);
     }
 
@@ -37,8 +37,6 @@ function Walkabout(data) {
     
     this.doActions = function() {
         this.ticksAlive++;
-        
-        
     }
     
     this.draw = function() {

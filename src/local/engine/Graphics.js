@@ -156,6 +156,18 @@ function Graphics() {
         ctx.fillRect(x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }
 
+    this.measureText = function(text) {
+        return ctx.measureText(text);
+    }
+
+    this.measureSpace = function(x) {
+        return canvas.width - x;
+    }
+
+    this.outsideRightBound = function(x) {
+        return x > canvas.width;
+    }
+
     this.calculateScaleFactor = function() {
         var windowHeight = window.innerHeight - 50;
         var myScaleFactor = windowHeight / canvas.height;

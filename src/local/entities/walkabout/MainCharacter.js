@@ -1,5 +1,6 @@
 
-function MainCharacter() {
+function MainCharacter(characterProps) {
+    this.characterProps = characterProps;
     this.topLeft = 0;
     this.topTop = 0;
     this.targetLeft = 0;

@@ -1190,6 +1190,44 @@ var mainMap = {
             isBlocker: false,
             footstepsColor: "orange",
             footstepsDuration: 100
+        }, {
+            name: "introConversation",
+            image: null,
+            topLeft: 760,
+            topTop: 865,
+            width: 200,
+            height: 200,
+            color: "purple",
+            isBlocker: false,
+            conversation: 
+                [
+                    {
+                        character: 1,
+                        text: "Ugh... my head...",
+                        index: 0
+                    }, {
+                        character: 2,
+                        text: "Where are we?",
+                        index: 1
+                    }, {
+                        character: 3,
+                        text: "I think our ship wrecked.",
+                        index: 1
+                    }, {
+                        character: 1,
+                        text: "We need to find some high ground.",
+                        index: 2
+                    }, {
+                        character: 2,
+                        text: "Sir, I see a hill to the southwest.",
+                        index: 3
+                    }, {
+                        character: 1,
+                        text: "Everyone gather your things and let's move out.",
+                        index: 4
+                    }
+                ]
+            
         }
     ]
 }

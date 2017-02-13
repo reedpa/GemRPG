@@ -1,4 +1,5 @@
-function Follower(target, spriteProps, index) {
+function Follower(characterProps, target, spriteProps, index) {
+    this.characterProps = characterProps;
     this.target = target;
     this.topLeft = target.topLeft - 35;
     this.topTop = target.topTop;

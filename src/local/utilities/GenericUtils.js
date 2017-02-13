@@ -38,3 +38,20 @@ function toNumberStringWithConstrainedDecimals(number, maxDecimals) {
         return number.toPrecision(leftHandPrecision).toString();
     }
 }
+
+function Chomp(str) {
+    var lastSpace = -1;
+    for (var i = 0; i < str.length; i++) {
+        if (str[i] === " ") {
+            lastSpace = i;
+        } else {
+            break;
+        }
+    }
+
+    if (lastSpace === -1) {
+        return str;
+    } else {
+        return str.substr(lastSpace + 1);
+    }
+}
