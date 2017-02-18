@@ -83,10 +83,47 @@ function Conversation(conversationProps, followers) {
 
     this.drawText = function(text, color, topLeft, topTop, nobreak) {
         if (!nobreak) {
-            var topOutOfBounds = false;
-            var leftOutOfBounds = false;
-            
+            var outOfRightBound = false;
+            var outOfLeftBound = false;
+            var outOfTopBound = false;
+            var outOfBottomBound = false;
+
+            var textLength = graphics.measureText(text).width;
+            var properLeftLocation = Math.max(graphics.getRightBound() - textLength - 10, Math.floor(canvas.width / 2));
+
+            if (topLeft > properLeftLocation) {
+                outOfRightBound = true;
+            } else if (topLeft < 0) {
+                outOfLeftBound = true;
+            }
+
+            if (topTop < 25) {
+                outOfTopBound = true;
+            } else if (topTop > (graphics.getBottomBound() - 25)) {
+                outOfBottomBound = true;
+            }
+
+
+            if (outOfRightBound || outOfLeftBound || outOfTopBound || outOfBottomBound) {
+                var newTopLeft = topLeft;
+                var newTopTop = topTop;
+
+                if (outOfRightBound) {
+                    newTopLeft = properLeftLocation;
+                } else if (outOfLeftBound) {
+                    newTopLeft = 25;
+                }
+
+                if (outOfBottomBound) {
+                    newTopTop = graphics.getBottomBound() - 25;
+                } else if (outOfTopBound) {
+                    newTopTop = 25
+                }
+
+                this.drawText(text, color, newTopLeft, newTopTop, nobreak);
+            }
         }
+
         graphics.setFillStyle("black");
         graphics.setFont(25, "Arial");
 

@@ -1461,7 +1461,7 @@ var mainMap = {
             isBlocker: false,
             conversation: [
                 {
-                    offscreen: "right",
+                    location: {topLeft: 3600, topTop: 500},
                     color: "DeepPink",
                     text: "Help!",
                     index: 0
@@ -1478,7 +1478,7 @@ var mainMap = {
                     text: "Sir, we need to figure out where we are.",
                     index: 2
                 }, {
-                    offscreen: "right",
+                    location: {topLeft: 3600, topTop: 500},
                     color: "DeepPink",
                     text: "Help!",
                     index: 2
@@ -1495,7 +1495,7 @@ var mainMap = {
             isBlocker: false,
             conversation: [
                 {
-                    offscreen: "right",
+                    location: {topLeft: 3600, topTop: 500},
                     color: "DeepPink",
                     text: "Help!",
                     index: 0

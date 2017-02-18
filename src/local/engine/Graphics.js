@@ -168,6 +168,14 @@ function Graphics() {
         return x > canvas.width;
     }
 
+    this.getRightBound = function() {
+        return canvas.width;
+    }
+
+    this.getBottomBound = function() {
+        return canvas.height;
+    }
+
     this.calculateScaleFactor = function() {
         var windowHeight = window.innerHeight - 50;
         var myScaleFactor = windowHeight / canvas.height;
