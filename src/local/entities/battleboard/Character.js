@@ -21,6 +21,9 @@ function Character(characterData) {
     this.lastAttackCountDown = 0;
     
     this.topLeft = characterData.fieldStart - 55 * Math.floor(this.index / 3);
+    if (this.spriteProps.spriteSize !== 32) {
+        this.topLeft -= (this.spriteProps.spriteSize - 32);
+    }
     this.topTop = 50 + ((30 + 45) * (this.index % 3));
     this.width = this.spriteProps.spriteSize;
     this.height = this.spriteProps.spriteSize;
@@ -52,22 +55,22 @@ function Character(characterData) {
             //health bar
             graphics.setFillStyle("green");
             var fillLength = Math.ceil(this.health / this.maxHealth * 30);
-            graphics.fillRect(this.topLeft, this.topTop + 32, fillLength, 5);
+            graphics.fillRect(this.topLeft, this.topTop + this.spriteProps.spriteSize, fillLength, 5);
             //health bar border
             graphics.setLineWidth(1);
             graphics.setStrokeStyle("black");
-            graphics.strokeRect(this.topLeft, this.topTop + 32, 30, 5);
+            graphics.strokeRect(this.topLeft, this.topTop + this.spriteProps.spriteSize, 30, 5);
             
             //action bar
             if (this.actionTimer >= 0) {
                 graphics.setFillStyle("blue");
                 fillLength = Math.ceil(this.actionTimer / this.actionMax * 30);
-                graphics.fillRect(this.topLeft, this.topTop + 40, fillLength, 5);
+                graphics.fillRect(this.topLeft, this.topTop + this.spriteProps.spriteSize + 8, fillLength, 5);
             }
             //action bar border
             graphics.setLineWidth(1);
             graphics.setStrokeStyle("black");
-            graphics.strokeRect(this.topLeft, this.topTop + 40, 30, 5);
+            graphics.strokeRect(this.topLeft, this.topTop + this.spriteProps.spriteSize + 8, 30, 5);
             
             if (this.targeted) {
                 graphics.drawSprite(

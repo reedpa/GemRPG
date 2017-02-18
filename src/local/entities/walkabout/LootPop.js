@@ -41,6 +41,9 @@ function LootPop(lootProps) {
         dataStore.gold += lootProps.gold;
     } else if (lootProps.xp) {
         dataStore.xp += lootProps.xp;
+    } else if (lootProps.character) {
+        dataStore.inventory.characters.push(lootProps.character);
+        dataStore.inventory.items.push(lootProps.character.weapon);
     } else {
         dataStore.inventory.items.push(this.loot);
     }

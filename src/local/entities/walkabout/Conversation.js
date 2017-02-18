@@ -1,10 +1,14 @@
+var conversing = false;
+
 function Conversation(conversationProps, followers) {
     this.activeText = [];
     this.zindex = lootPopZindex;
     this.id = "conversation_" + GetGuid();
 
+    conversing = true;
+
     this.currentIndex = 0;
-    this.duration = 244;
+    this.duration = 198;
     this.ticksAlive = 0;
 
     this.maxIndex = 0;
@@ -22,51 +26,85 @@ function Conversation(conversationProps, followers) {
             this.currentIndex++;
         }
 
+        for (var i = 0; i < conversationProps.conversation.length; i++) {
+            if (conversationProps.conversation[i].index === this.currentIndex) {
+                if (this.ticksAlive === 0 && conversationProps.conversation[i].action) {
+                    conversationProps.conversation[i].action();
+                }
+            }
+        }
+
         if (this.currentIndex > this.maxIndex) {
             ai.removeObject(this);
             graphics.removeObject(this);
+            conversing = false;
         }
     }
 
     this.draw = function() {
         for (var i = 0; i < conversationProps.conversation.length; i++) {
             if (conversationProps.conversation[i].index === this.currentIndex) {
-                var speakingCharacter;
-                for (var j = 0; j < dataStore.characters.length; j++) {
-                    if (dataStore.characters[j].id === conversationProps.conversation[i].character) {
-                        if (j === 0) {
-                            speakingCharacter = player;
-                        } else {
-                            speakingCharacter = followers[j-1];
+                if (conversationProps.conversation[i].character) {
+                    var speakingCharacter;
+                    for (var j = 0; j < dataStore.characters.length; j++) {
+                        if (dataStore.characters[j].id === conversationProps.conversation[i].character) {
+                            if (j === 0) {
+                                speakingCharacter = player;
+                            } else {
+                                speakingCharacter = followers[j-1];
+                            }
+                            break;
                         }
-                        break;
+                    }
+
+                    this.drawText(conversationProps.conversation[i].text, speakingCharacter.characterProps.gemAffinity, adjustXForWalkabout(speakingCharacter.topLeft), adjustYForWalkabout(speakingCharacter.topTop - 5));
+                } else if (conversationProps.conversation[i].location) {
+                    this.drawText(conversationProps.conversation[i].text, 
+                        conversationProps.conversation[i].color,
+                        adjustXForWalkabout(conversationProps.conversation[i].location.topLeft), 
+                        adjustYForWalkabout(conversationProps.conversation[i].location.topTop - 5));
+                } else if (conversationProps.conversation[i].offscreen) {
+                    if (conversationProps.conversation[i].offscreen === "right") {
+                        this.drawText(conversationProps.conversation[i].text, 
+                            conversationProps.conversation[i].color,
+                            250, 
+                            350);
+                    } else if (conversationProps.conversation[i].offscreen === "left") {
+                        this.drawText(conversationProps.conversation[i].text, 
+                            conversationProps.conversation[i].color,
+                            20, 
+                            350);
                     }
                 }
-
-                this.drawText(conversationProps.conversation[i].text, speakingCharacter.characterProps.gemAffinity, adjustXForWalkabout(speakingCharacter.topLeft), adjustYForWalkabout(speakingCharacter.topTop));
 
             }
         }
     }
 
-    this.drawText = function(text, color, topLeft, topTop) {
+    this.drawText = function(text, color, topLeft, topTop, nobreak) {
+        if (!nobreak) {
+            var topOutOfBounds = false;
+            var leftOutOfBounds = false;
+            
+        }
         graphics.setFillStyle("black");
         graphics.setFont(25, "Arial");
 
-        if (graphics.outsideRightBound(topLeft + graphics.measureText(text).width) && text.indexOf(" ") !== -1) {
+        if (graphics.outsideRightBound(topLeft + graphics.measureText(text).width) && 
+                text.indexOf(" ") !== -1 && 
+                !nobreak) {
             var textSize = graphics.measureText(text).width;
             var availableSize = graphics.measureSpace(topLeft);
             var piecesNeeded = Math.ceil(textSize / availableSize);
             var textPieces = this.splitText(piecesNeeded, text);
 
             for (var i = 0; i < textPieces.length; i++) {
-                this.drawText(Chomp(textPieces[i]), color, topLeft, topTop + (20 * i));
+                this.drawText(Chomp(textPieces[i]), color, topLeft, topTop - (20 * (textPieces.length - 1 - i)), true);
             }
             return;
         }
 
-        graphics.fillText(text, topLeft - 1, topTop - 1);
-
+        //black border around the text
         graphics.setFillStyle("black");
         graphics.setFont(25, "Arial");
         graphics.fillText(text, topLeft - 1, topTop);
@@ -77,16 +115,13 @@ function Conversation(conversationProps, followers) {
 
         graphics.setFillStyle("black");
         graphics.setFont(25, "Arial");
-        graphics.fillText(text, topLeft + 1, topTop + 1);
-
-        graphics.setFillStyle("black");
-        graphics.setFont(25, "Arial");
         graphics.fillText(text, topLeft + 1, topTop);
 
         graphics.setFillStyle("black");
         graphics.setFont(25, "Arial");
         graphics.fillText(text, topLeft, topTop + 1);
 
+        //the actual text
         graphics.setFillStyle(color);
         graphics.setFont(25, "Arial");
         graphics.fillText(text, topLeft, topTop);

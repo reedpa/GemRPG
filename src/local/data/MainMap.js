@@ -77,6 +77,53 @@ var katar = {
     name: "Katar"
 }
 
+var princessWand = {
+    spriteProps: {
+        sheetName: "items",
+        leftIndex: 10,
+        topIndex: 111,
+        spriteSize: 16,
+        frames: 1
+    },
+    ammoProps: {
+        spriteProps: {
+            sheetName: "items",
+            leftIndex: 1,
+            topIndex: 86,
+            spriteSize: 16,
+            frames: 1
+        }
+    },
+    sound: "magic_hit",
+    damageModifier: 1.2,
+    speedModifier: 0.5,
+    id: 8,
+    level: 2,
+    gold: 15,
+    type: "shooter",
+    name: "Scepter"
+}
+
+var princess = {
+    gemAffinity: "pink",
+    weapon: princessWand,
+    spriteProps: {
+        sheetName: "princess_sheet",
+        leftIndex: 0,
+        topIndex: 0,
+        spriteSize: 32,
+        frames: 4
+    },
+    health: 1400,
+    index: 0,
+    damageMultiplier: 1.4,
+    level: 2,
+    xp: 25,
+    infusionType: "blast",
+    keyCharacter: false,
+    id: 8
+}
+
 var rebelMushroom = {
     gemAffinity: "green",
     weapon: copyJSONThing(mushroomWand),
@@ -254,7 +301,49 @@ var goodMushroom = {
     ]
 }
 
+var bossWeapon = {
+    type: "melee",
+    spriteProps: {
+        sheetName: "Shroom",
+        leftIndex: 0,
+        topIndex: 0,
+        spriteSize: 45,
+        frames: 1
+    },
+    damageModifier: 100.0,
+    speedModifier: 10.0,
+    invisibleWhenHeld: true
+}
+
+var mushroomBoss = {
+    gemAffinity: "red",
+    weapon: bossWeapon,
+    spriteProps: {
+        sheetName: "shroomboss",
+        leftIndex: 0,
+        topIndex: 0,
+        spriteSize: 96,
+        frames: 2
+    },
+    health: 20000,
+    index: 4,
+    damageMultiplier: 1,
+    goldDrop: 300,
+    xpDrop: 300,
+    loot: []
+}
+
 //encounters
+
+var bossEncounter = {
+        board: {
+            backDropImage: "background_green",
+            boardImage: "board_green"
+        },
+        enemies: [
+            mushroomBoss
+        ]
+    }
 
 var mushroomEncounters = [
     {
@@ -361,7 +450,8 @@ var spiderAndMouseEncounters = [
 
 var mainMap = {
     image: "mainmap",
-    startingLocation: [820, 950],
+    //startingLocation: [820, 950],
+    startingLocation: [3300, 600],
     regions: [ 
         {
             name: "treeOverlay",
@@ -379,7 +469,6 @@ var mainMap = {
             topTop: 950,
             width: 32,
             height: 32,
-            //loot: katar
             gold: 58
         }, {
             name: "hiddenChest",
@@ -401,7 +490,7 @@ var mainMap = {
             name: "teaserChestTwo",
             image: "wooden_chest",
             topLeft: 2740,
-            topTop: 1530,
+            topTop: 1520,
             width: 32,
             height: 32,
             gold: 47
@@ -413,6 +502,14 @@ var mainMap = {
             width: 32,
             height: 32,
             xp: 105
+        }, {
+            name: "tiedPrincess",
+            image: "princess",
+            topLeft: 3610,
+            topTop: 480,
+            width: 32,
+            height: 32,
+            character: princess
         }, {
             name: "mushroomRegion",
             image: null,
@@ -481,6 +578,15 @@ var mainMap = {
             height: 300,
             color: "red",
             encounters: spiderAndMouseEncounters
+        }, { 
+            name: "bossEncounter",
+            image: "shroomboss_still",
+            topLeft: 3520,
+            topTop: 470,
+            width: 96,
+            height: 96,
+            color: "red",
+            guaranteedEncounter: bossEncounter
         }, {
             name: "treesTopBorder",
             image: null,
@@ -1228,6 +1334,173 @@ var mainMap = {
                     }
                 ]
             
+        }, {
+            name: "tutorialConversation",
+            image: null,
+            topLeft: 1200,
+            topTop: 490,
+            width: 50,
+            height: 350,
+            color: "purple",
+            isBlocker: false,
+            conversation: 
+                [
+                    {
+                        character: 1,
+                        text: "Weapons out! Those are some big mice.",
+                        index: 0
+                    }, {
+                        character: 2,
+                        text: "Remember to use the gems, sir. Match colors to infuse our attacks.",
+                        index: 1
+                    }, {
+                        character: 4,
+                        text: "Kill.",
+                        index: 1
+                    }
+                ]
+        }, {
+            name: "woundedLieutenant",
+            image: "woundedLieutenant",
+            id: "woundedLieutenant",
+            topLeft: 2310,
+            topTop: 640,
+            width: 32,
+            height: 32,
+            isDecorative: true,
+            isBlocker: false
+        }, {
+            name: "mushroomDeathConversation",
+            image: null,
+            topLeft: 2160,
+            topTop: 355,
+            width: 300,
+            height: 400,
+            color: "purple",
+            isBlocker: false,
+            conversation: 
+                [
+                    {
+                        character: 1,
+                        text: "Hey! He's one of ours.  Lieutenant?",
+                        index: 0
+                    }, {
+                        character: 1,
+                        text: "Lieutenant! That doesn't look good. Cleric?",
+                        index: 1
+                    }, {
+                        action: function() {
+                            for (var i = 0; i < graphics.graphicsObjects.length; i++) {
+                                if (graphics.graphicsObjects[i].characterProps &&
+                                    graphics.graphicsObjects[i].characterProps.id === 3) {
+                                    graphics.graphicsObjects[i].targetLeft = 2280;
+                                    graphics.graphicsObjects[i].targetTop = 640;
+                                }
+                            }
+                        },
+                        index: 1
+                    }, {
+                        character: 3,
+                        text: "I don't think I can fix this.",
+                        index: 2
+                    }, {
+                        location: {topLeft: 2310, topTop: 640},
+                        color: "red",
+                        text: "It hurts. Inside.",
+                        index: 3
+                    }, {
+                        character: 3,
+                        text: "There's extensive infection with some kind of- substance.",
+                        index: 4
+                    }, {
+                        character: 1,
+                        text: "Can you do anything for him?",
+                        index: 5
+                    }, {
+                        character: 3,
+                        text: "No.",
+                        index: 6
+                    }, {
+                        location: {topLeft: 2310, topTop: 640},
+                        color: "red",
+                        text: "... mushrooms...",
+                        index: 6
+                    }, {
+                        action: function() {
+                            for (var i = 0; i < graphics.graphicsObjects.length; i++) {
+                                if (graphics.graphicsObjects[i].id === "woundedLieutenant") {
+                                    graphics.graphicsObjects[i].flicker = true;
+                                }
+                            }
+                        },
+                        index: 7
+                    }, {
+                        action: function() {
+                            for (var i = 0; i < graphics.graphicsObjects.length; i++) {
+                                if (graphics.graphicsObjects[i].id === "woundedLieutenant") {
+                                    graphics.graphicsObjects[i].regionData.inactive = true;
+                                    graphics.graphicsObjects[i].inactive = true;
+                                }
+                            }
+                        },
+                        index: 8
+                    }, {
+                        character: 1,
+                        text: "Damn.",
+                        index: 8
+                    }
+                ]
+        }, {
+            name: "trappedPrincessConversation",
+            image: null,
+            topLeft: 2205,
+            topTop: 900,
+            width: 310,
+            height: 50,
+            color: "purple",
+            isBlocker: false,
+            conversation: [
+                {
+                    offscreen: "right",
+                    color: "DeepPink",
+                    text: "Help!",
+                    index: 0
+                }, {
+                    character: 1,
+                    text: "It's coming from the east.",
+                    index: 1
+                }, {
+                    character: 3,
+                    text: "We need to help her.",
+                    index: 1
+                }, {
+                    character: 2,
+                    text: "Sir, we need to figure out where we are.",
+                    index: 2
+                }, {
+                    offscreen: "right",
+                    color: "DeepPink",
+                    text: "Help!",
+                    index: 2
+                }
+            ]
+        }, {
+            name: "trappedPrincessConversationTwo",
+            image: null,
+            topLeft: 3200,
+            topTop: 800,
+            width: 300,
+            height: 300,
+            color: "purple",
+            isBlocker: false,
+            conversation: [
+                {
+                    offscreen: "right",
+                    color: "DeepPink",
+                    text: "Help!",
+                    index: 0
+                }
+            ]
         }
     ]
 }

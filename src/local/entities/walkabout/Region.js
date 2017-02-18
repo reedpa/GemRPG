@@ -2,6 +2,8 @@ var gameBoard;
 
 function Region(regionData, followers) {
     this.name = regionData.name;
+    this.id = regionData.id || GetGuid();
+    this.regionData = regionData;
     this.topLeft = regionData.topLeft;
     this.targetLeft = regionData.topLeft;
     this.topTop = regionData.topTop;
@@ -23,9 +25,15 @@ function Region(regionData, followers) {
             return;
         }
         if (this.image) {
+            if (this.flicker) {
+                if (this.ticksAlive % 10 >= 5) {
+                    return;
+                }
+            }
+
             graphics.drawImage(this.image, adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height);
         } else {
-            return; //DEBUG: comment out this return in order to "see" regions that have no image
+            //return; //DEBUG: comment out this return in order to "see" regions that have no image
             graphics.setFillStyle(this.color);
             ctx.globalAlpha = 0.5;
             graphics.fillRect(adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height)
@@ -45,24 +53,48 @@ function Region(regionData, followers) {
             return;
         }
         if (!regionData.decorative) {
-            if (regionData.encounters) {
-                if (physics.isInside(player, this)) {
-                    if (this.ticksAlive > 60) {
-                        if (regionData.encounters.length >= 1) {
-                            //return; //DEBUG: put this return here to not have encounters
-                            if (Math.floor(Math.random() * 300) === 10 && regionData.encounters.length >= 1 ) {
-                                var encounter = regionData.encounters[Math.floor(Math.random() * regionData.encounters.length)];
-                                ResetAllObjects();
-                                gameBoard = new GameBoard(encounter);
-                                graphics.addObject(gameBoard);
-                                ai.addObject(gameBoard);
-                                dataStore.lastLeft = player.topLeft;
-                                dataStore.lastTop = player.topTop;
+            if (!conversing) {
+                if (regionData.encounters) {
+                    if (physics.isInside(player, this)) {
+                        if (this.ticksAlive > 60) {
+                            if (regionData.encounters.length >= 1) {
+                                //return; //DEBUG: put this return here to not have encounters
+                                if (Math.floor(Math.random() * 300) === 10 && regionData.encounters.length >= 1 ) {
+                                    var encounter = regionData.encounters[Math.floor(Math.random() * regionData.encounters.length)];
+                                    ResetAllObjects();
+                                    gameBoard = new GameBoard(encounter);
+                                    graphics.addObject(gameBoard);
+                                    ai.addObject(gameBoard);
+                                    dataStore.lastLeft = player.topLeft;
+                                    dataStore.lastTop = player.topTop;
+                                }
                             }
                         }
                     }
                 }
+
+                if (regionData.conversation) {
+                    if (physics.isInside(player, this)) {
+                        var conversation = new Conversation({conversation: regionData.conversation}, followers);
+                        this.inactive = true;
+                        regionData.inactive = true;
+                    }
+                }
             }
+
+            if (regionData.guaranteedEncounter) {
+                if (physics.isInside(player, {topTop: this.topTop - 50, topLeft: this.topLeft - 50, width: this.width + 100, height: this.height +100})) {
+                    regionData.inactive = true;
+                    var encounter = regionData.guaranteedEncounter;
+                    ResetAllObjects();
+                    gameBoard = new GameBoard(encounter);
+                    graphics.addObject(gameBoard);
+                    ai.addObject(gameBoard);
+                    dataStore.lastLeft = player.topLeft;
+                    dataStore.lastTop = player.topTop;
+                }
+            }
+
             if (regionData.footstepsDuration) {
                 if (physics.isInside(player, this)) {
                     if (!player.footsteps) {
@@ -138,9 +170,18 @@ function Region(regionData, followers) {
                 }
             }
 
-            if (regionData.conversation) {
-                if (physics.isInside(player, this)) {
-                    var conversation = new Conversation({conversation: regionData.conversation}, followers);
+            if (regionData.character) {
+                if (physics.isInside(player, {topTop: this.topTop - 30, topLeft: this.topLeft - 30, width: this.width + 60, height: this.height + 60})) {
+                    var lootPopProps = {
+                        character: regionData.character,
+                        topTop: this.topTop,
+                        topLeft: this.topLeft,
+                        loot: {
+                            spriteProps: regionData.character.spriteProps
+                        }
+                    };
+
+                    var lootPop = new LootPop(lootPopProps);
                     this.inactive = true;
                     regionData.inactive = true;
                 }
