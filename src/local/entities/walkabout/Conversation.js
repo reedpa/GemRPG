@@ -121,6 +121,7 @@ function Conversation(conversationProps, followers) {
                 }
 
                 this.drawText(text, color, newTopLeft, newTopTop, nobreak);
+                return;
             }
         }
 
