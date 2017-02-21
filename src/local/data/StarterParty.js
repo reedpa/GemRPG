@@ -143,6 +143,7 @@ var starterInventory = [
 var starterParty = {
     characters: [
         {
+            name: "Cpt Sam",
             gemAffinity: "blue",
             weapon: dagger,
             spriteProps: {
@@ -162,6 +163,7 @@ var starterParty = {
             id: 1
         },
         {
+            name: "Lt Marla",
             gemAffinity: "green",
             weapon: sword,
             spriteProps: {
@@ -181,6 +183,7 @@ var starterParty = {
             id: 2
         },
         {
+            name: "Bob",
             gemAffinity: "red",
             weapon: axe,
             spriteProps: {
@@ -200,6 +203,7 @@ var starterParty = {
             id: 4
         },
         {
+            name: "Reverend M",
             gemAffinity: "pink",
             weapon: healing,
             spriteProps: {
@@ -219,6 +223,7 @@ var starterParty = {
             id: 3
         },
         {
+            name: "Mira",
             gemAffinity: "yellow",
             weapon: bow,
             spriteProps: {
@@ -238,6 +243,7 @@ var starterParty = {
             id: 5
         },
         {
+            name: "Fangdal",
             gemAffinity: "purple",
             weapon: staff,
             spriteProps: {

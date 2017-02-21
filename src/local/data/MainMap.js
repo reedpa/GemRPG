@@ -105,6 +105,7 @@ var princessWand = {
 }
 
 var princess = {
+    name: "Princess K",
     gemAffinity: "pink",
     weapon: princessWand,
     spriteProps: {
@@ -125,6 +126,7 @@ var princess = {
 }
 
 var rebelMushroom = {
+    name: "Rebel Mushroom",
     gemAffinity: "green",
     weapon: copyJSONThing(mushroomWand),
     spriteProps: {

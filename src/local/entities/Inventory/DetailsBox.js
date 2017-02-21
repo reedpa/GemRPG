@@ -93,17 +93,18 @@ function DetailsBox() {
                 
             graphics.setFont(20, "Arial");
             graphics.setFillStyle("white");
-            graphics.fillText("Infusion: " + this.characterProps.infusionType, this.topLeft + 40, this.topTop + 30);
-            graphics.fillText("Gem: ", this.topLeft + 5, this.topTop + 60);
+            graphics.fillText(this.characterProps.name, this.topLeft + 5 + 32 + 5, this.topTop + 30);
+            graphics.fillText("Infusion: " + this.characterProps.infusionType, this.topLeft + 5, this.topTop + 60);
+            graphics.fillText("Gem: ", this.topLeft + 5, this.topTop + 80);
             graphics.setFillStyle(this.characterProps.gemAffinity);
-            graphics.fillText(this.characterProps.gemAffinity, this.topLeft + 58, this.topTop + 60);
+            graphics.fillText(this.characterProps.gemAffinity, this.topLeft + 58, this.topTop + 80);
             graphics.setFillStyle("white");
             graphics.fillText(
                 "Health: " + toNumberStringWithConstrainedDecimals(this.characterProps.health, 0), 
-                this.topLeft + 5, this.topTop + 80);
+                this.topLeft + 5, this.topTop + 100);
             graphics.fillText(
                 "Damage x: " + toNumberStringWithConstrainedDecimals(this.characterProps.damageMultiplier, 2), 
-                this.topLeft + 5, this.topTop + 100);
+                this.topLeft + 5, this.topTop + 120);
             
             graphics.fillText("Level: " + this.characterProps.level, this.topLeft + 5, this.topTop + 160);
             graphics.fillText("XP: " + this.characterProps.xp, this.topLeft + 30, this.topTop + 180);
