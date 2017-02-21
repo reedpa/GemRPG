@@ -18,11 +18,11 @@ function InventoryScreen() {
     this.itemPage = 0;
     this.characterPage = 0;
     
-    var inventoryPageLeft = {topLeft: 320, topTop: 80, width: 20, height: 20};
-    var inventoryPageRight = {topLeft: 320, topTop: 100, width: 20, height: 20};
+    var inventoryPageLeft = {image: document.getElementById("leftarrow"), topLeft: 320, topTop: 80, width: 20, height: 20};
+    var inventoryPageRight = {image: document.getElementById("rightarrow"), topLeft: 320, topTop: 100, width: 20, height: 20};
     
-    var characterPageLeft = {topLeft: 320, topTop: 210, width: 20, height: 20 };
-    var characterPageRight = {topLeft: 320, topTop: 230, width: 20, height: 20 };
+    var characterPageLeft = {image: document.getElementById("leftarrow"),topLeft: 320, topTop: 210, width: 20, height: 20 };
+    var characterPageRight = {image: document.getElementById("rightarrow"), topLeft: 320, topTop: 230, width: 20, height: 20 };
     
     this.grabbedThing = null;
     
@@ -109,21 +109,21 @@ function InventoryScreen() {
         
         
         if (this.itemPage > 0) {
-            graphics.setFillStyle("blue");
-            graphics.fillRect(inventoryPageLeft.topLeft, inventoryPageLeft.topTop, inventoryPageLeft.width, inventoryPageLeft.height);
+            var jiggle = physics.mouseIsInside(inventoryPageLeft) ? 1 : 0;
+            graphics.drawImage(inventoryPageLeft.image, inventoryPageLeft.topLeft + jiggle, inventoryPageLeft.topTop + jiggle, inventoryPageLeft.width, inventoryPageRight.height);
         }
-        if (this.itemBoxes.length - this.itemPage > inventoryItemPageSize) {
-            graphics.setFillStyle("green");
-            graphics.fillRect(inventoryPageRight.topLeft, inventoryPageRight.topTop, inventoryPageRight.width, inventoryPageRight.height);
+        if (this.itemBoxes.length - 6 /*the "wielded" area*/ - this.itemPage > inventoryItemPageSize) {
+            var jiggle = physics.mouseIsInside(inventoryPageRight) ? 1 : 0;
+            graphics.drawImage(inventoryPageRight.image, inventoryPageRight.topLeft + jiggle, inventoryPageRight.topTop + jiggle, inventoryPageRight.width, inventoryPageRight.height);
         }
         
         if (this.characterPage > 0) {
-            graphics.setFillStyle("blue");
-            graphics.fillRect(characterPageLeft.topLeft, characterPageLeft.topTop, characterPageLeft.width, characterPageLeft.height);
+            var jiggle = physics.mouseIsInside(characterPageLeft) ? 1 : 0;
+            graphics.drawImage(characterPageLeft.image, characterPageLeft.topLeft + jiggle, characterPageLeft.topTop + jiggle, characterPageLeft.width, characterPageLeft.height);
         }
-        if (this.characterBoxes.length - this.characterPage > inventoryCharacterPageSize) {
-            graphics.setFillStyle("green");
-            graphics.fillRect(characterPageRight.topLeft, characterPageRight.topTop, characterPageRight.width, characterPageRight.height);
+        if (this.characterBoxes.length - 6 /*the "wielded" area*/ - this.characterPage > inventoryCharacterPageSize) {
+            var jiggle = physics.mouseIsInside(characterPageRight) ? 1 : 0;
+            graphics.drawImage(characterPageRight.image, characterPageRight.topLeft + jiggle, characterPageRight.topTop + jiggle, characterPageRight.width, characterPageRight.height);
         }
         
         graphics.setFont(25, "Arial");

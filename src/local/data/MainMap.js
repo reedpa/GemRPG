@@ -126,7 +126,7 @@ var princess = {
 }
 
 var rebelMushroom = {
-    name: "Rebel Mushroom",
+    name: "Rebel Mush",
     gemAffinity: "green",
     weapon: copyJSONThing(mushroomWand),
     spriteProps: {
@@ -1497,10 +1497,18 @@ var mainMap = {
             isBlocker: false,
             conversation: [
                 {
-                    location: {topLeft: 3600, topTop: 500},
+                    location: { topLeft: 3600, topTop: 500 },
                     color: "DeepPink",
                     text: "Help!",
                     index: 0
+                }, {
+                    character: 1,
+                    text: "That is a big mushroom!",
+                    index: 1
+                }, {
+                    character: 2,
+                    text: "Make sure you check the inventory screen and level us and our weapons up, sir.",
+                    index: 1
                 }
             ]
         }
