@@ -193,6 +193,7 @@ var mouseBite = {
 }
 
 var badMouse = {
+    name: "Dire Mouse",
     gemAffinity: "blue",
     weapon: mouseBite,
     spriteProps: {
@@ -226,6 +227,7 @@ var spiderWeb = {
 }
 
 var badSpider = {
+    name: "Dire Spider",
     gemAffinity: "purple",
     weapon: spiderWeb,
     spriteProps: {
@@ -249,6 +251,7 @@ var badSpider = {
 }
 
 var badMushroom = {
+    name: "Mush Soldier",
     gemAffinity: "green",
     weapon: mushroomShot,
     spriteProps: {
@@ -276,6 +279,7 @@ var badMushroom = {
 }
 
 var goodMushroom = {
+    name: "Mush Healer",
     gemAffinity: "pink",
     weapon: mushroomHeal,
     spriteProps: {
@@ -318,6 +322,7 @@ var bossWeapon = {
 }
 
 var mushroomBoss = {
+    name: "Mush King",
     gemAffinity: "red",
     weapon: bossWeapon,
     spriteProps: {
