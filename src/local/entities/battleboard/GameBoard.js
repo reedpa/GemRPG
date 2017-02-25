@@ -415,6 +415,7 @@ function GameBoard(encounterData) {
     
     for (var i = this.encounterData.enemies.length - 1; i >= 0; i--) {
         var enemyProps = this.encounterData.enemies[i];
+        tryAddToBestiary(enemyProps);
         enemyProps.fieldStart = 310;
         enemyProps.index = i;
         enemyProps.type = "enemy";

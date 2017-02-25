@@ -86,6 +86,11 @@ function MainMenu() {
         dataStore.inventory = {};
         dataStore.inventory.characters = starterParty.characters;
         dataStore.inventory.items = starterInventory;
+        dataStore.conversations = [];
+        dataStore.bestiary = [];
+        dataStore.settings = {};
+        dataStore.settings.conversationSpeed = 75;
+        dataStore.settings.encounterRate = 75;
         walkabout = new Walkabout(mainMap);
         
         this.active = false;

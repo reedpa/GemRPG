@@ -15,6 +15,7 @@ function Walkabout(data) {
     player.targetLeft = player.topLeft;
     player.targetTop = player.topTop;
     this.inventory = new Inventory();
+    conversing = false;
 
     this.regions = [];
     

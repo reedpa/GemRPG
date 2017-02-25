@@ -47,3 +47,13 @@ function drawFootsteps(stepper) {
         graphics.setGlobalAlpha(1);
     }
 }
+
+function tryAddToBestiary(enemyProps) {
+    for (var i = 0; i < dataStore.bestiary.length; i++) {
+        if (dataStore.bestiary[i].name === enemyProps.name) {
+            return; //has already been added to the bestiary
+        }
+    }
+
+    dataStore.bestiary.push(enemyProps);
+}

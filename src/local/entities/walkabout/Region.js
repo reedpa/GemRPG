@@ -19,6 +19,11 @@ function Region(regionData, followers) {
     }
     this.ticksAlive = 0;
     this.inactive = regionData.inactive;
+
+    this.encounterRate = 100 + 3 * (Math.abs(dataStore.settings.encounterRate - 150));
+    if (dataStore.settings.encounterRate <= 5) {
+        this.encounterRate = 1;
+    }
     
     this.draw = function() {
         if (this.inactive) {
@@ -59,7 +64,7 @@ function Region(regionData, followers) {
                         if (this.ticksAlive > 60) {
                             if (regionData.encounters.length >= 1) {
                                 //return; //DEBUG: put this return here to not have encounters
-                                if (Math.floor(Math.random() * 300) === 10 && regionData.encounters.length >= 1 ) {
+                                if (Math.floor(Math.random() * this.encounterRate) === 10 && regionData.encounters.length >= 1 ) {
                                     var encounter = regionData.encounters[Math.floor(Math.random() * regionData.encounters.length)];
                                     ResetAllObjects();
                                     gameBoard = new GameBoard(encounter);

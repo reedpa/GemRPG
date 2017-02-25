@@ -8,7 +8,7 @@ function Conversation(conversationProps, followers) {
     conversing = true;
 
     this.currentIndex = 0;
-    this.duration = 198;
+    this.duration = 198 * (2.5 - ((dataStore.settings.conversationSpeed) / 75));
     this.ticksAlive = 0;
 
     this.maxIndex = 0;
@@ -190,4 +190,5 @@ function Conversation(conversationProps, followers) {
 
     ai.addObject(this);
     graphics.addObject(this);
+    dataStore.conversations.push(conversationProps);
 }
