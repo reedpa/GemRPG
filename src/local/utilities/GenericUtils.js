@@ -39,6 +39,29 @@ function toNumberStringWithConstrainedDecimals(number, maxDecimals) {
     }
 }
 
+function splitText (pieces, text) {
+    var split = [];
+    var length = text.length;
+    var pieceLength = Math.ceil(text.length / pieces);
+
+    var lastSpace = 0;
+    var lastRoot = 0;
+    for (var i = 0; i < text.length; i++) {
+        if (text[i] === " ") {
+            lastSpace = i;
+        }
+
+        if (i - lastRoot > pieceLength && lastRoot !== lastSpace) {
+            split.push(text.substr(lastRoot, lastSpace - lastRoot));
+            lastRoot = lastSpace;
+        }
+    }
+
+    split.push(text.substr(lastRoot, text.length -1));
+
+    return split;
+}
+
 function Chomp(str) {
     var lastSpace = -1;
     for (var i = 0; i < str.length; i++) {

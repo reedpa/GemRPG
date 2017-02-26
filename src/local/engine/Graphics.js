@@ -148,6 +148,17 @@ function Graphics() {
         }
     }
 
+    this.fillTextWithOutline = function(color, outlineColor, text, x, y) {
+        this.setFillStyle(outlineColor);
+        this.fillText(text, x - 1, y);
+        this.fillText(text, x, y - 1);
+        this.fillText(text, x + 1, y);
+        this.fillText(text, x, y + 1);
+
+        this.setFillStyle(color);
+        this.fillText(text, x, y);
+    }
+
     this.strokeRect = function(x, y, width, height) {
         ctx.strokeRect(x * scaleFactor, y * scaleFactor, width * scaleFactor, height * scaleFactor);
     }

@@ -134,7 +134,7 @@ function Conversation(conversationProps, followers) {
             var textSize = graphics.measureText(text).width;
             var availableSize = graphics.measureSpace(topLeft);
             var piecesNeeded = Math.ceil(textSize / availableSize);
-            var textPieces = this.splitText(piecesNeeded, text);
+            var textPieces = splitText(piecesNeeded, text);
 
             for (var i = 0; i < textPieces.length; i++) {
                 this.drawText(Chomp(textPieces[i]), color, topLeft, topTop - (20 * (textPieces.length - 1 - i)), true);
@@ -142,53 +142,13 @@ function Conversation(conversationProps, followers) {
             return;
         }
 
-        //black border around the text
-        graphics.setFillStyle("black");
-        graphics.setFont(25, "Arial");
-        graphics.fillText(text, topLeft - 1, topTop);
 
-        graphics.setFillStyle("black");
-        graphics.setFont(25, "Arial");
-        graphics.fillText(text, topLeft, topTop - 1);
-
-        graphics.setFillStyle("black");
-        graphics.setFont(25, "Arial");
-        graphics.fillText(text, topLeft + 1, topTop);
-
-        graphics.setFillStyle("black");
-        graphics.setFont(25, "Arial");
-        graphics.fillText(text, topLeft, topTop + 1);
-
-        //the actual text
         graphics.setFillStyle(color);
         graphics.setFont(25, "Arial");
-        graphics.fillText(text, topLeft, topTop);
-    }
-
-    this.splitText = function(pieces, text) {
-        var split = [];
-        var length = text.length;
-        var pieceLength = Math.ceil(text.length / pieces);
-
-        var lastSpace = 0;
-        var lastRoot = 0;
-        for (var i = 0; i < text.length; i++) {
-            if (text[i] === " ") {
-                lastSpace = i;
-            }
-
-            if (i - lastRoot > pieceLength && lastRoot !== lastSpace) {
-                split.push(text.substr(lastRoot, lastSpace - lastRoot));
-                lastRoot = lastSpace;
-            }
-        }
-
-        split.push(text.substr(lastRoot, text.length -1));
-
-        return split;
+        graphics.fillTextWithOutline(color, "black", text, topLeft, topTop);
     }
 
     ai.addObject(this);
     graphics.addObject(this);
-    dataStore.conversations.push(conversationProps);
+    dataStore.conversations.push(conversationProps.conversation);
 }

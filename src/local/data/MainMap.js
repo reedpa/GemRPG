@@ -457,8 +457,7 @@ var spiderAndMouseEncounters = [
 
 var mainMap = {
     image: "mainmap",
-    //startingLocation: [820, 950],
-    startingLocation: [3300, 600],
+    startingLocation: [820, 950],
     regions: [ 
         {
             name: "treeOverlay",
@@ -1468,7 +1467,7 @@ var mainMap = {
             isBlocker: false,
             conversation: [
                 {
-                    location: {topLeft: 3600, topTop: 500},
+                    location: {topLeft: 3600, topTop: 900},
                     color: "DeepPink",
                     text: "Help!",
                     index: 0
