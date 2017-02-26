@@ -715,7 +715,7 @@ var mainMap = {
             image: null,
             topLeft: 2205,
             topTop: 850,
-            width: 80,
+            width: 50,
             height: 70,
             color: "blue",
             isBlocker: true
@@ -767,10 +767,10 @@ var mainMap = {
         }, {
             name: "secretTreesLeftBottomBottom",
             image: null,
-            topLeft: 2585,
+            topLeft: 2600,
             topTop: 950,
-            width: 100,
-            height: 120,
+            width: 80,
+            height: 80,
             color: "blue",
             isBlocker: true
         }, {

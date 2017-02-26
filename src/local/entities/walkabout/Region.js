@@ -13,7 +13,9 @@ function Region(regionData, followers) {
     this.color = regionData.color;
     this.zindex = regionData.zindex || regionZIndex;
     this.followers = followers;
-    this.isBlocker = !!regionData.isBlocker; //DEBUG: comment this out to explore a map without bumping into walls
+    if (!dataStore.debug) {
+        this.isBlocker = !!regionData.isBlocker;
+    }
     if (regionData.image) {
         this.image = document.getElementById(regionData.image);
     }
@@ -38,7 +40,9 @@ function Region(regionData, followers) {
 
             graphics.drawImage(this.image, adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height);
         } else {
-            //return; //DEBUG: comment out this return in order to "see" regions that have no image
+            if (!dataStore.debug) {
+                return;
+            }
             graphics.setFillStyle(this.color);
             ctx.globalAlpha = 0.5;
             graphics.fillRect(adjustXForWalkabout(this.topLeft), adjustYForWalkabout(this.topTop), this.width, this.height)
