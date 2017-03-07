@@ -240,7 +240,7 @@ function GameBoard(encounterData) {
     }
 
     this.grabPiece = function() {
-        if (mouseX > 330 && mouseY < 30) {
+        if (mouseX > 330 && mouseY < 30 && dataStore.debug) {
             audio.playSound("buttonclick");
             this.endGame();
         } else if (this.state === "playing") {

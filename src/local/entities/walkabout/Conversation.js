@@ -8,7 +8,7 @@ function Conversation(conversationProps, followers) {
     conversing = true;
 
     this.currentIndex = 0;
-    this.duration = 198 * (2.5 - ((dataStore.settings.conversationSpeed) / 75));
+    this.duration = 120 * (2.5 - ((dataStore.settings.conversationSpeed) / 75));
     this.ticksAlive = 0;
 
     this.maxIndex = 0;
@@ -19,12 +19,6 @@ function Conversation(conversationProps, followers) {
     }
     
     this.doActions = function() {
-        this.ticksAlive++;
-
-        if (this.ticksAlive >= this.duration) {
-            this.ticksAlive = 0;
-            this.currentIndex++;
-        }
 
         for (var i = 0; i < conversationProps.conversation.length; i++) {
             if (conversationProps.conversation[i].index === this.currentIndex) {
@@ -39,6 +33,13 @@ function Conversation(conversationProps, followers) {
             graphics.removeObject(this);
             conversing = false;
         }
+
+        this.ticksAlive++;
+        if (this.ticksAlive >= this.duration) {
+            this.ticksAlive = 0;
+            this.currentIndex++;
+        }
+
     }
 
     this.draw = function() {

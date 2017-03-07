@@ -457,7 +457,8 @@ var spiderAndMouseEncounters = [
 
 var mainMap = {
     image: "mainmap",
-    startingLocation: [820, 950],
+    //startingLocation: [820, 950],
+    startingLocation: [1960, 1120],
     regions: [ 
         {
             name: "treeOverlay",
@@ -1515,6 +1516,82 @@ var mainMap = {
                     index: 1
                 }
             ]
+        }, {
+            name: "deliciousOrangesConversation",
+            image: null,
+            topLeft: 1650,
+            topTop: 1400,
+            width: 600,
+            height: 100,
+            color: "purple",
+            isBlocker: false,
+            conversation: [
+                {
+                    character: 1,
+                    text: "Oranges! I'm famished.",
+                    index: 0
+                }, {
+                    action: function() {
+                        for (var i = 0; i < graphics.graphicsObjects.length; i++) {
+                            if (graphics.graphicsObjects[i].characterProps) {
+                                graphics.graphicsObjects[i].targetLeft = 1880 + (Math.random() * 200 - 100);
+                                graphics.graphicsObjects[i].targetTop = 1440 + (Math.random() * 200 - 100);
+                            }
+                        }
+                    },
+                    index: 0
+                }, {
+                    character: 5,
+                    text: "Better than salt tack and jerky.",
+                    index: 1
+                }, {
+                    character: 6,
+                    text: "*om nom*",
+                    index: 1
+                }, {
+                    character: 2,
+                    text: "I'll pack some up for later.",
+                    index: 1
+                }, {
+                    character: 3,
+                    text: "The gods provide.",
+                    index: 1
+                }, {
+                    character: 4,
+                    text: "Eat.",
+                    index: 1
+                }
+            ]
+        }, {
+            name: "nearlyThereConversation",
+            image: null,
+            topLeft: 780,
+            topTop: 1110,
+            width: 100,
+            height: 300,
+            color: "purple",
+            isBlocker: false,
+            conversation: [
+                {
+                    character: 2,
+                    text: "Sir, there's a path up ahead.",
+                    index: 0
+                }, {
+                    character: 1,
+                    text: "Great! Let's hike up and get our bearings.",
+                    index: 1
+                }
+            ]
+        }, {
+            name: "end",
+            image: null,
+            topLeft: 200,
+            topTop: 1600,
+            width: 500,
+            height: 100,
+            color: "yellow",
+            isBlocker: false,
+            newMap: null
         }
     ]
 }

@@ -10,9 +10,11 @@ function BackDrop(backDropImage) {
         graphics.setFillStyle("#FFFFFF");
         graphics.drawImage(this.image, 0, 0);
         
-        graphics.setFont(25, "Arial");
-        graphics.setFillStyle("#000000");
-        graphics.fillText("X", 340, 22);
+        if (dataStore.debug) {
+            graphics.setFont(25, "Arial");
+            graphics.setFillStyle("#000000");
+            graphics.fillText("X", 340, 22);
+        }
     };
     
     graphics.addObject(this);
