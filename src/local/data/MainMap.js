@@ -457,8 +457,7 @@ var spiderAndMouseEncounters = [
 
 var mainMap = {
     image: "mainmap",
-    //startingLocation: [820, 950],
-    startingLocation: [1960, 1120],
+    startingLocation: [820, 950],
     regions: [ 
         {
             name: "treeOverlay",
