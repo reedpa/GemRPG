@@ -1549,16 +1549,16 @@ var mainMap = {
                     text: "*om nom*",
                     index: 1
                 }, {
-                    character: 2,
-                    text: "I'll pack some up for later.",
-                    index: 1
-                }, {
                     character: 3,
                     text: "The gods provide.",
                     index: 1
                 }, {
                     character: 4,
                     text: "Eat.",
+                    index: 1
+                }, {
+                    character: 2,
+                    text: "I'll pack some up for later.",
                     index: 1
                 }
             ]
