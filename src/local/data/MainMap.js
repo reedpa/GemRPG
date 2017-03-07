@@ -1584,7 +1584,7 @@ var mainMap = {
         }, {
             name: "end",
             image: null,
-            topLeft: 200,
+            topLeft: 250,
             topTop: 1600,
             width: 500,
             height: 100,
