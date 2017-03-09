@@ -116,7 +116,7 @@ function Graphics() {
     this.drawCircle = function(color, x, y, radius) {
         this.setFillStyle(color);
         ctx.beginPath();
-        ctx.arc(x, y, radius, 0, 2*Math.PI);
+        ctx.arc(x * scaleFactor, y * scaleFactor, radius * scaleFactor, 0, 2*Math.PI);
         ctx.fill();
     }
 

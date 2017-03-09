@@ -21,7 +21,7 @@ function MainMenu() {
     }
 
     var gameModes = [
-        [145, 165, 65, 50, "Adventure Mode", document.getElementById("buttonpurple")]
+        [100, 165, 160, 50, "New Game", document.getElementById("buttonpurple")]
     ];
     
     this.doActions = function() {
