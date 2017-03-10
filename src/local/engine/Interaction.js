@@ -5,10 +5,13 @@ var mouseIsDown = false;
 var mouseClicked = false;
 var mouseCameUp = false;
 var mouseCameDown = false;
+var wasTouchInteraction = false;
 
 function Interaction() {
 
     this.order = 100000;
+
+    this.wasTouchInteraction = false;
     
     mouseX = -1;
     mouseY = -1;
@@ -19,6 +22,15 @@ function Interaction() {
 
     this.doActions = function() {
         //other AI objects get one frame to handle these events and then we clear them
+
+        if (wasTouchInteraction) {
+            wasTouchInteraction = false;
+            if (mouseCameUp) {
+                mouseX = -1;
+                mouseY = 01;
+            }
+        }
+
         mouseCameUp = false;
         mouseCameDown = false;
         mouseClicked = false;
@@ -50,6 +62,7 @@ function Interaction() {
     }
     
     this.handleTouchStart = function(event) {
+        wasTouchInteraction = true;
         mouseX = event.touches[0].clientX / scaleFactor;
         mouseY = event.touches[0].clientY / scaleFactor;
         mouseCameDown = true;
@@ -58,14 +71,14 @@ function Interaction() {
     }
     
     this.handleTouchMove = function(event) {
+        wasTouchInteraction = true;
         mouseX = event.touches[0].clientX / scaleFactor;
         mouseY = event.touches[0].clientY / scaleFactor;
         event.preventDefault();
     }
     
     this.handleTouchEnd = function(event) {
-        mouseX = -1;
-        mouseY = -1;
+        wasTouchInteraction = true;
         mouseCameUp = true;
         mouseIsDown = false;
         event.preventDefault();
