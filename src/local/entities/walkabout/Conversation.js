@@ -89,7 +89,7 @@ function Conversation(conversationProps, followers) {
             var outOfTopBound = false;
             var outOfBottomBound = false;
 
-            var textLength = graphics.measureText(text).width;
+            var textLength = graphics.getTextWidth(text);
             var properLeftLocation = Math.max(graphics.getRightBound() - textLength - 10, Math.floor(canvas.width / 2));
 
             if (topLeft > properLeftLocation) {
@@ -129,10 +129,10 @@ function Conversation(conversationProps, followers) {
         graphics.setFillStyle("black");
         graphics.setFont(25, "Arial");
 
-        if (graphics.outsideRightBound(topLeft + graphics.measureText(text).width) && 
+        if (graphics.outsideRightBound(topLeft + graphics.getTextWidth(text)) && 
                 text.indexOf(" ") !== -1 && 
                 !nobreak) {
-            var textSize = graphics.measureText(text).width;
+            var textSize = graphics.getTextWidth(text);
             var availableSize = graphics.measureSpace(topLeft);
             var piecesNeeded = Math.ceil(textSize / availableSize);
             var textPieces = splitText(piecesNeeded, text);

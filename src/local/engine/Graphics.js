@@ -171,20 +171,24 @@ function Graphics() {
         return ctx.measureText(text);
     }
 
+    this.getTextWidth = function(text) {
+        return this.measureText(text).width / scaleFactor;
+    }
+
     this.measureSpace = function(x) {
-        return canvas.width - x;
+        return (canvas.width / scaleFactor) - x;
     }
 
     this.outsideRightBound = function(x) {
-        return x > canvas.width;
+        return x > (canvas.width / scaleFactor);
     }
 
     this.getRightBound = function() {
-        return canvas.width;
+        return canvas.width / scaleFactor;
     }
 
     this.getBottomBound = function() {
-        return canvas.height;
+        return canvas.height / scaleFactor;
     }
 
     this.calculateScaleFactor = function() {

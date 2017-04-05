@@ -94,7 +94,7 @@ function ConversationTab() {
 
     this.renderText = function(text, x, y) {
         var textPieces = [];
-        var textLength = graphics.measureText(text).width;
+        var textLength = graphics.getTextWidth(text);
         var textSpace = graphics.getRightBound() - x;
         if (textLength > textSpace) {
             textPieces = splitText(Math.ceil(textLength / textSpace), text);
